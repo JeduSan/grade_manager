@@ -6,4 +6,4 @@
 // [x] Add teacher
 // [x] Add student
 // [x] Add subject
-// [ ] Add semester
+// [x] Add semester

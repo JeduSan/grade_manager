@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AddSemesterController;
 use App\Http\Controllers\admin\AddStudentController;
 use App\Http\Controllers\admin\AddSubjectController;
 use App\Http\Controllers\admin\AddTeacherController;
@@ -35,3 +36,4 @@ Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin
 Route::post('/admin/dashboard/add/teacher',[AddTeacherController::class,'store'])->name('admin.dashboard.add.teacher');
 Route::post('/admin/dashboard/add/student',[AddStudentController::class,'store'])->name('admin.dashboard.add.student');
 Route::post('/admin/dashboard/add/subject',[AddSubjectController::class,'store'])->name('admin.dashboard.add.subject');
+Route::post('/admin/dashboard/add/semester',[AddSemesterController::class,'store'])->name('admin.dashboard.add.semester');

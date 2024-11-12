@@ -151,7 +151,7 @@
         <!-- Add Semester -->
         <div>
             <h3>Add Semester</h3>
-            <form action="" method="post">
+            <form action="/admin/dashboard/add/semester" method="POST">
                 @csrf
                 <div>
                     <label for="semester">Semester</label>
