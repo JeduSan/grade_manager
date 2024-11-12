@@ -127,7 +127,7 @@
         <!-- Add Subject -->
         <div>
             <h3>Add Subject</h3>
-            <form action="" method="POST">
+            <form action="/admin/dashboard/add/subject" method="POST">
                 @csrf
                 <div>
                     <label for="subject_name">Subject Name</label>

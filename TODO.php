@@ -5,5 +5,5 @@
 // =======
 // [x] Add teacher
 // [x] Add student
-// [ ] Add subject
+// [x] Add subject
 // [ ] Add semester
