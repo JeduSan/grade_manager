@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\AddStudentController;
 use App\Http\Controllers\admin\AddSubjectController;
 use App\Http\Controllers\admin\AddTeacherController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\ManagerController;
+use App\Http\Controllers\admin\ManagerTeacherController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +39,6 @@ Route::post('/admin/dashboard/add/teacher',[AddTeacherController::class,'store']
 Route::post('/admin/dashboard/add/student',[AddStudentController::class,'store'])->name('admin.dashboard.add.student');
 Route::post('/admin/dashboard/add/subject',[AddSubjectController::class,'store'])->name('admin.dashboard.add.subject');
 Route::post('/admin/dashboard/add/semester',[AddSemesterController::class,'store'])->name('admin.dashboard.add.semester');
+
+Route::get('/admin/manager',[ManagerController::class,'index'])->name('admin.manager');
+Route::get('/admin/manager/delete/teacher/{id}',[ManagerTeacherController::class,'destroy'])->name('admin.manager.delete.teacher');
