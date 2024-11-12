@@ -42,3 +42,4 @@ Route::post('/admin/dashboard/add/semester',[AddSemesterController::class,'store
 
 Route::get('/admin/manager',[ManagerController::class,'index'])->name('admin.manager');
 Route::get('/admin/manager/delete/teacher/{id}',[ManagerTeacherController::class,'destroy'])->name('admin.manager.delete.teacher');
+Route::patch('/admin/manager/edit/teacher/{id}',[ManagerTeacherController::class,'update'])->name('admin.manager.edit.teacher');

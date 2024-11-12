@@ -14,7 +14,7 @@
 // ======
 // [ ] Teachers
     // [x] UI
-    // [ ] edit
+    // [x] edit
     // [x] delete
     // [ ] view
 

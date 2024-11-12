@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class ManagerTeacherController extends Controller
 {
@@ -37,7 +38,26 @@ class ManagerTeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'teacher_id' => ['required','string','max:255'],
+            'teacher_fname' => ['required','string','max:255'],
+            'teacher_lname' => ['required','string','max:255']
+        ]);
+
+        try {
+
+            Teacher::where('key',$id)->update([
+                'id' => $request->teacher_id,
+                'fname' => $request->teacher_fname,
+                'lname' => $request->teacher_lname
+            ]);
+            session(['success' => 'Teacher edited successfully!']);
+
+        } catch(Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('admin.manager');
     }
 
     /**
