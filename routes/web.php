@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AddStudentController;
 use App\Http\Controllers\admin\AddTeacherController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -31,3 +32,4 @@ require __DIR__.'/auth.php';
 
 Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
 Route::post('/admin/dashboard/add/teacher',[AddTeacherController::class,'store'])->name('admin.dashboard.add.teacher');
+Route::post('/admin/dashboard/add/student',[AddStudentController::class,'store'])->name('admin.dashboard.add.student');
