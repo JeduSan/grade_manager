@@ -20,8 +20,8 @@
 
 // [ ] Students
     // [x] UI
-    // [ ] edit
-    // [ ] delete
+    // [x] edit
+    // [x] delete
     // [ ] view
 
 // [ ] Sems

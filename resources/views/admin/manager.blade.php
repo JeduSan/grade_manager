@@ -39,13 +39,12 @@
     @endif
 
     {{-- TEACHERS TABLE --}}
-    <div>
+    {{-- <div>
         <h3>Manage Teacher</h3>
         <table>
             <thead>
                 <th>Teacher ID</th>
                 <th>Name</th>
-                {{-- <th>Email</th> --}}
                 <th>Actions</th>
             </thead>
             <tbody>
@@ -88,10 +87,10 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+    </div> --}}
 
     {{-- STUDENTS TABLE --}}
-    <div>
+    {{-- <div>
         <h3>Manager Students</h3>
         <table>
             <thead>
@@ -113,13 +112,41 @@
                             {{$student->email}}
                         </td>
                         <td>
-                            {{-- //REVIEW: Put actions here  --}}
+                            <a href="#modal{{$student->key}}" rel="modal:open">Edit</a>
+                            <a href="/admin/manager/delete/student/{{$student->key}}">Delete</a>
+                            <a href="">View</a>
                         </td>
                     </tr>
+
+                    <div id="modal{{$student->key}}" class="modal">
+                        <h3>Edit Student</h3>
+                        <form action="/admin/manager/edit/student/{{$student->key}}" method="POST">
+                            @csrf
+                            @method("PATCH")
+                            <div>
+                                <label for="student_id">Student ID</label>
+                                <input type="text" name="student_id" id="student_id" value="{{$student->id}}" placeholder="A24-1234">
+                            </div>
+                            <div>
+                                <label for="student_fname">Student First Name</label>
+                                <input type="text" name="student_fname" id="student_fname" value="{{$student->fname}}" placeholder="Juan">
+                            </div>
+                            <div>
+                                <label for="student_mname">Student Middle Name</label>
+                                <input type="text" name="student_mname" id="student_mname" value="{{$student->mname}}" placeholder="Doe">
+                            </div>
+                            <div>
+                                <label for="student_lname">Student Last Name</label>
+                                <input type="text" name="student_lname" id="student_lname" value="{{$student->lname}}" placeholder="Dela Cruz">
+                            </div>
+                            <input type="submit" value="Save">
+                            <a href="" rel="modal:close">Cancel</a>
+                        </form>
+                    </div>
                 @endforeach
             </tbody>
         </table>
-    </div>
+    </div> --}}
 
     {{-- SEMESTERS TABLE --}}
     <div>
@@ -152,7 +179,8 @@
                             {{$sem->end_date}}
                         </td>
                         <td>
-                            {{-- //REVIEW: Put actions here  --}}
+                            <a href="#modal{{$teacher->key}}" rel="modal:open">Edit</a>
+                            <a href="/admin/manager/delete/teacher/{{$teacher->key}}">Delete</a>
                         </td>
                     </tr>
                 @endforeach

@@ -14,7 +14,11 @@ class ManagerTeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::all();
+
+        return view('admin.teacher_manager',[
+            'teachers' => $teachers
+        ]);
     }
 
     /**
@@ -57,7 +61,7 @@ class ManagerTeacherController extends Controller
             session(['failure' => 'Something went wrong :(']);
         }
 
-        return to_route('admin.manager');
+        return to_route('admin.manager.teacher');
     }
 
     /**
@@ -67,6 +71,6 @@ class ManagerTeacherController extends Controller
     {
         Teacher::destroy($id);
 
-        return to_route('admin.manager');
+        return to_route('admin.manager.teacher');
     }
 }
