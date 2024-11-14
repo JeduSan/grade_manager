@@ -8,6 +8,7 @@
 // [x] Add subject
 // [x] Add semester
 // [ ] Assign a class/section to a teacher
+// [ ] Subject Manager -> see all students for that subject and who is the instructor
 
 // ======
 // ADMIN MANAGER
@@ -25,7 +26,7 @@
     // [ ] view
 
 // NOTE: Skipped for now. Fix logic first, too destructive
-// [ ] Sems
+// [x] Sems
     // [x] UI
     // [ ] edit
     // [x] delete
@@ -40,6 +41,14 @@
 // [x] Merge subject add & manager in one page
 // [x] Merge sem add & manager in one page
 
-// [ ] Excel upload of students
-// [ ] " teachers
-// [ ] "" subjects
+// [x] Excel upload of students
+// [x] " teachers
+// [x] "" subjects
+
+
+// ==================
+// TEACHER DASHBOARD
+// ==================
+// [ ] List of assigned subjects/classes
+// [ ] List of students per subject/class
+// [ ] Input of grades

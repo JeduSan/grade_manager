@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use Exception;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Exception;
 
 class ManagerTeacherController extends Controller
 {
@@ -14,7 +15,8 @@ class ManagerTeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::all();
+        // $teachers = Teacher::all();
+        $teachers = DB::table('teacher')->paginate(15);
 
         return view('admin.teacher_manager',[
             'teachers' => $teachers

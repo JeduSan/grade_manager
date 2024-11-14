@@ -38,6 +38,17 @@
         </div>
     @endif
 
+    {{-- Add Subject - Excel --}}
+    <div>
+        <form action="/admin/manager/add/subject/excel" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label for="excel">Upload File</label>
+            <input type="file" name="excel" id="excel" required>
+            <x-input-error :messages="$errors->get('excel')" class="mt-2" />
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
     <!-- Add Subject -->
     <div>
         <h3>Add Subject</h3>
@@ -118,14 +129,18 @@
         </table>
     </div>
 
+    <nav>
+        {{ $subjects->links() }}
+    </nav>
+
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.modal.min.js')}}"></script>
     <script>
         $j = jQuery.noConflict();
 
-        $j("#success_modal").fadeOut(2000);
+        $j("#success_modal").fadeOut(5000);
 
-        $j("#failure_modal").fadeOut(2000);
+        $j("#failure_modal").fadeOut(5000);
     </script>
 </body>
 </html>

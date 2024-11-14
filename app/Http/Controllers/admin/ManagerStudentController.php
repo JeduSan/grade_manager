@@ -18,7 +18,8 @@ class ManagerStudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        // $students = Student::all();
+        $students = DB::table('student')->paginate(15);
 
         $courses = Course::select(
             'id',

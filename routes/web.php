@@ -10,6 +10,9 @@ use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\ManagerStudentController;
 use App\Http\Controllers\admin\ManagerSubjectController;
 use App\Http\Controllers\admin\ManagerTeacherController;
+use App\Http\Controllers\admin\StudentExcelController;
+use App\Http\Controllers\admin\SubjectExcelController;
+use App\Http\Controllers\admin\TeacherExcelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,12 +52,14 @@ Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin
 // TEACHER MANAGER
 Route::get('/admin/manager/teacher',[ManagerTeacherController::class,'index'])->name('admin.manager.teacher');
 Route::post('/admin/manager/add/teacher',[ManagerTeacherController::class,'store'])->name('admin.manager.add.teacher');
+Route::post('/admin/manager/add/teacher/excel',[TeacherExcelController::class,'store'])->name('admin.manager.add.teacher.excel');
 Route::get('/admin/manager/delete/teacher/{id}',[ManagerTeacherController::class,'destroy'])->name('admin.manager.delete.teacher');
 Route::patch('/admin/manager/edit/teacher/{id}',[ManagerTeacherController::class,'update'])->name('admin.manager.edit.teacher');
 
 // STUDENT MANAGER
 Route::get('/admin/manager/student',[ManagerStudentController::class,'index'])->name('admin.manager.student');
 Route::post('/admin/manager/add/student',[ManagerStudentController::class,'store'])->name('admin.manager.add.student');
+Route::post('/admin/manager/add/student/excel',[StudentExcelController::class,'store'])->name('admin.manager.add.student.excel');
 Route::get('/admin/manager/delete/student/{id}',[ManagerStudentController::class,'destroy'])->name('admin.manager.delete.student');
 Route::patch('/admin/manager/edit/student/{id}',[ManagerStudentController::class,'update'])->name('admin.manager.edit.student');
 
@@ -67,5 +72,6 @@ Route::patch('/admin/manager/edit/semester/{id}',[ManagerSemesterController::cla
 // SUBJECT MANAGER
 Route::get('/admin/manager/subject',[ManagerSubjectController::class,'index'])->name('admin.manager.subject');
 Route::post('/admin/manager/add/subject',[ManagerSubjectController::class,'store'])->name('admin.manager.add.subject');
+Route::post('/admin/manager/add/subject/excel',[SubjectExcelController::class,'store'])->name('admin.manager.add.subject.excel');
 Route::get('/admin/manager/delete/subject/{id}',[ManagerSubjectController::class,'destroy'])->name('admin.manager.delete.subject');
 Route::patch('/admin/manager/edit/subject/{id}',[ManagerSubjectController::class,'update'])->name('admin.manager.edit.subject');

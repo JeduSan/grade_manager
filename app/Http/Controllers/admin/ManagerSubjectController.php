@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Subject;
 use Exception;
+use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ManagerSubjectController extends Controller
 {
@@ -14,7 +15,8 @@ class ManagerSubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all();
+        // $subjects = Subject::all();
+        $subjects = DB::table('subject')->paginate(15);
 
         return view('admin.subject_manager',[
             "subjects" => $subjects

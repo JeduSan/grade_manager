@@ -16,7 +16,8 @@ class ManagerSemesterController extends Controller
      */
     public function index()
     {
-        $semesters = Semester::all();
+        // $semesters = Semester::all();
+        $semesters = DB::table('semester')->paginate(15);
 
         // Get the current academic year based in the current year
         $acad_year = AcademicYear::where(DB::raw('YEAR(start_date)'),DB::raw('YEAR(NOW())'))
