@@ -26,7 +26,27 @@ class ManagerSubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'subject_name' => ['required','string','max:255'],
+            'subject_code' => ['required','string','max:255'],
+            'subject_units' => ['required','numeric','integer','unique:subject,code']
+        ]);
+
+        try {
+
+            Subject::create([
+                'code' => $request->subject_code,
+                'description' => $request->subject_name,
+                'units' => $request->subject_units
+            ]);
+
+            session(['success' => 'Subject added successfully!']);
+
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('admin.manager.subject');
     }
 
     /**

@@ -42,7 +42,7 @@
     <h1>Admin Manager</h1>
 
     <main>
-        <!-- Add Teacher -->
+        {{-- <!-- Add Teacher -->
         <div>
             <h3>Add Teacher</h3>
             <form action="/admin/dashboard/add/teacher" method="POST">
@@ -175,7 +175,7 @@
                     <input type="submit" value="Add Semester">
                 </div>
             </form>
-        </div>
+        </div> --}}
     </main>
 
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>

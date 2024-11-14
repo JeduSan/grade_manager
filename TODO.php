@@ -34,3 +34,8 @@
     // [x] UI
     // [x] edit
     // [x] delete
+
+// [x] Merge teacher add & manager in one page
+// [x] Merge student add & manager in one page
+// [x] Merge subject add & manager in one page
+// [x] Merge sem add & manager in one page

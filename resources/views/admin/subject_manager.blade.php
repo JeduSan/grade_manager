@@ -38,6 +38,30 @@
         </div>
     @endif
 
+    <!-- Add Subject -->
+    <div>
+        <h3>Add Subject</h3>
+        <form action="/admin/manager/add/subject" method="POST">
+            @csrf
+            <div>
+                <label for="subject_name">Subject Name</label>
+                <input type="text" name="subject_name" id="subject_name" placeholder="Software Engineering 1" value="{{old('subject_name')}}"
+                    required>
+            </div>
+            <div>
+                <label for="subject_code">Subject Code</label>
+                <input type="text" name="subject_code" id="subject_code" placeholder="CCS123" value="{{old('subject_code')}}" required>
+            </div>
+            <div>
+                <label for="subject_units">Subject Units</label>
+                <input type="text" name="subject_units" id="subject_units" placeholder="5" value="{{old('subject_units')}}" required>
+            </div>
+            <div>
+                <input type="submit" value="Add Subject">
+            </div>
+        </form>
+    </div>
+
     {{-- SUBJECTS TABLE --}}
     <div>
         <table>

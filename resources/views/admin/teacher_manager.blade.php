@@ -38,6 +38,29 @@
         </div>
     @endif
 
+    <!-- Add Teacher -->
+    <div>
+        <h3>Add Teacher</h3>
+        <form action="/admin/manager/add/teacher" method="POST">
+            @csrf
+            <div>
+                <label for="teacher_id">Teacher ID</label>
+                <input type="text" name="teacher_id" id="teacher_id" placeholder="XMPL1234" value="{{old('teacher_id')}}" required>
+            </div>
+            <div>
+                <label for="teacher_fname">Teacher First Name</label>
+                <input type="text" name="teacher_fname" id="teacher_fname" placeholder="Juan" value="{{old('teacher_fname')}}" required>
+            </div>
+            <div>
+                <label for="teacher_lname">Teacher Last Name</label>
+                <input type="text" name="teacher_lname" id="teacher_lname" placeholder="Dela Cruz" value="{{old('teacher_lname')}}" required>
+            </div>
+            <div>
+                <input type="submit" value="Add Teacher">
+            </div>
+        </form>
+    </div>
+
     {{-- TEACHERS TABLE --}}
     <div>
         <h3>Manage Teacher</h3>

@@ -36,7 +36,7 @@ class AddSemesterController extends Controller
                 'end_date' => $request->semester_end
             ]);
 
-            session(['success' => 'Student added successfully!']);
+            session(['success' => 'Semester added successfully!']);
 
         } catch(Exception $e) {
             session(['failure' => 'Something went wrong :(']);

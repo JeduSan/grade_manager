@@ -38,6 +38,34 @@
         </div>
     @endif
 
+    <!-- Add Semester -->
+    <div>
+        <h3>Add Semester</h3>
+        <form action="/admin/manager/add/semester" method="POST">
+            @csrf
+            <div>
+                <label for="semester">Semester</label>
+                <select name="semester" id="semester" required>
+                    <option value="" selected disabled>Select Semester</option>
+                    <option value="1">First Semester</option>
+                    <option value="2">Second Semester</option>
+                    <option value="3">Summer</option>
+                </select>
+            </div>
+            <div>
+                <label for="semester_start">Semester Start Date</label>
+                <input type="date" name="semester_start" id="semester_start"  value="{{old('semester_start')}}" required>
+            </div>
+            <div>
+                <label for="semester_end">Semester End Date</label>
+                <input type="date" name="semester_end" id="semester_end"  value="{{old('semester_end')}}" required>
+            </div>
+            <div>
+                <input type="submit" value="Add Semester">
+            </div>
+        </form>
+    </div>
+
     {{-- SEMESTERS TABLE --}}
     <div>
         <h3>Manage Semesters</h3>
@@ -63,7 +91,7 @@
                                 else if($sem->number === 3)
                                     echo "Summer";
                             @endphp
-                            {{date("Y",strtotime($sem->start_date)).'-'.date("Y",strtotime($sem->end_date))}}
+                            {{date("Y",strtotime($acad_year->start_date)).'-'.date("Y",strtotime($acad_year->end_date))}}
                         </td>
                         <td>
                             {{$sem->start_date}}

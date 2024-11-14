@@ -38,29 +38,34 @@ require __DIR__.'/auth.php';
  */
 
 Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
-Route::post('/admin/dashboard/add/teacher',[AddTeacherController::class,'store'])->name('admin.dashboard.add.teacher');
-Route::post('/admin/dashboard/add/student',[AddStudentController::class,'store'])->name('admin.dashboard.add.student');
-Route::post('/admin/dashboard/add/subject',[AddSubjectController::class,'store'])->name('admin.dashboard.add.subject');
-Route::post('/admin/dashboard/add/semester',[AddSemesterController::class,'store'])->name('admin.dashboard.add.semester');
+// Route::post('/admin/dashboard/add/teacher',[AddTeacherController::class,'store'])->name('admin.dashboard.add.teacher');
+// Route::post('/admin/dashboard/add/student',[AddStudentController::class,'store'])->name('admin.dashboard.add.student');
+// Route::post('/admin/dashboard/add/subject',[AddSubjectController::class,'store'])->name('admin.dashboard.add.subject');
+// Route::post('/admin/dashboard/add/semester',[AddSemesterController::class,'store'])->name('admin.dashboard.add.semester');
 
-Route::get('/admin/manager',[ManagerController::class,'index'])->name('admin.manager');
+// DEPRECATED
+// Route::get('/admin/manager',[ManagerController::class,'index'])->name('admin.manager');
 
 // TEACHER MANAGER
 Route::get('/admin/manager/teacher',[ManagerTeacherController::class,'index'])->name('admin.manager.teacher');
+Route::post('/admin/manager/add/teacher',[ManagerTeacherController::class,'store'])->name('admin.manager.add.teacher');
 Route::get('/admin/manager/delete/teacher/{id}',[ManagerTeacherController::class,'destroy'])->name('admin.manager.delete.teacher');
 Route::patch('/admin/manager/edit/teacher/{id}',[ManagerTeacherController::class,'update'])->name('admin.manager.edit.teacher');
 
 // STUDENT MANAGER
 Route::get('/admin/manager/student',[ManagerStudentController::class,'index'])->name('admin.manager.student');
+Route::post('/admin/manager/add/student',[ManagerStudentController::class,'store'])->name('admin.manager.add.student');
 Route::get('/admin/manager/delete/student/{id}',[ManagerStudentController::class,'destroy'])->name('admin.manager.delete.student');
 Route::patch('/admin/manager/edit/student/{id}',[ManagerStudentController::class,'update'])->name('admin.manager.edit.student');
 
 // SEMESTER MANAGER
 Route::get('/admin/manager/semester',[ManagerSemesterController::class,'index'])->name('admin.manager.semester');
+Route::post('/admin/manager/add/semester',[ManagerSemesterController::class,'store'])->name('admin.manager.add.semester');
 Route::get('/admin/manager/delete/semester/{id}',[ManagerSemesterController::class,'destroy'])->name('admin.manager.delete.semester');
 Route::patch('/admin/manager/edit/semester/{id}',[ManagerSemesterController::class,'update'])->name('admin.manager.edit.semester');
 
 // SUBJECT MANAGER
 Route::get('/admin/manager/subject',[ManagerSubjectController::class,'index'])->name('admin.manager.subject');
+Route::post('/admin/manager/add/subject',[ManagerSubjectController::class,'store'])->name('admin.manager.add.subject');
 Route::get('/admin/manager/delete/subject/{id}',[ManagerSubjectController::class,'destroy'])->name('admin.manager.delete.subject');
 Route::patch('/admin/manager/edit/subject/{id}',[ManagerSubjectController::class,'update'])->name('admin.manager.edit.subject');

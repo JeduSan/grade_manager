@@ -28,7 +28,7 @@ class AddSubjectController extends Controller
                 'units' => $request->subject_units
             ]);
 
-            session(['success' => 'Student added successfully!']);
+            session(['success' => 'Subject added successfully!']);
 
         } catch (Exception $e) {
             session(['failure' => 'Something went wrong :(']);
