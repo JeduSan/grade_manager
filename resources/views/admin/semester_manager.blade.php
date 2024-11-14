@@ -24,9 +24,26 @@
         </div>
     @endif
 
+    {{-- FAILURE MODAL --}}
+    @if (session()->has('failure'))
+        {{--
+             // [ ] Change z-index
+             // [ ] Design
+        --}}
+        <div id="failure_modal">
+            <p>{{ session()->get('failure') }}</p>
+            @php
+                session()->forget('failure');
+            @endphp
+        </div>
+    @endif
+
     {{-- SEMESTERS TABLE --}}
     <div>
         <h3>Manage Semesters</h3>
+
+        <p>NOTE: Only newly added semester without any assigned classes are available for deletion</p>
+
         <table>
             <thead>
                 <th>Semester Name</th>
@@ -55,9 +72,39 @@
                             {{$sem->end_date}}
                         </td>
                         <td>
-                            {{-- //REVIEW: Put actions here  --}}
+                            {{-- <a href="#modal{{$sem->id}}" rel="modal:open">Edit</a> --}}
+                            <a href="/admin/manager/delete/semester/{{$sem->id}}">Delete</a>
                         </td>
                     </tr>
+
+                    {{-- <div id="modal{{$sem->id}}" class="modal">
+                        <h3>Edit Semester</h3>
+                        <form action="/admin/manager/edit/semester/{{$student->key}}" method="POST">
+                            @csrf
+                            @method("PATCH")
+                            <div>
+                                <label for="semester">Semester</label>
+                                <select name="semester" id="semester" required>
+                                    <option value="" selected disabled>Select Semester</option>
+                                    <option value="1">First Semester</option>
+                                    <option value="2">Second Semester</option>
+                                    <option value="3">Summer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="semester_start">Semester Start Date</label>
+                                <input type="date" name="semester_start" id="semester_start"  value="{{old('semester_start')}}" required>
+                            </div>
+                            <div>
+                                <label for="semester_end">Semester End Date</label>
+                                <input type="date" name="semester_end" id="semester_end"  value="{{old('semester_end')}}" required>
+                            </div>
+                            <div>
+                                <input type="submit" value="Save">
+                            </div>
+                            <a href="" rel="modal:close">Cancel</a>
+                        </form>
+                    </div> --}}
                 @endforeach
             </tbody>
         </table>

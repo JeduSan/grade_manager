@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
+use Exception;
+use App\Models\Semester;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ManagerSemesterController extends Controller
 {
@@ -12,7 +14,11 @@ class ManagerSemesterController extends Controller
      */
     public function index()
     {
-        return view('admin.semester_manager');
+        $semesters = Semester::all();
+
+        return view('admin.semester_manager',[
+            'sems' => $semesters
+        ]);
     }
 
     /**
@@ -44,6 +50,15 @@ class ManagerSemesterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            // NOTE: Deleting a sem affiliated to a class throws an error since sem is a foreign key in class
+            Semester::destroy($id);
+            session(['success' => 'Semester deleted successfully!']);
+        } catch(Exception $e) {
+            session(['failure' => 'Something went wrong, please make sure this semester record is not assigned to any class :(']);
+        }
+
+
+        return to_route('admin.manager.semester');
     }
 }

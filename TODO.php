@@ -24,10 +24,11 @@
     // [x] delete
     // [ ] view
 
+// NOTE: Skipped for now. Fix logic first, too destructive
 // [ ] Sems
     // [x] UI
     // [ ] edit
-    // [ ] delete
+    // [x] delete
 
 // [ ] Subjects
     // [x] UI
