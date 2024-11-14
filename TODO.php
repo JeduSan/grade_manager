@@ -30,7 +30,7 @@
     // [ ] edit
     // [x] delete
 
-// [ ] Subjects
+// [x] Subjects
     // [x] UI
-    // [ ] edit
-    // [ ] delete
+    // [x] edit
+    // [x] delete

@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ManagerController;
 use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\ManagerStudentController;
+use App\Http\Controllers\admin\ManagerSubjectController;
 use App\Http\Controllers\admin\ManagerTeacherController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -54,7 +55,12 @@ Route::get('/admin/manager/student',[ManagerStudentController::class,'index'])->
 Route::get('/admin/manager/delete/student/{id}',[ManagerStudentController::class,'destroy'])->name('admin.manager.delete.student');
 Route::patch('/admin/manager/edit/student/{id}',[ManagerStudentController::class,'update'])->name('admin.manager.edit.student');
 
-// SEMESTER
+// SEMESTER MANAGER
 Route::get('/admin/manager/semester',[ManagerSemesterController::class,'index'])->name('admin.manager.semester');
 Route::get('/admin/manager/delete/semester/{id}',[ManagerSemesterController::class,'destroy'])->name('admin.manager.delete.semester');
 Route::patch('/admin/manager/edit/semester/{id}',[ManagerSemesterController::class,'update'])->name('admin.manager.edit.semester');
+
+// SUBJECT MANAGER
+Route::get('/admin/manager/subject',[ManagerSubjectController::class,'index'])->name('admin.manager.subject');
+Route::get('/admin/manager/delete/subject/{id}',[ManagerSubjectController::class,'destroy'])->name('admin.manager.delete.subject');
+Route::patch('/admin/manager/edit/subject/{id}',[ManagerSubjectController::class,'update'])->name('admin.manager.edit.subject');
