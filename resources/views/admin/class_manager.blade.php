@@ -43,7 +43,7 @@
             <div>
                 {{-- //[x] RETRIEVE TEACHERS --}}
                 <label for="instructor">Instructor</label>
-                <select name="instructor" id="instructor">
+                <select name="instructor" id="instructor" required>
                     <option value="" selected disabled>Select Instructor</option>
 
                     @foreach ($teachers as $teacher)
@@ -56,7 +56,7 @@
             <div>
                 {{-- //[x] RETRIEVE SUBJECTS --}}
                 <label for="subject">Subject</label>
-                <select name="subject" id="subject">
+                <select name="subject" id="subject" required>
                     <option value="" selected disabled>Select Subject</option>
 
                     @foreach ($subjects as $subject)
@@ -69,7 +69,7 @@
             <div>
                 {{-- //[x] RETRIEVE COURSES --}}
                 <label for="course">Course</label>
-                <select name="course" id="course">
+                <select name="course" id="course" required>
                     <option value="" selected disabled>Select Course</option>
 
                     @foreach ($courses as $course)
@@ -81,9 +81,9 @@
 
             <div>
                 <label for="year">Year</label>
-                <select name="year" id="year">
+                <select name="year" id="year" required>
                     <option value="" selected disabled>Select Year</option>
-                    <option value="0">Irregular</option>
+                    {{-- <option value="0">Irregular</option> --}}
                     <option value="1">1st Year</option>
                     <option value="2">2nd Year</option>
                     <option value="3">3rd Year</option>
@@ -93,7 +93,7 @@
 
             <div>
                 <label for="semester">Semester</label>
-                <select name="semester" id="semester">
+                <select name="semester" id="semester" required>
                     <option value="" selected disabled>Select Semester</option>
 
                     @foreach ($semesters as $sem)
@@ -120,6 +120,56 @@
             </div>
 
         </form>
+    </div>
+
+    {{-- CLASS TABLE --}}
+    <div>
+        <table>
+            <thead>
+                <th>Instructor</th>
+                <th>Subject</th>
+                <th>Course</th>
+                <th>Year</th>
+                <th>Section</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                @foreach ($classes as $class)
+                    <tr>
+                        <td>
+                            {{$class->teacher}}
+                        </td>
+                        <td>
+                            {{$class->description}}
+                        </td>
+                        <td>
+                            {{$class->course}}
+                        </td>
+                        <td>
+                            @if ($class->year == 1)
+                                {{ '1st Year' }}
+                            @elseif ($class->year == 2)
+                                {{ '2nd Year' }}
+                            @elseif ($class->year == 3)
+                                {{ '3rd Year' }}
+                            @elseif ($class->year == 4)
+                                {{ '4th Year' }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($class->section != null)
+                                {{$class->section}}
+                            @else
+                                TBA
+                            @endif
+                        </td>
+                        <td>
+                            {{-- ACTIONS HERE --}}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>

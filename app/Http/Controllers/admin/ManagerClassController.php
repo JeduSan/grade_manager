@@ -37,11 +37,27 @@ class ManagerClassController extends Controller
         ->leftJoin('academic_year','semester.academic_year_id','academic_year.id')
         ->get();
 
+        $classes = DB::table('class')
+        ->select(
+            DB::raw('CONCAT(teacher.lname, ", ", teacher.fname) AS "teacher"'),
+            'subject.description',
+            DB::raw('CONCAT(course.abbr," - ",course.description) as course'),
+            'class.year_level_id as year',
+            'class.section'
+        )
+        ->leftJoin('subject','subject.key','class.subject_key')
+        ->leftJoin('course','course.id','class.course_id')
+        ->leftJoin('semester','semester.id','class.semester_id')
+        ->leftJoin('teacher','teacher.key','class.teacher_key')
+        ->orderBy('class.course_id')
+        ->get();
+
         return view('admin.class_manager',[
             'teachers' => $teachers,
             'subjects' => $subjects,
             'courses' => $courses,
-            'semesters' => $semesters
+            'semesters' => $semesters,
+            'classes' => $classes
         ]);
     }
 
@@ -56,7 +72,7 @@ class ManagerClassController extends Controller
             'course' => ['required','integer','numeric'],
             'year' => ['required','integer','numeric'],
             'semester' => ['required','integer','numeric'],
-            'section' => ['required','string','max:255']
+            'section' => ['string','max:255']
         ]);
 
         try {
