@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AddStudentController;
 use App\Http\Controllers\admin\AddSubjectController;
 use App\Http\Controllers\admin\AddTeacherController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\ManagerClassController;
 use App\Http\Controllers\admin\ManagerController;
 use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\ManagerStudentController;
@@ -16,9 +17,9 @@ use App\Http\Controllers\admin\TeacherExcelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,6 +40,11 @@ require __DIR__.'/auth.php';
  *
  * //[ ] Add middlewares
  */
+
+// TEMP LANDING PAGE
+Route::get('/',function () {
+    return view('landing');
+});
 
 Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
 // Route::post('/admin/dashboard/add/teacher',[AddTeacherController::class,'store'])->name('admin.dashboard.add.teacher');
@@ -75,3 +81,8 @@ Route::post('/admin/manager/add/subject',[ManagerSubjectController::class,'store
 Route::post('/admin/manager/add/subject/excel',[SubjectExcelController::class,'store'])->name('admin.manager.add.subject.excel');
 Route::get('/admin/manager/delete/subject/{id}',[ManagerSubjectController::class,'destroy'])->name('admin.manager.delete.subject');
 Route::patch('/admin/manager/edit/subject/{id}',[ManagerSubjectController::class,'update'])->name('admin.manager.edit.subject');
+
+// CLASS MANAGER
+Route::get('/admin/manager/class',[ManagerClassController::class,'index'])->name('admin.manager.class');
+Route::post('/admin/manager/add/class',[ManagerClassController::class,'store'])->name('admin.manager.add.class');
+
