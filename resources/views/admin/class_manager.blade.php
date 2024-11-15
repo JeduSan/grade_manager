@@ -137,7 +137,11 @@
                 @foreach ($classes as $class)
                     <tr>
                         <td>
-                            {{$class->teacher}}
+                            @if ($class->teacher != null)
+                                {{$class->teacher}}
+                            @else
+                                TBA
+                            @endif
                         </td>
                         <td>
                             {{$class->description}}

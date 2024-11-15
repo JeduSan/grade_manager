@@ -72,7 +72,7 @@ class ManagerClassController extends Controller
             'course' => ['required','integer','numeric'],
             'year' => ['required','integer','numeric'],
             'semester' => ['required','integer','numeric'],
-            'section' => ['string','max:255']
+            'section' => ['nullable','string','max:255']
         ]);
 
         try {
