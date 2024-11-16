@@ -1,0 +1,46 @@
+h5 {
+    font-size: 1.5em;
+}
+
+.btn-add {
+    background-color: #b62d2d;
+    color: #fff;
+    font-size: 0.9em;
+    height: 30px;
+    padding: 5px 15px 25px;
+}
+
+.btn-add:hover {
+    background-color: #7f1d1d;
+    color: #fff;
+}
+
+.btn-cancel {
+    background-color: #555555;
+    color: #fff;
+    font-size: 0.9em;
+    height: 30px;
+    padding: 5px 15px 25px;
+}
+
+.btn-cancel:hover {
+    background-color: #343434;
+    color: #fff;
+}
+
+.btn-action {
+    font-size: 1.1em;
+    padding: 5px 10px;
+    color: #af2929;
+}
+
+.btn-action:hover {
+    font-size: 1.1em;
+    padding: 5px 10px;
+    color: #7e2222;
+}
+
+#toastSuccess, #toastError {
+    z-index: 9999;
+}
+

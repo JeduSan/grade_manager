@@ -1,0 +1,91 @@
+body {
+    background-color: #eeeeee;
+}
+
+#sidebar {
+    width: 200px; 
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgb(177,45,45);
+    background: linear-gradient(190deg, rgba(177,45,45,1) 0%, rgba(101,24,24,1) 92%);
+}
+
+#sidebar.toggled {
+    width: 60px; 
+}
+
+.icon-size {
+    font-size: 1.2rem;
+    margin-left: 15px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sidebar.toggled .nav-link span {
+    display: none;
+}
+
+#sidebar.toggled .nav-link i {
+    display: inline-block; 
+}
+
+.col.p-0 {
+    transition: margin-left 0.3s ease;
+    margin-left: 200px; 
+}
+
+#sidebar.toggled + .col.p-0 {
+    margin-left: 60px; 
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+}
+
+.page-content {
+    padding-top: 30px; 
+}
+
+#sidebarCollapse {
+    background-color: transparent;
+    border: none;
+}
+
+.navbar-toggler-icon {
+    color: #fff !important;
+}
+
+.navbar-toggler-icon:hover {
+    background-color: rgba(255, 255, 255, 0.7); 
+}
+
+.navbar .logo {
+    max-height: 40px; 
+    margin-right: 10px; 
+}
+
+.logo-name {
+    font-size: 1.2rem;
+    color: #272727;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.profile-icon {
+    color: rgb(152, 38, 38);
+    margin-right: 5px;
+}

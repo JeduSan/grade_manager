@@ -41,7 +41,7 @@ class ManagerClassController extends Controller
         ->select(
             DB::raw('CONCAT(teacher.lname, ", ", teacher.fname) AS "teacher"'),
             'subject.description',
-            DB::raw('CONCAT(course.abbr," - ",course.description) as course'),
+            DB::raw('course.abbr as course'),
             'class.year_level_id as year',
             'class.section'
         )

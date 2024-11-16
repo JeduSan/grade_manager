@@ -1,0 +1,78 @@
+.card {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    background: rgb(254,254,254);
+    background: linear-gradient(94deg, rgba(254,254,254,1) 0%, rgba(244,244,244,1) 99%);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;     
+    text-align: center;      
+    height: 120px;           
+}
+
+.card-body i {
+    color: #861b1b;
+}
+
+.card-body h5 {
+    color: #861b1b;
+}
+
+h5 {
+    color: #861b1b;
+}
+
+table {
+    background-color: #fff;
+    border-radius: 8px; 
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+}
+
+table th {
+    background-color: #af2f2f !important;
+    color: white !important;
+}
+
+
+.col-md-3:nth-child(3) .card {
+  background: rgb(177,45,45);
+  background: linear-gradient(190deg, rgba(177,45,45,1) 0%, rgba(153,13,13,1) 92%);
+}
+
+.col-md-3:nth-child(3) .card-body {
+    color: #fafafa; 
+}
+
+.col-md-3:nth-child(3) .card-body i {
+  color: #fafafa; 
+}
+.col-md-3:nth-child(3) .card-body h5 {
+  color: #fafafa; 
+}
+
+.col-md-3:nth-child(4) .card {
+  background: rgb(177,45,45);
+  background: linear-gradient(190deg, rgba(177,45,45,1) 0%, rgba(153,13,13,1) 92%);
+}
+
+.col-md-3:nth-child(4) .card-body {
+  color: #fafafa; 
+}
+
+.col-md-3:nth-child(4) .card-body i {
+  color: #fafafa; 
+}
+.col-md-3:nth-child(4) .card-body h5 {
+  color: #fafafa; 
+}
