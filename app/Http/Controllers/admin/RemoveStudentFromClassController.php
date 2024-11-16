@@ -48,8 +48,9 @@ class RemoveStudentFromClassController extends Controller
     {
         try {
             StudentClass::destroy($student_class_id);
+            session(['success' => 'Student deleted successfully!']);
         } catch (Exception $e) {
-
+            session(['failure' => 'Something went wrong :(']);
         }
 
         return redirect("/admin/manager/view/class/$class_id");

@@ -84,6 +84,8 @@
                 <div class="container-fluid page-content mt-3">
                     <br><br>
 
+                    @include('components.popup-condition')
+
                     <div class="d-flex mb-3">
                         <h5>Student List</h5>
                        <div class="d-flex ms-auto">
@@ -238,6 +240,10 @@
 
         //     $('#deleteStudentModal').modal('hide');
         // });
+
+        const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
+        toastSuccess.show();
+
     </script>
 </body>
 </html>
