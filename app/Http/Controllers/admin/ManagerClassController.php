@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use Exception;
 use App\Models\Course;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -10,14 +11,14 @@ use App\Models\ClassModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Exception;
+use Illuminate\Database\Eloquent\Builder;
 
 class ManagerClassController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $teachers = Teacher::all();
 
@@ -37,8 +38,30 @@ class ManagerClassController extends Controller
         ->leftJoin('academic_year','semester.academic_year_id','academic_year.id')
         ->get();
 
-        $classes = DB::table('class')
-        ->select(
+        // $classes = DB::table('class')
+        // ->select(
+        //     DB::raw('CONCAT(teacher.lname, ", ", teacher.fname) AS "teacher"'),
+        //     'class.id',
+        //     'subject.key as subject_key',
+        //     'subject.description',
+        //     'course.id as course_id',
+        //     'course.abbr as course',
+        //     'class.year_level_id as year',
+        //     'class.section',
+        //     'teacher.key as teacher_key',
+        //     'semester.id as sem_id'
+        // )
+        // ->leftJoin('subject','subject.key','class.subject_key')
+        // ->leftJoin('course','course.id','class.course_id')
+        // ->leftJoin('semester','semester.id','class.semester_id')
+        // ->leftJoin('teacher','teacher.key','class.teacher_key')
+        // ->orderBy('class.course_id')
+        // ->get();
+
+        $classes = ClassModel::search($request->search)
+        ->query(function (Builder $builder) {
+
+            $builder->select(
             DB::raw('CONCAT(teacher.lname, ", ", teacher.fname) AS "teacher"'),
             'class.id',
             'subject.key as subject_key',
@@ -49,13 +72,15 @@ class ManagerClassController extends Controller
             'class.section',
             'teacher.key as teacher_key',
             'semester.id as sem_id'
-        )
-        ->leftJoin('subject','subject.key','class.subject_key')
-        ->leftJoin('course','course.id','class.course_id')
-        ->leftJoin('semester','semester.id','class.semester_id')
-        ->leftJoin('teacher','teacher.key','class.teacher_key')
-        ->orderBy('class.course_id')
-        ->get();
+            )
+            ->leftJoin('subject','subject.key','class.subject_key')
+            ->leftJoin('course','course.id','class.course_id')
+            ->leftJoin('semester','semester.id','class.semester_id')
+            ->leftJoin('teacher','teacher.key','class.teacher_key')
+            ->orderBy('class.course_id');
+            // ->get();
+
+        })->get();
 
         return view('admin.class_manager',[
             'teachers' => $teachers,
@@ -129,7 +154,7 @@ class ManagerClassController extends Controller
                 'section' => $request->section
             ]);
 
-            session(['success' => 'Class added successfully!']);
+            session(['success' => 'Class updated!']);
         } catch (Exception $e) {
             session(['failure' => 'Something went wrong :(']);
         }

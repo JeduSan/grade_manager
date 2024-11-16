@@ -3,7 +3,7 @@ body {
 }
 
 #sidebar {
-    width: 200px; 
+    width: 200px;
     transition: all 0.3s ease;
     position: fixed;
     top: 0;
@@ -15,7 +15,7 @@ body {
 }
 
 #sidebar.toggled {
-    width: 60px; 
+    width: 60px;
 }
 
 .icon-size {
@@ -34,16 +34,16 @@ body {
 }
 
 #sidebar.toggled .nav-link i {
-    display: inline-block; 
+    display: inline-block;
 }
 
 .col.p-0 {
     transition: margin-left 0.3s ease;
-    margin-left: 200px; 
+    margin-left: 200px;
 }
 
 #sidebar.toggled + .col.p-0 {
-    margin-left: 60px; 
+    margin-left: 60px;
 }
 
 .navbar {
@@ -58,7 +58,7 @@ body {
 }
 
 .page-content {
-    padding-top: 30px; 
+    padding-top: 30px;
 }
 
 #sidebarCollapse {
@@ -71,12 +71,12 @@ body {
 }
 
 .navbar-toggler-icon:hover {
-    background-color: rgba(255, 255, 255, 0.7); 
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .navbar .logo {
-    max-height: 40px; 
-    margin-right: 10px; 
+    max-height: 40px;
+    margin-right: 10px;
 }
 
 .logo-name {
@@ -88,15 +88,4 @@ body {
 .profile-icon {
     color: rgb(152, 38, 38);
     margin-right: 5px;
-}
-
-.navbar-nav .nav-item:hover .dropdown-menu {
-    display: block;
-}
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    min-width: 200px;
 }

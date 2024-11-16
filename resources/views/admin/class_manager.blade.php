@@ -93,17 +93,23 @@
 
 
                         <div class="d-flex ms-auto">
-                            <div class="search-container me-3">
-                                <input type="text" class="form-control" placeholder="Search Class..." id="searchInput">
-                            </div>
+
+                            <form method="GET">
+                                <div class="search-container me-3">
+                                    <input type="text" class="form-control" name="search" placeholder="Search Class..." id="searchInput">
+                                </div>
+                            </form>
+
                             <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addClassModal">
                                 <i class="fas fa-user-plus"></i> Add Class
                             </button>
                         </div>
                     </div>
 
+                    {{-- SUCCESS FAILURE POPUP --}}
                     @include('components.popup-condition')
 
+                    {{-- ADD MODAL --}}
                     @include('components.class_manager.add-modal')
 
                     <div class="table-responsive">
@@ -154,6 +160,7 @@
                                         <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editClassModal" data-form="{{$class->id}}" data-instructor="{{$class->teacher_key}}" data-subject="{{$class->subject_key}}" data-course="{{$class->course_id}}" data-year="{{$class->year}}" data-section="{{$class->section}}" data-semester="{{$class->sem_id}}">
                                             <i class="fas fa-edit"></i>
                                         </button>
+                                        {{-- // [ ] ADD CLAS VIEWING--}}
                                         <button class="btn btn-action"
                                         onclick="window.location.href='class-list.html';">
                                         <i class="fas fa-eye"></i>
@@ -173,26 +180,11 @@
 
     </div>
 
+    {{-- EDIT MODAL --}}
     @include('components.class_manager.edit-modal')
 
-    <!-- Delete Class Modal -->
-    <div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="deleteClassModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteClassModalLabel">Delete Class</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this class <strong id="deleteClassInstructor"></strong> - <span id="deleteClassSubject"></span>?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <a id="deleteClassModalBtn" class="btn btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- DELETE MODAL --}}
+    @include('components.class_manager.delete-modal')
 
     <script>
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
