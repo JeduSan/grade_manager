@@ -127,7 +127,36 @@ class ManagerClassController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $class = DB::table('class')
+        ->leftJoin('teacher','teacher.key','class.teacher_key')
+        ->leftJoin('subject','subject.key','class.subject_key')
+        ->select(
+            DB::raw('CONCAT(teacher.fname," ",teacher.lname) as teacher'),
+            'subject.description as subject',
+            'subject.units'
+        )
+        ->where('class.id',$id)
+        ->first();
+
+        $students = DB::table('student_class')
+        ->select(
+            DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
+            'student.id as student_id',
+            'course.abbr as course',
+            'student_year_level.year_level_id as year'
+        )
+        ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
+        ->leftJoin('student','student_year_level.student_key','student.key')
+        ->leftJoin('course','course.id','student.course_id')
+        ->where('student_class.class_id',$id)
+        ->get();
+
+        // dd($students);
+
+        return view('admin.class_view',[
+            'class' => $class,
+            'students' => $students
+        ]);
     }
 
     /**

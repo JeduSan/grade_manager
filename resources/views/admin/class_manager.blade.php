@@ -161,10 +161,9 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         {{-- // [ ] ADD CLAS VIEWING--}}
-                                        <button class="btn btn-action"
-                                        onclick="window.location.href='class-list.html';">
+                                        <a class="btn btn-action" href="/admin/manager/view/class/{{$class->id}}">
                                         <i class="fas fa-eye"></i>
-                                        </button>
+                                        </a>
                                         <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteClassModal" data-form="{{$class->id}}" data-instructor="{{$class->teacher}}" data-subject="{{$class->description}}">
                                             <i class="fas fa-trash"></i>
                                         </button>

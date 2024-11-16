@@ -10,6 +10,8 @@
 // [ ] Assign a class/section to a teacher
 // [ ] Subject Manager -> see all students for that subject and who is the instructor
 
+// [ ] Register student to a class
+
 // ======
 // ADMIN MANAGER
 // ======
