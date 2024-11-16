@@ -86,3 +86,4 @@ Route::patch('/admin/manager/edit/subject/{id}',[ManagerSubjectController::class
 Route::get('/admin/manager/class',[ManagerClassController::class,'index'])->name('admin.manager.class');
 Route::post('/admin/manager/add/class',[ManagerClassController::class,'store'])->name('admin.manager.add.class');
 Route::patch('/admin/manager/edit/class/{id}',[ManagerClassController::class,'update'])->name('admin.manager.edit.class');
+Route::get('/admin/manager/delete/class/{id}',[ManagerClassController::class,'destroy'])->name('admin.manager.delete.class');

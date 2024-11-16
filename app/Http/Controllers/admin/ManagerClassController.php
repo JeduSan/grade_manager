@@ -122,11 +122,11 @@ class ManagerClassController extends Controller
         try {
             ClassModel::where('id',$id)->update([
                 'teacher_key' => $request->instructor,
-            'subject_key' => $request->subject,
-            'course_id' => $request->course,
-            'year_level_id' => $request->year,
-            'semester_id' => $request->semester,
-            'section' => $request->section
+                'subject_key' => $request->subject,
+                'course_id' => $request->course,
+                'year_level_id' => $request->year,
+                'semester_id' => $request->semester,
+                'section' => $request->section
             ]);
 
             session(['success' => 'Class added successfully!']);
@@ -142,6 +142,13 @@ class ManagerClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            ClassModel::destroy($id);
+            session(['success' => 'Class deleted successfully!']);
+        } catch(Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('admin.manager.class');
     }
 }

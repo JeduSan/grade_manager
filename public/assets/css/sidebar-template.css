@@ -89,3 +89,14 @@ body {
     color: rgb(152, 38, 38);
     margin-right: 5px;
 }
+
+.navbar-nav .nav-item:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 200px;
+}

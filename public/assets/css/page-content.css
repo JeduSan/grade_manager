@@ -27,7 +27,19 @@ h5 {
     background-color: #343434;
     color: #fff;
 }
+.btn-password{
+    background-color: #812020;
+    color: #fff;
+    font-size: 0.9em;
+    height: 30px;
+    padding: 5px 15px 25px;
 
+}
+
+.btn-password:hover {
+    background-color: #611818;
+    color: #fff;
+}
 .btn-action {
     font-size: 1.1em;
     padding: 5px 10px;

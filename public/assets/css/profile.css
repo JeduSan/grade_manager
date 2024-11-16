@@ -1,0 +1,18 @@
+.profile-container {
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 40px;
+}
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.profile-header h2 {
+    margin-bottom: 0;
+}
+.profile-header p {
+    margin-top: 10px;
+    color: #6c757d;
+}
