@@ -173,7 +173,6 @@
                         </div>
                     </div>
 
-
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -219,13 +218,13 @@
                                     </td>
                                     {{-- //[ ] EDIT ACTIONS --}}
                                     <td>
-                                        <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editClassModal" data-instructor="Dr. Aldwin Illumin" data-subject="Parallel and Distributed Computing" data-course="Computer Science" data-year="3rd Year" data-section="A">
+                                        <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editClassModal" data-form="{{$class->id}}" data-instructor="{{$class->teacher_key}}" data-subject="{{$class->subject_key}}" data-course="{{$class->course_id}}" data-year="{{$class->year}}" data-section="{{$class->section}}" data-semester="{{$class->sem_id}}">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="btn btn-action"
                                         onclick="window.location.href='class-list.html';">
                                         <i class="fas fa-eye"></i>
-                                    </button>
+                                        </button>
                                         <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteClassModal" data-instructor="Dr. Aldwin Illumin" data-subject="Parallel and Distributed Computing">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -250,63 +249,72 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="editClassForm" method="POST">
+                        @csrf
+                        @method("PATCH")
                         <div class="mb-3">
                             <label for="editClassInstructor" class="form-label">Instructor</label>
-                            <select class="form-select" id="editClassInstructor">
-                                <option selected>Select Instructor</option>
-                                <option value="Dr. Aldwin Illumin"> Aldwin Illumin</option>
-                                <option value="Prof. Samantha Doe">Aldwin Illumin</option>
-                                <option value="Dr. John Smith">Aldwin Illumin</option>
+                            <select class="form-select" name="instructor" id="editClassInstructor">
+                                <option selected disabled>Select Instructor</option>
+                                @foreach ($teachers as $teacher)
+                                    <option value="{{$teacher->key}}">{{"$teacher->fname $teacher->lname [$teacher->id]" }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editClassSubject" class="form-label">Class Subject</label>
-                            <select class="form-select" id="editClassSubject">
-                                <option selected>Select Subject</option>
-                                <option value="Parallel and Distributed Computing">Parallel and Distributed Computing</option>
-                                <option value="Data Structures">Data Structures</option>
-                                <option value="Algorithms">Algorithms</option>
+                            <label for="subject" class="form-label">Class Subject</label>
+                            <select class="form-select" name="subject" id="editClassSubject">
+                                <option selected disabled>Select Subject</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{$subject->key}}">{{"$subject->description [$subject->code]"}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editClassCourse" class="form-label">Class Course</label>
-                            <select class="form-select" id="editClassCourse">
+                            <label for="course" class="form-label">Class Course</label>
+                            <select class="form-select" name="course" id="editClassCourse">
                                 <option selected>Select Course</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Computer Science">Computer Science</option>
+                                @foreach ($courses as $course)
+                                    <option value="{{$course->id}}">{{"[$course->abbr] $course->description"}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editClassYear" class="form-label">Class Year</label>
-                            <select class="form-select" id="editClassYear">
-                                <option selected>Select Year</option>
-                                <option value="1st Year">1st Year</option>
-                                <option value="2nd Year">2nd Year</option>
-                                <option value="3rd Year">3rd Year</option>
-                                <option value="4th Year">4th Year</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="classSemester" class="form-label">Semester</label>
-                            <select class="form-select" id="classSemeste">
-                                <option selected>Select Semester</option>
-                                <option value="1st Semester 2024-2025">1st Semester 2024-2025</option>
-                                <option value="1st Semester 2024-2025">1st Semester 2024-2025</option>
-                                <option value="1st Semester 2024-2025">1st Semester 2024-2025</option>
+                            <label for="year" class="form-label">Class Year</label>
+                            <select class="form-select" name="year" id="editClassYear">
+                                <option selected disabled>Select Year</option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editclassSection" class="form-label">Section</label>
-                            <input type="text" class="form-control" id="editclassSection" placeholder="Enter Section">
+                            <label for="semester" class="form-label">Semester</label>
+                            <select class="form-select" name="semester" id="editClassSemester">
+                                <option selected disabled>Select Semester</option>
+                                @foreach ($semesters as $sem)
+                                <option value="{{$sem->id}}">
+                                @if ($sem->number == 1)
+                                    {{"1st Semester AY $sem->start_year-$sem->end_year"}}
+                                @elseif ($sem->number == 2)
+                                    {{"2nd Semester AY $sem->start_year-$sem->end_year"}}
+                                @elseif ($sem->number == 3)
+                                    {{"Summer AY $sem->start_year-$sem->end_year"}}
+                                @endif
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="section" class="form-label">Section</label>
+                            <input type="text" class="form-control" name="section" id="editClassSection" placeholder="Enter Section">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-add">Save Changes</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-add">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -332,8 +340,6 @@
     </div>
 
     <script>
-
-
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggled');
         });
@@ -341,6 +347,7 @@
 
         var editButtons = document.querySelectorAll('[data-bs-target="#editClassModal"]');
         var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteClassModal"]');
+        var editForm = document.querySelector('#editClassForm');
 
         editButtons.forEach(function(button) {
             button.addEventListener('click', function() {
@@ -349,12 +356,16 @@
                 var course = button.getAttribute('data-course');
                 var year = button.getAttribute('data-year');
                 var section = button.getAttribute('data-section');
+                var sem = button.getAttribute('data-semester');
+                var form = button.getAttribute('data-form');
 
                 document.getElementById('editClassInstructor').value = instructor;
                 document.getElementById('editClassSubject').value = subject;
                 document.getElementById('editClassCourse').value = course;
                 document.getElementById('editClassYear').value = year;
                 document.getElementById('editClassSection').value = section;
+                document.getElementById('editClassSemester').value = sem;
+                editForm.setAttribute('action','/admin/manager/edit/class/' + form);
             });
         });
 

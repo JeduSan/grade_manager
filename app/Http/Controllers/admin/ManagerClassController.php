@@ -40,10 +40,15 @@ class ManagerClassController extends Controller
         $classes = DB::table('class')
         ->select(
             DB::raw('CONCAT(teacher.lname, ", ", teacher.fname) AS "teacher"'),
+            'class.id',
+            'subject.key as subject_key',
             'subject.description',
-            DB::raw('course.abbr as course'),
+            'course.id as course_id',
+            'course.abbr as course',
             'class.year_level_id as year',
-            'class.section'
+            'class.section',
+            'teacher.key as teacher_key',
+            'semester.id as sem_id'
         )
         ->leftJoin('subject','subject.key','class.subject_key')
         ->leftJoin('course','course.id','class.course_id')
@@ -105,7 +110,31 @@ class ManagerClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'instructor' => ['required','integer','numeric'],
+            'subject' => ['required','integer','numeric'],
+            'course' => ['required','integer','numeric'],
+            'year' => ['required','integer','numeric'],
+            'semester' => ['required','integer','numeric'],
+            'section' => ['nullable','string','max:255']
+        ]);
+
+        try {
+            ClassModel::where('id',$id)->update([
+                'teacher_key' => $request->instructor,
+            'subject_key' => $request->subject,
+            'course_id' => $request->course,
+            'year_level_id' => $request->year,
+            'semester_id' => $request->semester,
+            'section' => $request->section
+            ]);
+
+            session(['success' => 'Class added successfully!']);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('admin.manager.class');
     }
 
     /**
