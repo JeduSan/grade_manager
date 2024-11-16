@@ -131,6 +131,7 @@ class ManagerClassController extends Controller
         ->leftJoin('teacher','teacher.key','class.teacher_key')
         ->leftJoin('subject','subject.key','class.subject_key')
         ->select(
+            'class.id',
             DB::raw('CONCAT(teacher.fname," ",teacher.lname) as teacher'),
             'subject.description as subject',
             'subject.units'
@@ -140,6 +141,7 @@ class ManagerClassController extends Controller
 
         $students = DB::table('student_class')
         ->select(
+            'student_class.id',
             DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
             'student.id as student_id',
             'course.abbr as course',

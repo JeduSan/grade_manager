@@ -120,7 +120,7 @@
                                 @foreach ($students as $student)
                                     <tr>
                                         <td>
-                                            <div style="color: rgb(192, 27, 27); font-size: 0.85em;"> A20-0003</div>
+                                            <div style="color: rgb(192, 27, 27); font-size: 0.85em;">{{$student->student_id}}</div>
                                             <div>{{$student->name}}</div>
                                         </td>
                                         <td>{{$student->course}}</td>
@@ -137,7 +137,7 @@
                                                 4th Year
                                             @endif
                                         </td>
-                                        <td><button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteStudentModal"><i class="fas fa-trash"></i></button></td>
+                                        <td><button class="btn btn-action" data-href="/admin/manager/view/class/remove/student/{{$student->id}}/{{$class->id}}" data-bs-toggle="modal" data-bs-target="#deleteStudentModal"><i class="fas fa-trash"></i></button></td>
                                     </tr>
                                 @endforeach
 
@@ -204,30 +204,40 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="deleteStudentBtn">Delete</button>
+                    <a class="btn btn-danger" id="deleteStudentBtn">Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        var deleteModalBtn = document.querySelectorAll('[data-bs-target="#deleteStudentModal"]');
+        var delBtn = document.querySelector('#deleteStudentBtn');
 
-        document.querySelectorAll('.btn-danger').forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                const studentId = event.target.getAttribute('data-student-id');
-                const deleteButton = document.getElementById('deleteStudentBtn');
+        // document.querySelectorAll('.btn-danger').forEach(function(button) {
+        //     button.addEventListener('click', function(event) {
+        //         // const studentId = event.target.getAttribute('data-student-id');
+        //         const deleteButton = document.getElementById('deleteStudentBtn');
 
-                deleteButton.setAttribute('data-student-id', studentId);
+        //         deleteButton.setAttribute('data-student-id', studentId);
+        //     });
+        // });
+
+        deleteModalBtn.forEach(function(button){
+            button.addEventListener('click',function () {
+                var href = button.getAttribute('data-href');
+
+                delBtn.setAttribute('href',href);
             });
         });
 
 
-        document.getElementById('deleteStudentBtn').addEventListener('click', function() {
-            const studentId = this.getAttribute('data-student-id');
-            console.log(`Student with ID ${studentId} has been deleted.`);
+        // document.getElementById('deleteStudentBtn').addEventListener('click', function() {
+        //     const studentId = this.getAttribute('data-student-id');
+        //     console.log(`Student with ID ${studentId} has been deleted.`);
 
-            $('#deleteStudentModal').modal('hide');
-        });
+        //     $('#deleteStudentModal').modal('hide');
+        // });
     </script>
 </body>
 </html>

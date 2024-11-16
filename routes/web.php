@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\ManagerStudentController;
 use App\Http\Controllers\admin\ManagerSubjectController;
 use App\Http\Controllers\admin\ManagerTeacherController;
+use App\Http\Controllers\admin\RemoveStudentFromClassController;
 use App\Http\Controllers\admin\StudentExcelController;
 use App\Http\Controllers\admin\SubjectExcelController;
 use App\Http\Controllers\admin\TeacherExcelController;
@@ -88,3 +89,5 @@ Route::post('/admin/manager/add/class',[ManagerClassController::class,'store'])-
 Route::patch('/admin/manager/edit/class/{id}',[ManagerClassController::class,'update'])->name('admin.manager.edit.class');
 Route::get('/admin/manager/delete/class/{id}',[ManagerClassController::class,'destroy'])->name('admin.manager.delete.class');
 Route::get('/admin/manager/view/class/{id}',[ManagerClassController::class,'show'])->name('admin.manager.show.class');
+
+Route::get('/admin/manager/view/class/remove/student/{student_class_id}/{class_id}',[RemoveStudentFromClassController::class,'destroy'])->name('admin.manager.view.class.remove.student');
