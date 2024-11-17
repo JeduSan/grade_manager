@@ -34,7 +34,7 @@
               </a>
           </li>
             <li>
-                <a href="manage-users.html" class="nav-link px-0 align-middle text-white">
+                <a href="/admin/manager/user" class="nav-link px-0 align-middle text-white">
                     <i class="fas fa-cogs icon-size"></i> <span class="ms-1">Manage Users</span>
                 </a>
             </li>

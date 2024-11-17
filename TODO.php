@@ -51,7 +51,7 @@
 // [x] Teacher manager
 // [x] Student manager
 // [x] Class manager
-// [ ] Subject manager
+// [x] Subject manager
 // [ ] User manager
 
 
