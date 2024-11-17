@@ -30,6 +30,7 @@ class ManagerTeacherController extends Controller
                 'teacher.lname',
                 'teacher.email',
                 'dept.description as dept',
+                'teacher.dept_id',
                 'teacher.user_id'
             )
             ->leftJoin('dept','dept.id','teacher.dept_id');
@@ -97,21 +98,35 @@ class ManagerTeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $user_id)
     {
         $request->validate([
             'teacher_id' => ['required','string','max:255'],
             'teacher_fname' => ['required','string','max:255'],
-            'teacher_lname' => ['required','string','max:255']
+            'teacher_lname' => ['required','string','max:255'],
+            'teacher_email' => ['required','string','max:255'],
+            'teacher_dept' => ['required','numeric','integer'],
+            'teacher_password' => ['nullable',Rules\Password::defaults()]
         ]);
 
         try {
 
-            Teacher::where('key',$id)->update([
-                'id' => $request->teacher_id,
-                'fname' => $request->teacher_fname,
-                'lname' => $request->teacher_lname
-            ]);
+            DB::transaction(function () use ($request,$user_id) {
+                Teacher::where('user_id',$user_id)->update([
+                    'id' => $request->teacher_id,
+                    'fname' => $request->teacher_fname,
+                    'lname' => $request->teacher_lname,
+                    'email' => $request->teacher_email,
+                    'dept_id' => $request->teacher_dept
+                ]);
+
+                User::find($user_id)->update([
+                    'name' => $request->teacher_id,
+                    'email' => $request->teacher_email,
+                    'password' => Hash::make($request->teacher_password),
+                ]);
+            });
+
             session(['success' => 'Teacher edited successfully!']);
 
         } catch(Exception $e) {

@@ -80,7 +80,7 @@
                                         <td>{{$teacher->email}}</td>
                                         <td>{{str_replace('College of','',$teacher->dept)}}</td>
                                         <td>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editTeacherModal"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editTeacherModal" data-form="{{$teacher->user_id}}" data-id="{{$teacher->id}}" data-fname="{{$teacher->fname}}" data-lname="{{$teacher->lname}}" data-email="{{$teacher->email}}" data-dept="{{$teacher->dept_id}}"><i class="fas fa-edit"></i></button>
                                             <button class="btn btn-action" data-form="{{$teacher->user_id}}" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -95,50 +95,21 @@
         </div>
     </div>
 
-    <!-- Edit Teacher Modal -->
-    <div class="modal fade" id="editTeacherModal" tabindex="-1" aria-labelledby="editTeacherModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editTeacherModalLabel">Edit Teacher Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="editTeacherName" placeholder="Enter teacher's name">
-                        </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" id="editTeacherEmail" placeholder="Enter teacher's email">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="editTeacherDepartment" placeholder="Enter teacher's department">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="teacherPassword" placeholder="Create Password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-add" onclick="showSuccessMessage('Teacher details updated successfully!')">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- EDIT TEACHER MODAL --}}
+    @include('components.teacher_manager.edit-modal')
 
     {{-- DELETE TEACHER MODAL --}}
     @include('components.teacher_manager.delete-modal')
 
     <script>
+        var editModalBtns = document.querySelectorAll('[data-bs-target="#editTeacherModal"]');
+        var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteTeacherModal"]');
+        var deleteClassModalBtn = document.querySelector('#deleteClassModalBtn');
+        var editForm = document.querySelector('#editForm');
+
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggled');
         });
-
-        // document.getElementById('searchButton').addEventListener('click', function() {
-        //     const searchTerm = document.getElementById('searchInput').value;
-        //     console.log('Search term:', searchTerm);
-        // });
 
         function showSuccessMessage(message) {
             const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
@@ -146,13 +117,26 @@
             toastSuccess.show();
         }
 
-        // function showErrorMessage(message) {
-        //     const toastError = new bootstrap.Toast(document.getElementById('toastError'));
-        //     document.querySelector('#toastError .toast-body').textContent = message;
-        //     toastError.show();
-        // }
-        var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteTeacherModal"]');
-        var deleteClassModalBtn = document.querySelector('#deleteClassModalBtn');
+        editModalBtns.forEach(function (button) {
+            button.addEventListener('click',function () {
+                var id = button.getAttribute('data-id');
+                var fname = button.getAttribute('data-fname');
+                var lname = button.getAttribute('data-lname');
+                var email = button.getAttribute('data-email');
+                var dept = button.getAttribute('data-dept');
+                var form = button.getAttribute('data-form');
+
+                // alert(`${id} - ${fname} - ${lname} - ${email} - ${dept}`);
+                document.getElementById('teacher-id').value = id;
+                document.getElementById('teacherFirstName').value = fname;
+                document.getElementById('teacherLastName').value = lname;
+                document.getElementById('teacher-email').value = email;
+                document.getElementById('teacher-dept').value = dept;
+                editForm.setAttribute('action', '/admin/manager/edit/teacher/' + form);
+
+            });
+        });
+
         deleteButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 var form = button.getAttribute('data-form');
