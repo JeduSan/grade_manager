@@ -7,16 +7,28 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class ManagerTeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // $teachers = Teacher::all();
-        $teachers = DB::table('teacher')->paginate(15);
+        // $teachers = DB::table('teacher')->paginate(15);
+        $teachers  = Teacher::search($request->search)
+        ->query(function (Builder $builder) {
+            $builder->select(
+                'teacher.fname',
+                'teacher.lname',
+                'teacher.email',
+                'dept.description as dept'
+            )
+            ->leftJoin('dept','dept.id','teacher.dept_id');
+        })
+        ->get();
 
         return view('admin.teacher_manager',[
             'teachers' => $teachers

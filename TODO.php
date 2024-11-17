@@ -47,6 +47,13 @@
 // [x] " teachers
 // [x] "" subjects
 
+// [ ] APPLY UI
+// [ ] Teacher manager
+// [ ] Student manager
+// [x] Class manager
+// [ ] Subject manager
+// [ ] User manager
+
 
 // ==================
 // TEACHER DASHBOARD
