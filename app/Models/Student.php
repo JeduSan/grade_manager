@@ -27,7 +27,9 @@ class Student extends Model
             'student.lname' => $this->student_lname,
             'student.fname' => $this->student_fname,
             'student.mname' => $this->student_mname,
-            'student.id' => $this->student_id
+            'student.id' => $this->student_id,
+            'course.abbr' => $this->student_course,
+            'course.description' => $this->student_course_desc
         ];
     }
 }
