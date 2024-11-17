@@ -11,6 +11,7 @@ use App\Models\ClassModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
 
 class ManagerClassController extends Controller
@@ -26,8 +27,6 @@ class ManagerClassController extends Controller
 
         $courses = Course::all();
 
-        // $semesters = Semester::all();
-
         $semesters = DB::table('semester')
         ->select(
             'semester.id',
@@ -37,26 +36,6 @@ class ManagerClassController extends Controller
         )
         ->leftJoin('academic_year','semester.academic_year_id','academic_year.id')
         ->get();
-
-        // $classes = DB::table('class')
-        // ->select(
-        //     DB::raw('CONCAT(teacher.lname, ", ", teacher.fname) AS "teacher"'),
-        //     'class.id',
-        //     'subject.key as subject_key',
-        //     'subject.description',
-        //     'course.id as course_id',
-        //     'course.abbr as course',
-        //     'class.year_level_id as year',
-        //     'class.section',
-        //     'teacher.key as teacher_key',
-        //     'semester.id as sem_id'
-        // )
-        // ->leftJoin('subject','subject.key','class.subject_key')
-        // ->leftJoin('course','course.id','class.course_id')
-        // ->leftJoin('semester','semester.id','class.semester_id')
-        // ->leftJoin('teacher','teacher.key','class.teacher_key')
-        // ->orderBy('class.course_id')
-        // ->get();
 
         $classes = ClassModel::search($request->search)
         ->query(function (Builder $builder) {
@@ -78,7 +57,6 @@ class ManagerClassController extends Controller
             ->leftJoin('semester','semester.id','class.semester_id')
             ->leftJoin('teacher','teacher.key','class.teacher_key')
             ->orderBy('class.course_id');
-            // ->get();
 
         })->get();
 
@@ -125,7 +103,7 @@ class ManagerClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request,string $id)
     {
         $class = DB::table('class')
         ->leftJoin('teacher','teacher.key','class.teacher_key')
@@ -153,11 +131,20 @@ class ManagerClassController extends Controller
         ->where('student_class.class_id',$id)
         ->get();
 
-        // dd($students);
+        $all_students = Student::search($request->search)
+        ->query(function (Builder $builder) {
+            $builder->select(
+                    DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
+                    'student_year_level.id as year'
+                )
+                ->leftJoin('student_year_level','student_year_level.student_key','student.key');
+        })
+        ->get();
 
         return view('admin.class_view',[
             'class' => $class,
-            'students' => $students
+            'students' => $students,
+            'all_students' => $all_students
         ]);
     }
 

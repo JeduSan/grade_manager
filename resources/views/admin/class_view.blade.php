@@ -162,19 +162,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/admin/manager/view/class/{{$class->id}}" method="GET">
+                        {{-- SEARCH --}}
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="studentName" placeholder="Enter student's name">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Search by ID or Name">
                         </div>
+                    </form>
+
+                    <form action="/admin/manager/view/class/add/student/{{$class->id}}" method="POST">
+                        @csrf
                         <div class="mb-3">
+                            {{-- <input type="text" class="form-control" id="studentName" placeholder="Enter student's name"> --}}
+                            <select name="year_id" id="studentName" class="form-control">
+                                <option value="" selected disabled>Select Student</option>
+                                @foreach ($all_students as $student)
+                                    <option value="{{$student->year}}">{{$student->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <input type="hidden" name="class_id" value="{{$class->id}}">
+                        </div>
+                        {{-- <div class="mb-3">
                             <label for="classCourse" class="form-label">Course</label>
                             <select class="form-select" id="classCourse">
                                 <option selected>Select Course</option>
                                 <option value="Computer Science">Computer Science</option>
                                 <option value="Information Technology">Information Technology</option>
                             </select>
-                        </div>
-                        <div class="mb-3">
+                        </div> --}}
+                        {{-- <div class="mb-3">
                             <label for="classYear" class="form-label">Year</label>
                             <select class="form-select" id="classYear">
                                 <option selected>Select Year</option>
@@ -183,35 +201,20 @@
                                 <option value="3rd Year">3rd Year</option>
                                 <option value="4th Year">4th Year</option>
                             </select>
+                        </div> --}}
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-add">Add Student</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-add">Add Student</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Delete Student Modal -->
-    <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="deleteStudentModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteStudentModalLabel">Delete Student</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to remove this student on this class?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger" id="deleteStudentBtn">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- DELETE MODAL --}}
+    @include('components.class_view.delete-modal')
 
     <script>
         var deleteModalBtn = document.querySelectorAll('[data-bs-target="#deleteStudentModal"]');
