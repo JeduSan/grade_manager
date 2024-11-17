@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -13,14 +15,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $courses = Course::select(
-            'id',
-            'abbr',
-            'description'
-        )->get();
+        $teacher_count = Teacher::count();
+
+        $student_count = Student::count();
 
         return view('admin.dashboard',[
-            'courses' => $courses
+            'teacher_count' => $teacher_count,
+            'student_count' => $student_count
         ]);
     }
 

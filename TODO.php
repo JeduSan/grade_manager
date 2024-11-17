@@ -52,8 +52,8 @@
 // [x] Student manager
 // [x] Class manager
 // [x] Subject manager
-// [ ] User manager
-
+// [x] User manager
+// [ ] Dashboard
 
 // ==================
 // TEACHER DASHBOARD

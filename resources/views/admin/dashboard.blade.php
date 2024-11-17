@@ -1,191 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Admin Dashboard</title>
+    <title>Responsive Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+    <link rel="stylesheet" href="{{asset('assets/css/sidebar-template.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/dashboard.css')}}">
+    <style>
+
+
+
+
+    </style>
 </head>
-
 <body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
 
-    {{-- SUCCESS MODAL --}}
-    @if (session()->has('success'))
-        {{--
-             // [ ] Change z-index
-             // [ ] Design
-        --}}
-        <div id="success_modal">
-            <p>{{ session()->get('success') }}</p>
-            @php
-                session()->forget('success');
-            @endphp
+            {{-- SIDEBAR --}}
+            @include('components.admin_sidebar')
+
+            <!-- Main content area -->
+            <div class="col p-0">
+
+                {{-- APPBAR --}}
+                @include('components.admin_appbar')
+
+                <!-- Page content -->
+                <div class="container-fluid page-content mt-3">
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-user-md"></i>
+                                    <h5 class="card-title"> Total Teachers</h5>
+                                    <strong> <span class="card-number">{{$teacher_count}}</span></strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-procedures"></i>
+                                    <h5 class="card-title"> Total Students</h5>
+                                   <strong> <span class="card-number">{{$student_count}}</span></strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <h5 class="card-title">Total Sections</h5>
+                                    <strong> <span class="card-number">22</span></strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <h5 class="card-title">Current Semester</h5>
+                                    <strong> <span class="card-number">1st Semester 2024-2025</span></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Class Sections Table -->
+                    <h5>Pending Class Sections</h5>
+                    <div class="table-container">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Subject Name</th>
+                                    <th>Section</th>
+                                    <th>Assigned Teacher</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ECS 103</td>
+                                    <td>LAW1RB</td>
+                                    <td><span class="text-danger">Not Assigned</span></td>
+                                    <td><span class="badge bg-warning">Pending</span></td>
+                                </tr>
+                                <tr>
+                                  <td>ECS 103</td>
+                                  <td>LAW1RB</td>
+                                  <td><span class="text-danger">Not Assigned</span></td>
+                                  <td><span class="badge bg-warning">Pending</span></td>
+                              </tr>
+                              <tr>
+                                <td>ECS 103</td>
+                                <td>LAW1RB</td>
+                                <td><span class="text-danger">Not Assigned</span></td>
+                                <td><span class="badge bg-warning">Pending</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    @endif
+    </div>
 
-    {{-- FAILURE MODAL --}}
-    @if (session()->has('failure'))
-        {{--
-             // [ ] Change z-index
-             // [ ] Design
-        --}}
-        <div id="failure_modal">
-            <p>{{ session()->get('failure') }}</p>
-            @php
-                session()->forget('failure');
-            @endphp
-        </div>
-    @endif
-
-    <h1>Admin Manager</h1>
-
-    <main>
-        {{-- <!-- Add Teacher -->
-        <div>
-            <h3>Add Teacher</h3>
-            <form action="/admin/dashboard/add/teacher" method="POST">
-                @csrf
-                <div>
-                    <label for="teacher_id">Teacher ID</label>
-                    <input type="text" name="teacher_id" id="teacher_id" placeholder="XMPL1234" value="{{old('teacher_id')}}" required>
-                </div>
-                <div>
-                    <label for="teacher_fname">Teacher First Name</label>
-                    <input type="text" name="teacher_fname" id="teacher_fname" placeholder="Juan" value="{{old('teacher_fname')}}" required>
-                </div>
-                <div>
-                    <label for="teacher_lname">Teacher Last Name</label>
-                    <input type="text" name="teacher_lname" id="teacher_lname" placeholder="Dela Cruz" value="{{old('teacher_lname')}}" required>
-                </div>
-                <div>
-                    <input type="submit" value="Add Teacher">
-                </div>
-            </form>
-        </div>
-
-        <!-- Add Student -->
-        <div>
-            <h3>Add Student</h3>
-            <form action="/admin/dashboard/add/student" method="POST">
-                @csrf
-                <div>
-                    <label for="student_id">Student ID</label>
-                    <input type="text" name="student_id" id="student_id" placeholder="A24-1234" value="{{old('student_id')}}" required>
-                    <x-input-error :messages="$errors->get('student_id')" class="mt-2" />
-                </div>
-                <div>
-                    <label for="student_fname">Student First Name</label>
-                    <input type="text" name="student_fname" id="student_fname" placeholder="Juan" value="{{old('student_fname')}}" required>
-                    <x-input-error :messages="$errors->get('student_fname')" class="mt-2" />
-                </div>
-                <div>
-                    <label for="student_mname">Student Middle Name</label>
-                    <input type="text" name="student_mname" id="student_mname" placeholder="Doe" value="{{old('student_mname')}}" required>
-                    <x-input-error :messages="$errors->get('student_mname')" class="mt-2" />
-                </div>
-                <div>
-                    <label for="student_lname">Student Last Name</label>
-                    <input type="text" name="student_lname" id="student_lname" placeholder="Dela Cruz" value="{{old('student_lname')}}" required>
-                    <x-input-error :messages="$errors->get('student_lname')" class="mt-2" />
-                </div>
-                <div>
-                    <label for="student_email">Student Email</label>
-                    <input type="email" name="student_email" id="student_email" placeholder="juan@example.com" value="{{old('student_email')}}"
-                        required>
-                    <x-input-error :messages="$errors->get('student_email')" class="mt-2" />
-                </div>
-                <div>
-                    <label for="student_course">Student Course</label>
-                    <!-- [ ] Fill this with courses from the database-->
-                    <select name="student_course" id="student_course">
-                        <option value="" selected disabled>Select Course</option>
-                        @foreach ($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->description }}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('student_course')" class="mt-2" />
-                </div>
-                <div>
-                    <label for="student_year">Student Year</label>
-                    <select name="student_year" id="student_year">
-                        <option value="" selected disabled>Select Year</option>
-                        <option value="0">Irregular</option>
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option>
-                    </select>
-                    <x-input-error :messages="$errors->get('student_year')" class="mt-2" />
-                </div>
-                <div>
-                    <input type="submit" value="Add Student">
-                </div>
-            </form>
-        </div>
-
-        <!-- Add Subject -->
-        <div>
-            <h3>Add Subject</h3>
-            <form action="/admin/dashboard/add/subject" method="POST">
-                @csrf
-                <div>
-                    <label for="subject_name">Subject Name</label>
-                    <input type="text" name="subject_name" id="subject_name" placeholder="Software Engineering 1" value="{{old('subject_name')}}"
-                        required>
-                </div>
-                <div>
-                    <label for="subject_code">Subject Code</label>
-                    <input type="text" name="subject_code" id="subject_code" placeholder="CCS123" value="{{old('subject_code')}}" required>
-                </div>
-                <div>
-                    <label for="subject_units">Subject Units</label>
-                    <input type="text" name="subject_units" id="subject_units" placeholder="5" value="{{old('subject_units')}}" required>
-                </div>
-                <div>
-                    <input type="submit" value="Add Subject">
-                </div>
-            </form>
-        </div>
-
-        <!-- Add Semester -->
-        <div>
-            <h3>Add Semester</h3>
-            <form action="/admin/dashboard/add/semester" method="POST">
-                @csrf
-                <div>
-                    <label for="semester">Semester</label>
-                    <select name="semester" id="semester" required>
-                        <option value="" selected disabled>Select Semester</option>
-                        <option value="1">First Semester</option>
-                        <option value="2">Second Semester</option>
-                        <option value="3">Summer</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="semester_start">Semester Start Date</label>
-                    <input type="date" name="semester_start" id="semester_start"  value="{{old('semester_start')}}" required>
-                </div>
-                <div>
-                    <label for="semester_end">Semester End Date</label>
-                    <input type="date" name="semester_end" id="semester_end"  value="{{old('semester_end')}}" required>
-                </div>
-                <div>
-                    <input type="submit" value="Add Semester">
-                </div>
-            </form>
-        </div> --}}
-    </main>
-
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script>
-        $j = jQuery.noConflict();
-
-        $j("#success_modal").fadeOut(2000);
-
-        $j("#failure_modal").fadeOut(2000);
+        document.getElementById('sidebarCollapse').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('toggled');
+        });
     </script>
-</body>
 
+</body>
 </html>
