@@ -89,9 +89,12 @@
                     <div class="d-flex mb-3">
                         <h5>Student List</h5>
                        <div class="d-flex ms-auto">
-                            <div class="search-container me-3">
-                                <input type="text" class="form-control" placeholder="Search Student..." id="searchInput">
-                            </div>
+                            <form action="/admin/manager/view/class/{{$class->id}}" method="GET">
+                                {{-- SEARCH --}}
+                                <div class="search-container me-3">
+                                    <input type="text" class="form-control" name="search_all_students" placeholder="Search Student..." id="searchInput">
+                                </div>
+                            </form>
                             <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                                 <i class="fas fa-user-plus"></i> Add Student
                             </button>

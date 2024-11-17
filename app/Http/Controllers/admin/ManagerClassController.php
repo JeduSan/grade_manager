@@ -4,14 +4,15 @@ namespace App\Http\Controllers\admin;
 
 use Exception;
 use App\Models\Course;
+use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Semester;
 use App\Models\ClassModel;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
 
 class ManagerClassController extends Controller
@@ -117,19 +118,34 @@ class ManagerClassController extends Controller
         ->where('class.id',$id)
         ->first();
 
-        $students = DB::table('student_class')
-        ->select(
-            'student_class.id',
-            DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
-            'student.id as student_id',
-            'course.abbr as course',
-            'student_year_level.year_level_id as year'
-        )
-        ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
-        ->leftJoin('student','student_year_level.student_key','student.key')
-        ->leftJoin('course','course.id','student.course_id')
-        ->where('student_class.class_id',$id)
-        ->get();
+        // $students = DB::table('student_class')
+        // ->select(
+        //     'student_class.id',
+        //     DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
+        //     'student.id as student_id',
+        //     'course.abbr as course',
+        //     'student_year_level.year_level_id as year'
+        // )
+        // ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
+        // ->leftJoin('student','student_year_level.student_key','student.key')
+        // ->leftJoin('course','course.id','student.course_id')
+        // ->where('student_class.class_id',$id)
+        // ->get();
+
+        $students = StudentClass::search($request->search_all_students)
+        ->query(function (Builder $builder) use ($id) {
+            $builder->select(
+                'student_class.id',
+                DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
+                'student.id as student_id',
+                'course.abbr as course',
+                'student_year_level.year_level_id as year'
+            )
+            ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
+            ->leftJoin('student','student_year_level.student_key','student.key')
+            ->leftJoin('course','course.id','student.course_id')
+            ->where('student_class.class_id',$id);
+        })->get();
 
         $all_students = Student::search($request->search)
         ->query(function (Builder $builder) {
