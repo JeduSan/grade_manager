@@ -46,34 +46,8 @@
                         </div>
                     </div>
 
-                    <!-- Modal for adding subject -->
-                    <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addSubjectModalLabel">Add New Subject</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="subjectCode" placeholder="Enter Subject Code">
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="subjectName" placeholder="Enter Subject Name">
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="number" class="form-control" id="subjectUnits" placeholder="Enter Subject Units">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-add">Save Subject</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{-- ADD MODAL --}}
+                    @include('components.subject_manager.add-modal')
 
                     <!-- Table for managing subjects -->
                     <div class="table-container">
