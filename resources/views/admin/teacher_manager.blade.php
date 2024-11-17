@@ -28,9 +28,6 @@
             <!-- Main content area -->
             <div class="col p-0">
 
-
-
-
                 <!-- Page content -->
                 <div class="container-fluid page-content mt-3">
                     <br><br>
@@ -55,6 +52,9 @@
                         </div>
                     </div>
 
+                    {{-- POPUP --}}
+                    @include('components.popup-condition')
+
                     <!-- Add Teacher Modal -->
                     <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -64,24 +64,37 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form action="/admin/manager/add/teacher" method="POST">
+                                        @csrf
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" id="teacherName" placeholder="Enter teacher's name">
+                                            <input type="text" class="form-control" name="teacher_id" id="teacherId" placeholder="Enter teacher's ID" required>
                                         </div>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" id="teacherEmail" placeholder="Enter teacher's email">
+                                            <input type="text" class="form-control" name="teacher_fname" id="teacherFName" placeholder="Enter teacher's first name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" id="teacherDepartment" placeholder="Enter teacher's department">
+                                            <input type="text" class="form-control" name="teacher_lname" id="teacherlName" placeholder="Enter teacher's last name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" id="teacherPassword" placeholder="Create Password">
+                                            <input type="email" class="form-control" name="teacher_email" id="teacherEmail" placeholder="Enter teacher's email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            {{-- <input type="text" class="form-control" name="teacher_dept" id="teacherDepartment" placeholder="Enter teacher's department"> --}}
+                                            <select name="teacher_dept" id="teacherDept" class="form-control" required>
+                                                <option value="" selected disabled>Select department</option>
+                                                @foreach ($depts as $dept)
+                                                    <option value="{{$dept->id}}">[{{$dept->abbr}}] {{$dept->description}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" name="teacher_password" id="teacherPassword" placeholder="Create Password" required>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-add">Save Teacher</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-add" onclick="showSuccessMessage('Teacher added successfully!')">Save Teacher</button>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +126,7 @@
                                         <td>{{str_replace('College of','',$teacher->dept)}}</td>
                                         <td>
                                             <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editTeacherModal"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"><i class="fas fa-trash"></i></button>
+                                            <button class="btn btn-action" data-form="{{$teacher->id}}" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
 
@@ -172,26 +185,22 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" onclick="showErrorMessage('Error deleting teacher. Please try again.')">Delete</button>
+                    {{-- <button type="button" class="btn btn-danger" onclick="showErrorMessage('Error deleting teacher. Please try again.')">Delete</button> --}}
+                    <a class="btn btn-danger" id="deleteClassModalBtn">Delete</a>
                 </div>
             </div>
         </div>
     </div>
-
-
-    {{-- POPUP --}}
-    @include('components.popup-condition')
-
 
     <script>
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggled');
         });
 
-        document.getElementById('searchButton').addEventListener('click', function() {
-            const searchTerm = document.getElementById('searchInput').value;
-            console.log('Search term:', searchTerm);
-        });
+        // document.getElementById('searchButton').addEventListener('click', function() {
+        //     const searchTerm = document.getElementById('searchInput').value;
+        //     console.log('Search term:', searchTerm);
+        // });
 
         function showSuccessMessage(message) {
             const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
@@ -199,11 +208,24 @@
             toastSuccess.show();
         }
 
-        function showErrorMessage(message) {
-            const toastError = new bootstrap.Toast(document.getElementById('toastError'));
-            document.querySelector('#toastError .toast-body').textContent = message;
-            toastError.show();
-        }
+        // function showErrorMessage(message) {
+        //     const toastError = new bootstrap.Toast(document.getElementById('toastError'));
+        //     document.querySelector('#toastError .toast-body').textContent = message;
+        //     toastError.show();
+        // }
+        var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteTeacherModal"]');
+        var deleteClassModalBtn = document.querySelector('#deleteClassModalBtn');
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var form = button.getAttribute('data-form');
+
+                deleteClassModalBtn.setAttribute('href', '/admin/manager/delete/teacher/' + form);
+            });
+        });
+
+        const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
+        toastSuccess.show();
+
     </script>
 
 </body>

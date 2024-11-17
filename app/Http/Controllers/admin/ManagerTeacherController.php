@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use Exception;
+use App\Models\Dept;
+use App\Models\User;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
 
 class ManagerTeacherController extends Controller
@@ -21,17 +25,22 @@ class ManagerTeacherController extends Controller
         $teachers  = Teacher::search($request->search)
         ->query(function (Builder $builder) {
             $builder->select(
+                'teacher.id',
                 'teacher.fname',
                 'teacher.lname',
                 'teacher.email',
-                'dept.description as dept'
+                'dept.description as dept',
+                'teacher.user_id'
             )
             ->leftJoin('dept','dept.id','teacher.dept_id');
         })
         ->get();
 
+        $depts = Dept::all();
+
         return view('admin.teacher_manager',[
-            'teachers' => $teachers
+            'teachers' => $teachers,
+            'depts' => $depts
         ]);
     }
 
@@ -43,18 +52,30 @@ class ManagerTeacherController extends Controller
         $request->validate([
             'teacher_id' => ['required','string','max:255'],
             'teacher_fname' => ['required','string','max:255'],
-            'teacher_lname' => ['required','string','max:255']
+            'teacher_lname' => ['required','string','max:255'],
+            'teacher_email' => ['required','string','max:255','unique:'.User::class.',email'],
+            'teacher_password' => ['required',Rules\Password::defaults()]
         ]);
-
 
         try {
 
-            Teacher::create([
-                'id' => $request->teacher_id,
-                'fname' => $request->teacher_fname,
-                'lname' => $request->teacher_lname
-            ]);
+            DB::transaction(function () use ($request) {
 
+                User::create([
+                    'name' => $request->teacher_id,
+                    'email' => $request->teacher_email,
+                    'password' => Hash::make($request->teacher_password),
+                    'role_id' => 3 // teacher
+                ]);
+
+                Teacher::create([
+                    'id' => $request->teacher_id,
+                    'fname' => $request->teacher_fname,
+                    'lname' => $request->teacher_lname,
+                    'email' => $request->teacher_email,
+                    'dept_id' => $request->teacher_dept
+                ]);
+            });
             session(['success' => 'Teacher added successfully!']);
 
         } catch (Exception $e) {
