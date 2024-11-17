@@ -152,6 +152,7 @@
         </div>
     </div>
 
+    {{-- //[ ] ADD STUDENTS --}}
     <!-- Add Student Modal -->
     <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
         <div class="modal-dialog">

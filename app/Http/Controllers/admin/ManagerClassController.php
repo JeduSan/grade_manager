@@ -116,6 +116,7 @@ class ManagerClassController extends Controller
             ]);
             session(['success' => 'Class added successfully!']);
         } catch(Exception $e) {
+            throw $e;
             session(['failure' => 'Something went wrong :(']);
         }
 
