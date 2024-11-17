@@ -48,7 +48,7 @@
 // [x] "" subjects
 
 // [ ] APPLY UI
-// [ ] Teacher manager
+// [x] Teacher manager
 // [ ] Student manager
 // [x] Class manager
 // [ ] Subject manager

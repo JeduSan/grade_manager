@@ -3,23 +3,42 @@
 namespace App\Http\Controllers\admin;
 
 use Exception;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\AcademicYear;
 use Illuminate\Http\Request;
 use App\Models\StudentYearLevel;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Builder;
 
 class ManagerStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // $students = Student::all();
-        $students = DB::table('student')->paginate(15);
+        // $students = DB::table('student')->get();
+        $students = Student::search($request->search)
+        ->query(function (Builder $builder) {
+            $builder->select(
+                'student.fname',
+                'student.mname',
+                'student.lname',
+                'student.id',
+                'student.email',
+                'student_year_level.year_level_id as year',
+                'course.abbr as course'
+            )
+            ->leftJoin('student_year_level','student_year_level.student_key','student.key')
+            ->leftJoin('course','course.id','student.course_id');
+        })
+        ->get();
 
         $courses = Course::select(
             'id',
@@ -45,19 +64,28 @@ class ManagerStudentController extends Controller
             'student_fname' => ['required','string','max:255'],
             'student_email' => ['required','string','lowercase','email','max:255','unique:student,email'],
             'student_course' => ['required','numeric','integer','digits:1'],
-            'student_year' => ['required','numeric','integer','digits:1']
+            'student_year' => ['required','numeric','integer','digits:1'],
+            'student_password' => ['required',Rules\Password::defaults()]
         ]);
 
         try {
 
             DB::transaction(function () use ($request) {
+                $user = User::create([
+                    'name' => $request->student_id,
+                    'email' => $request->student_email,
+                    'password' => Hash::make($request->student_password),
+                    'role_id' => 2 // student
+                ]);
+
                 $student = Student::create([
                     'id' => $request->student_id,
                     'fname' => $request->student_fname,
                     'mname' => $request->student_mname,
                     'lname' => $request->student_lname,
                     'email' => $request->student_email,
-                    'course_id' => $request->student_course
+                    'course_id' => $request->student_course,
+                    'user_id' => $user->id
                 ]);
 
                 // Get the current academic year based in the current year
