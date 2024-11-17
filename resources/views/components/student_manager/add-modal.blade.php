@@ -10,23 +10,23 @@
                 <form action="/admin/manager/add/student" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="student_id" id="studentID" placeholder="Enter student ID">
+                        <input type="text" class="form-control" name="student_id" id="studentID" placeholder="Enter student ID" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="student_fname" id="studentFName" placeholder="Enter student's first name">
+                        <input type="text" class="form-control" name="student_fname" id="studentFName" placeholder="Enter student's first name" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="student_mname" id="studentMName" placeholder="Enter student's middle name">
+                        <input type="text" class="form-control" name="student_mname" id="studentMName" placeholder="Enter student's middle name" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="student_lname" id="studentLName" placeholder="Enter student's last name">
+                        <input type="text" class="form-control" name="student_lname" id="studentLName" placeholder="Enter student's last name" required>
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="form-control" name="student_email" id="studentEmail" placeholder="Enter student's email">
+                        <input type="email" class="form-control" name="student_email" id="studentEmail" placeholder="Enter student's email" required>
                     </div>
                     <div class="mb-3">
                         {{-- <input type="text" class="form-control" name="student_course" id="studentCourse" placeholder="Enter student's course"> --}}
-                        <select name="student_course" id="studentCourse" class="form-control">
+                        <select name="student_course" id="studentCourse" class="form-control" required>
                             <option value="" selected disabled>Select Course</option>
                             @foreach ($courses as $course)
                                 <option value="{{$course->id}}">{{$course->description}}</option>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="mb-3">
                         {{-- <input type="text" class="form-control" name="student_year" id="studentYear" placeholder="Enter student's year"> --}}
-                        <select name="student_year" id="studentYear" class="form-control">
+                        <select name="student_year" id="studentYear" class="form-control" required>
                             <option value="" selected disabled>Select Year</option>
                             <option value="0">Irregular</option>
                             <option value="1">1st Year</option>
@@ -45,7 +45,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="student_password" id="studentPassword" placeholder="Enter student's password">
+                        <input type="text" class="form-control" name="student_password" id="studentPassword" placeholder="Enter student's password" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>

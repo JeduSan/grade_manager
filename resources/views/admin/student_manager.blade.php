@@ -88,7 +88,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editStudentModal"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-action" data-bs-toggle="modal" data-form="{{$student->user_id}}" data-id="{{$student->id}}" data-fname="{{$student->fname}}" data-mname="{{$student->mname}}" data-lname="{{$student->lname}}" data-email="{{$student->email}}" data-course="{{$student->course_id}}" data-year="{{$student->year}}" data-bs-target="#editStudentModal"><i class="fas fa-edit"></i></button>
                                             <button class="btn btn-action" data-form="{{$student->user_id}}" data-bs-toggle="modal" data-bs-target="#deleteStudentModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -112,6 +112,31 @@
     <script>
         var deleteClassModalBtn = document.querySelector('#deleteClassModalBtn');
         var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteStudentModal"]');
+        var editButtons = document.querySelectorAll('[data-bs-target="#editStudentModal"]');
+        var editForm = document.querySelector('#editForm');
+
+        editButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var form = button.getAttribute('data-form');
+                var id = button.getAttribute('data-id');
+                var fname = button.getAttribute('data-fname');
+                var mname = button.getAttribute('data-mname');
+                var lname = button.getAttribute('data-lname');
+                var email = button.getAttribute('data-email');
+                var course = button.getAttribute('data-course');
+                var year = button.getAttribute('data-year');
+
+                // alert(`${form} - ${id} - ${fname} - ${mname} - ${lname} - ${email} - ${course} - ${year}`);
+                editForm.setAttribute('action','/admin/manager/edit/student/' + form);
+                document.getElementById('editStudentID').value = id;
+                document.getElementById('editStudentFName').value = fname;
+                document.getElementById('editStudentMName').value = mname;
+                document.getElementById('editStudentLName').value = lname;
+                document.getElementById('editStudentEmail').value = email;
+                document.getElementById('editStudentCourse').value = course;
+                document.getElementById('editStudentYear').value = year;
+            });
+        });
 
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggled');

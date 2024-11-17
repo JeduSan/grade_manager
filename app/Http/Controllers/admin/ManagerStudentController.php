@@ -34,7 +34,8 @@ class ManagerStudentController extends Controller
                 'student.email',
                 'student_year_level.year_level_id as year',
                 'course.abbr as course',
-                'student.user_id'
+                'student.user_id',
+                'student.course_id'
             )
             ->leftJoin('student_year_level','student_year_level.student_key','student.key')
             ->leftJoin('course','course.id','student.course_id');
@@ -121,26 +122,49 @@ class ManagerStudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $user_id)
     {
         $request->validate([
             'student_id' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
             'student_mname' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
-            'student_email' => ['required','string','lowercase','email','max:255']
+            'student_email' => ['required','string','lowercase','email','max:255'],
+            'student_course' => ['required','numeric','integer'],
+            'student_year' => ['required','numeric','integer'],
+            'student_password' => ['nullable',Rules\Password::defaults()]
         ]);
 
+        // dd($request);
+
         try {
-            Student::where('key',$id)->update([
-                'id' => $request->student_id,
-                'fname' => $request->student_fname,
-                'mname' => $request->student_mname,
-                'lname' => $request->student_lname,
-                'email' => $request->student_email
-            ]);
+
+            DB::transaction(function () use ($request,$user_id) {
+
+                $student = Student::where('user_id',$user_id)->first();
+                $student->id = $request->student_id;
+                $student->fname = $request->student_fname;
+                $student->mname = $request->student_mname;
+                $student->lname = $request->student_lname;
+                $student->email = $request->student_email;
+                $student->course_id = $request->student_course;
+                $student->save();
+
+                StudentYearLevel::where('student_key',$student->key)->update([
+                    'year_level_id' => $request->student_year
+                ]);
+
+                User::find($user_id)->update([
+                    'name' => $request->student_id,
+                    'email' => $request->student_email,
+                    'password' => Hash::make($request->student_password)
+                ]);
+
+            });
+
             session(['success' => 'Student edited successfully!']);
         } catch(Exception $e) {
+            throw $e;
             session(['failure' => 'Something went wrong :(']);
         }
 
