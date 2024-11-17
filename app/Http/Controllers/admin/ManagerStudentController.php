@@ -33,7 +33,8 @@ class ManagerStudentController extends Controller
                 'student.id',
                 'student.email',
                 'student_year_level.year_level_id as year',
-                'course.abbr as course'
+                'course.abbr as course',
+                'student.user_id'
             )
             ->leftJoin('student_year_level','student_year_level.student_key','student.key')
             ->leftJoin('course','course.id','student.course_id');
@@ -151,7 +152,15 @@ class ManagerStudentController extends Controller
      */
     public function destroy(string $id)
     {
-        Student::destroy($id);
+
+        try {
+
+            User::destroy($id);
+
+            session(['success' => 'Student deleted successfully!']);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
 
         return to_route('admin.manager.student');
     }
