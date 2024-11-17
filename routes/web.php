@@ -98,3 +98,4 @@ Route::post('/admin/manager/view/class/add/student/{class_id}',[AddStudentFromCl
 // USER MANAGER
 Route::get('/admin/manager/user',[ManagerUserController::class,'index'])->name('admin.manager.user');
 Route::post('/admin/manager/add/user',[ManagerUserController::class,'store'])->name('admin.manager.add.user');
+Route::get('/admin/manager/delete/user/{id}',[ManagerUserController::class,'destroy'])->name('admin.manager.delete.user');

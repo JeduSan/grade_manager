@@ -73,7 +73,7 @@
                                         <td>Admin</td>
                                         <td>
                                             <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editAdminModal"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteAdminModal"><i class="fas fa-trash"></i></button>
+                                            <button class="btn btn-action" data-id="{{$admin->id}}" data-bs-toggle="modal" data-bs-target="#deleteAdminModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -117,29 +117,28 @@
         </div>
     </div>
 
-    <!-- Delete Admin Confirmation Modal -->
-    <div class="modal fade" id="deleteAdminModal" tabindex="-1" aria-labelledby="deleteAdminModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteAdminModalLabel">Delete Admin</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this admin's record?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- DELETE MODAL --}}
+    @include('components.user_manager.delete-modal')
 
     <script>
+        var deleteUserModalBtn = document.querySelector('#deleteUserModalBtn');
+        var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteAdminModal"]');
+
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var id = button.getAttribute('data-id');
+
+                // alert(id);
+                deleteUserModalBtn.setAttribute('href','/admin/manager/delete/user/' + id);
+            });
+        });
+
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggled');
         });
+
+        const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
+        toastSuccess.show();
     </script>
 
 </body>

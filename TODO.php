@@ -65,3 +65,6 @@
 // BUG: [KNOWN BUGS]
     // [ ] Searching for a class with enough data for a second page will cause the second page to be inaccessible
         // ex: searching for "wish" will have 2 page result, but the second page will be inaccessible.
+
+// [ ] Apply error messages to forms to see what is wrong from the outputs
+    // [ ] set old value

@@ -73,6 +73,15 @@ class ManagerUserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+
+            User::destroy($id);
+
+            session(['success' => 'User deleted successfully!']);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('admin.manager.user');
     }
 }
