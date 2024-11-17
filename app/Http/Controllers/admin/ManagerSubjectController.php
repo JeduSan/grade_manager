@@ -91,7 +91,13 @@ class ManagerSubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        Subject::destroy($id);
+        try {
+            Subject::destroy($id);
+            session(['success' => 'Subject deleted successfully!']);
+        } catch(Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
 
         return to_route('admin.manager.subject');
     }

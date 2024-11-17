@@ -25,7 +25,11 @@
             <!-- Main content area -->
             <div class="col p-0">
 
+                {{-- APPBAR --}}
                 @include('components.admin_appbar')
+
+                {{-- POPUP --}}
+                @include('components.popup-condition')
 
                 <!-- Page content -->
                 <div class="container-fluid page-content mt-3">
@@ -69,11 +73,10 @@
                                         <td>{{$subject->units}}</td>
                                         <td>
                                             <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editSubjectModal"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteSubjectModal"><i class="fas fa-trash"></i></button>
+                                            <button class="btn btn-action" data-id="{{$subject->key}}" data-bs-toggle="modal" data-bs-target="#deleteSubjectModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -111,28 +114,23 @@
         </div>
     </div>
 
-    <!-- Delete Subject Confirmation Modal -->
-    <div class="modal fade" id="deleteSubjectModal" tabindex="-1" aria-labelledby="deleteSubjectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteSubjectModalLabel">Delete Subject</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this subject?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
+    {{-- DELETE MODAL --}}
+    @include('components.subject_manager.delete-modal')
 
 
     <script>
+        var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteSubjectModal"]');
+        var deleteModalBtn = document.querySelector('#deleteSubjectModalBtn');
+
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click',function () {
+                var id = button.getAttribute('data-id');
+
+                deleteModalBtn.setAttribute('href','/admin/manager/delete/subject/' + id);
+            });
+        });
+
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggled');
         });
