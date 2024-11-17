@@ -72,7 +72,7 @@
                                         <td>{{$admin->email}}</td>
                                         <td>Admin</td>
                                         <td>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editAdminModal"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-action" data-id="{{$admin->id}}" data-name="{{$admin->name}}" data-email="{{$admin->email}}" data-bs-toggle="modal" data-bs-target="#editAdminModal"><i class="fas fa-edit"></i></button>
                                             <button class="btn btn-action" data-id="{{$admin->id}}" data-bs-toggle="modal" data-bs-target="#deleteAdminModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -85,37 +85,8 @@
         </div>
     </div>
 
-    <!-- Edit Admin Modal -->
-    <div class="modal fade" id="editAdminModal" tabindex="-1" aria-labelledby="editAdminModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editAdminModalLabel">Edit Admin Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="editAdminName" placeholder="Enter admin's name">
-                        </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" id="editAdminEmail" placeholder="Enter admin's email">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="editAdminRole" placeholder="Enter admin's role">
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="editAdminPassword" placeholder="Enter admin's password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-add">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- EDIT MODAL --}}
+    @include('components.user_manager.edit-modal')
 
     {{-- DELETE MODAL --}}
     @include('components.user_manager.delete-modal')
@@ -123,6 +94,22 @@
     <script>
         var deleteUserModalBtn = document.querySelector('#deleteUserModalBtn');
         var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteAdminModal"]');
+        var editButtons = document.querySelectorAll('[data-bs-target="#editAdminModal"]');
+        var editForm = document.querySelector('#editForm');
+
+        editButtons.forEach(function (button) {
+            button.addEventListener('click',function () {
+                var id = button.getAttribute('data-id');
+                var name = button.getAttribute('data-name');
+                var email = button.getAttribute('data-email');
+
+                // alert(`${id} - ${name} - ${email}`);
+
+                document.getElementById('editAdminName').value = name;
+                document.getElementById('editAdminEmail').value = email;
+                editForm.setAttribute('action','/admin/manager/edit/user/' + id);
+            });
+        });
 
         deleteButtons.forEach(function (button) {
             button.addEventListener('click', function () {

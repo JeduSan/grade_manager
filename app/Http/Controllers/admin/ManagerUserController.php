@@ -65,7 +65,26 @@ class ManagerUserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'admin_name' => ['required','string','max:255'],
+            'admin_email' => ['required','string','max:255'],
+            'admin_password' => ['nullable',Rules\Password::defaults()],
+        ]);
+
+        try {
+
+            User::find($id)->update([
+                'name' => $request->admin_name,
+                'email' => $request->admin_email,
+                'password' => Hash::make($request->admin_password)
+            ]);
+
+            session(['success' => 'Admin edited successfully!']);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('admin.manager.user');
     }
 
     /**
