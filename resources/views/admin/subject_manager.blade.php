@@ -3,144 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Admin Manager</title>
-    <link rel="stylesheet" href="{{asset('assets/css/jquery.modal.min.css')}}">
+    <title>Responsive Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+    <link rel="stylesheet" href="{{asset('assets/css/sidebar-template.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/page-content.css')}}">
+
+
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
 
-    {{-- SUCCESS MODAL --}}
-    @if (session()->has('success'))
-        {{--
-             // [ ] Change z-index
-             // [ ] Design
-        --}}
-        <div id="success_modal">
-            <p>{{ session()->get('success') }}</p>
-            @php
-                session()->forget('success');
-            @endphp
-        </div>
-    @endif
+            {{-- SIDEBAR --}}
+            @include('components.admin_sidebar')
 
-    {{-- FAILURE MODAL --}}
-    @if (session()->has('failure'))
-        {{--
-             // [ ] Change z-index
-             // [ ] Design
-        --}}
-        <div id="failure_modal">
-            <p>{{ session()->get('failure') }}</p>
-            @php
-                session()->forget('failure');
-            @endphp
-        </div>
-    @endif
+            <!-- Main content area -->
+            <div class="col p-0">
 
-    {{-- Add Subject - Excel --}}
-    <div>
-        <form action="/admin/manager/add/subject/excel" method="POST" enctype="multipart/form-data">
-            @csrf
-            <label for="excel">Upload File</label>
-            <input type="file" name="excel" id="excel" required>
-            <x-input-error :messages="$errors->get('excel')" class="mt-2" />
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+                @include('components.admin_appbar')
 
-    <!-- Add Subject -->
-    <div>
-        <h3>Add Subject</h3>
-        <form action="/admin/manager/add/subject" method="POST">
-            @csrf
-            <div>
-                <label for="subject_name">Subject Name</label>
-                <input type="text" name="subject_name" id="subject_name" placeholder="Software Engineering 1" value="{{old('subject_name')}}"
-                    required>
-            </div>
-            <div>
-                <label for="subject_code">Subject Code</label>
-                <input type="text" name="subject_code" id="subject_code" placeholder="CCS123" value="{{old('subject_code')}}" required>
-            </div>
-            <div>
-                <label for="subject_units">Subject Units</label>
-                <input type="text" name="subject_units" id="subject_units" placeholder="5" value="{{old('subject_units')}}" required>
-            </div>
-            <div>
-                <input type="submit" value="Add Subject">
-            </div>
-        </form>
-    </div>
+                <!-- Page content -->
+                <div class="container-fluid page-content mt-3">
+                    <br><br>
 
-    {{-- SUBJECTS TABLE --}}
-    <div>
-        <table>
-            <thead>
-                <th>Subject Code</th>
-                <th>Description</th>
-                <th>Units</th>
-                <th>Actions</th>
-            </thead>
-            <tbody>
-                @foreach ($subjects as $subject)
-                    <tr>
-                        <td>
-                            {{$subject->code}}
-                        </td>
-                        <td>
-                            {{$subject->description}}
-                        </td>
-                        <td>
-                            {{$subject->units}}
-                        </td>
-                        <td>
-                            <a href="#modal{{$subject->key}}" rel="modal:open">Edit</a>
-                            <a href="/admin/manager/delete/subject/{{$subject->key}}">Delete</a>
-                        </td>
-                    </tr>
+                    <div class="d-flex mb-3">
+                        <h5>Manage Subjects</h5>
 
-                    <div id="modal{{$subject->key}}" class="modal">
-                        <h3>Edit Semester</h3>
-                        <form action="/admin/manager/edit/subject/{{$subject->key}}" method="POST">
-                            @csrf
-                            @method("PATCH")
-                            <div>
-                                <label for="subject_name">Subject Name</label>
-                                <input type="text" name="subject_name" id="subject_name" placeholder="Software Engineering 1" value="{{$subject->description}}"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="subject_code">Subject Code</label>
-                                <input type="text" name="subject_code" id="subject_code" placeholder="CCS123" value="{{$subject->code}}" required>
-                            </div>
-                            <div>
-                                <label for="subject_units">Subject Units</label>
-                                <input type="text" name="subject_units" id="subject_units" placeholder="5" value="{{$subject->units}}" required>
-                            </div>
-                            <div>
-                                <input type="submit" value="Save">
-                            </div>
-                            <a href="" rel="modal:close">Cancel</a>
-                        </form>
+                        <div class="d-flex ms-auto">
+                            <form method="GET">
+                                <div class="search-container me-3">
+                                    <input type="text" class="form-control" name="search" placeholder="Search Subjects..." id="searchInput">
+                                </div>
+                            </form>
+                            <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
+                                <i class="fas fa-user-plus"></i> Add Subjects
+                            </button>
+                        </div>
                     </div>
-                @endforeach
-            </tbody>
-        </table>
+
+                    <!-- Modal for adding subject -->
+                    <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addSubjectModalLabel">Add New Subject</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="subjectCode" placeholder="Enter Subject Code">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="subjectName" placeholder="Enter Subject Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="number" class="form-control" id="subjectUnits" placeholder="Enter Subject Units">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-add">Save Subject</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table for managing subjects -->
+                    <div class="table-container">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Subject Code</th>
+                                    <th>Subject Name</th>
+                                    <th>Units</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($subjects as $subject)
+                                    <tr>
+                                        <td>{{$subject->code}}</td>
+                                        <td>{{$subject->description}}</td>
+                                        <td>{{$subject->units}}</td>
+                                        <td>
+                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editSubjectModal"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#deleteSubjectModal"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <nav>
-        {{ $subjects->links() }}
-    </nav>
+    <!-- Edit Subject Modal -->
+    <div class="modal fade" id="editSubjectModal" tabindex="-1" aria-labelledby="editSubjectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSubjectModalLabel">Edit Subject Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="editSubjectCode" placeholder="Enter Subject Code">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="editSubjectName" placeholder="Enter Subject Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="editSubjectUnits" placeholder="Enter Subject Units">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-add">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.modal.min.js')}}"></script>
+    <!-- Delete Subject Confirmation Modal -->
+    <div class="modal fade" id="deleteSubjectModal" tabindex="-1" aria-labelledby="deleteSubjectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSubjectModalLabel">Delete Subject</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this subject?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script>
-        $j = jQuery.noConflict();
+        document.getElementById('sidebarCollapse').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('toggled');
+        });
 
-        $j("#success_modal").fadeOut(5000);
-
-        $j("#failure_modal").fadeOut(5000);
+        const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
+        toastSuccess.show();
     </script>
+
 </body>
 </html>

@@ -13,10 +13,11 @@ class ManagerSubjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // $subjects = Subject::all();
-        $subjects = DB::table('subject')->paginate(15);
+        // $subjects = DB::table('subject')->paginate(15);
+        $subjects = Subject::search($request->search)->get();
 
         return view('admin.subject_manager',[
             "subjects" => $subjects
