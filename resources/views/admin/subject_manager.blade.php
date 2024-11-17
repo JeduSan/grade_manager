@@ -72,7 +72,7 @@
                                         <td>{{$subject->description}}</td>
                                         <td>{{$subject->units}}</td>
                                         <td>
-                                            <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editSubjectModal"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-action" data-id="{{$subject->key}}" data-code="{{$subject->code}}" data-description="{{$subject->description}}" data-units="{{$subject->units}}" data-bs-toggle="modal" data-bs-target="#editSubjectModal"><i class="fas fa-edit"></i></button>
                                             <button class="btn btn-action" data-id="{{$subject->key}}" data-bs-toggle="modal" data-bs-target="#deleteSubjectModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -85,35 +85,8 @@
         </div>
     </div>
 
-    <!-- Edit Subject Modal -->
-    <div class="modal fade" id="editSubjectModal" tabindex="-1" aria-labelledby="editSubjectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editSubjectModalLabel">Edit Subject Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="editSubjectCode" placeholder="Enter Subject Code">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="editSubjectName" placeholder="Enter Subject Name">
-                        </div>
-                        <div class="mb-3">
-                            <input type="number" class="form-control" id="editSubjectUnits" placeholder="Enter Subject Units">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-add">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    {{-- EDIT MODAL --}}
+    @include('components.subject_manager.edit-modal')
 
     {{-- DELETE MODAL --}}
     @include('components.subject_manager.delete-modal')
@@ -122,6 +95,24 @@
     <script>
         var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteSubjectModal"]');
         var deleteModalBtn = document.querySelector('#deleteSubjectModalBtn');
+        var editForm = document.querySelector('#editForm');
+        var editButtons = document.querySelectorAll('[data-bs-target="#editSubjectModal"]');
+
+        editButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var id = button.getAttribute('data-id');
+                var code = button.getAttribute('data-code');
+                var name = button.getAttribute('data-description');
+                var units = button.getAttribute('data-units');
+
+                // alert(`${id} - ${code} - ${name} - ${units}`);
+
+                document.getElementById('editSubjectCode').value = code;
+                document.getElementById('editSubjectName').value = name;
+                document.getElementById('editSubjectUnits').value = units;
+                editForm.setAttribute('action','/admin/manager/edit/subject/' + id);
+            });
+        });
 
         deleteButtons.forEach(function (button) {
             button.addEventListener('click',function () {
