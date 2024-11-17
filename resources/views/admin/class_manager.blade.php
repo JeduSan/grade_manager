@@ -122,9 +122,9 @@
             </div>
         </div>
 
-        <nav>
+        {{-- <nav>
             {{$classes->links()}}
-        </nav>
+        </nav> --}}
     </div>
 
     {{-- EDIT MODAL --}}

@@ -100,9 +100,9 @@
             </div>
         </div>
 
-        <nav>
+        {{-- <nav>
             {{$students->links()}}
-        </nav>
+        </nav> --}}
     </div>
 
     {{-- //[ ] ADD STUDENTS --}}

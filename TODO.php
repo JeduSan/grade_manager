@@ -49,7 +49,7 @@
 
 // [ ] APPLY UI
 // [x] Teacher manager
-// [ ] Student manager
+// [x] Student manager
 // [x] Class manager
 // [ ] Subject manager
 // [ ] User manager
