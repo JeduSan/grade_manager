@@ -7,7 +7,7 @@
 // [x] Add student
 // [x] Add subject
 // [x] Add semester
-// [ ] Assign a class/section to a teacher
+// [x] Assign a class/section to a teacher
 // [ ] Subject Manager -> see all students for that subject and who is the instructor
 
 // [x] Register student to a class upon class creation based on course and year
@@ -54,3 +54,7 @@
 // [ ] List of assigned subjects/classes
 // [ ] List of students per subject/class
 // [ ] Input of grades
+
+// BUG: [KNOWN BUGS]
+    // [ ] Searching for a class with enough data for a second page will cause the second page to be inaccessible
+        // ex: searching for "wish" will have 2 page result, but the second page will be inaccessible.

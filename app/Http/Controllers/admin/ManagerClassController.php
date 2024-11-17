@@ -59,7 +59,7 @@ class ManagerClassController extends Controller
             ->leftJoin('teacher','teacher.key','class.teacher_key')
             ->orderBy('class.course_id');
 
-        })->get();
+        })->paginate(8);
 
         return view('admin.class_manager',[
             'teachers' => $teachers,
@@ -145,7 +145,7 @@ class ManagerClassController extends Controller
             ->leftJoin('student','student_year_level.student_key','student.key')
             ->leftJoin('course','course.id','student.course_id')
             ->where('student_class.class_id',$id);
-        })->get();
+        })->paginate(8);
 
         $all_students = Student::search($request->search)
         ->query(function (Builder $builder) {
