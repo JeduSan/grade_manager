@@ -61,7 +61,7 @@ class ManagerTeacherController extends Controller
 
             DB::transaction(function () use ($request) {
 
-                User::create([
+                $user = User::create([
                     'name' => $request->teacher_id,
                     'email' => $request->teacher_email,
                     'password' => Hash::make($request->teacher_password),
@@ -73,7 +73,8 @@ class ManagerTeacherController extends Controller
                     'fname' => $request->teacher_fname,
                     'lname' => $request->teacher_lname,
                     'email' => $request->teacher_email,
-                    'dept_id' => $request->teacher_dept
+                    'dept_id' => $request->teacher_dept,
+                    'user_id' => $user->id
                 ]);
             });
             session(['success' => 'Teacher added successfully!']);
@@ -125,7 +126,16 @@ class ManagerTeacherController extends Controller
      */
     public function destroy(string $id)
     {
-        Teacher::destroy($id);
+        try {
+
+            User::destroy($id);
+            // Teacher::destroy($id);
+            session(['success' => 'Teacher deleted successfully!']);
+
+        } catch(Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
 
         return to_route('admin.manager.teacher');
     }

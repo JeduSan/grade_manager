@@ -55,53 +55,8 @@
                     {{-- POPUP --}}
                     @include('components.popup-condition')
 
-                    <!-- Add Teacher Modal -->
-                    <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addTeacherModalLabel">Add New Teacher</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="/admin/manager/add/teacher" method="POST">
-                                        @csrf
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" name="teacher_id" id="teacherId" placeholder="Enter teacher's ID" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" name="teacher_fname" id="teacherFName" placeholder="Enter teacher's first name" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" name="teacher_lname" id="teacherlName" placeholder="Enter teacher's last name" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="email" class="form-control" name="teacher_email" id="teacherEmail" placeholder="Enter teacher's email" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            {{-- <input type="text" class="form-control" name="teacher_dept" id="teacherDepartment" placeholder="Enter teacher's department"> --}}
-                                            <select name="teacher_dept" id="teacherDept" class="form-control" required>
-                                                <option value="" selected disabled>Select department</option>
-                                                @foreach ($depts as $dept)
-                                                    <option value="{{$dept->id}}">[{{$dept->abbr}}] {{$dept->description}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" name="teacher_password" id="teacherPassword" placeholder="Create Password" required>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-add">Save Teacher</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+                    {{-- ADD TEACHER MODAL --}}
+                    @include('components.teacher_manager.add-modal')
 
                     <!-- Table -->
                     <div class="table-container">
@@ -126,7 +81,7 @@
                                         <td>{{str_replace('College of','',$teacher->dept)}}</td>
                                         <td>
                                             <button class="btn btn-action" data-bs-toggle="modal" data-bs-target="#editTeacherModal"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-action" data-form="{{$teacher->id}}" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"><i class="fas fa-trash"></i></button>
+                                            <button class="btn btn-action" data-form="{{$teacher->user_id}}" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
 
@@ -172,25 +127,8 @@
         </div>
     </div>
 
-    <!-- Delete Teacher Modal -->
-    <div class="modal fade" id="deleteTeacherModal" tabindex="-1" aria-labelledby="deleteTeacherModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteTeacherModalLabel">Delete Teacher</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this teacher's record?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    {{-- <button type="button" class="btn btn-danger" onclick="showErrorMessage('Error deleting teacher. Please try again.')">Delete</button> --}}
-                    <a class="btn btn-danger" id="deleteClassModalBtn">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- DELETE TEACHER MODAL --}}
+    @include('components.teacher_manager.delete-modal')
 
     <script>
         document.getElementById('sidebarCollapse').addEventListener('click', function() {
