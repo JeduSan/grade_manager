@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\SubjectExcelController;
 use App\Http\Controllers\admin\TeacherExcelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\teacher\ViewSubjectsController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -109,4 +110,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 // ============
 Route::middleware(['auth','verified','teacher'])->group(function () {
     Route::get('/teacher/dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
+
+    Route::get('/teacher/view/subjects', [ViewSubjectsController::class, 'index'])->name('teacher.view.subjects');
 });
