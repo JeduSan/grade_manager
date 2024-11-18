@@ -73,8 +73,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <i class="fas fa-user-md"></i>
-                                    <h5 class="card-title"> Assigned Subjects</h5>
-                                    <strong> <span class="card-number">122</span></strong>
+                                    <h5 class="card-title">Assigned Subjects</h5>
+                                    <strong> <span class="card-number">{{$assigned_subject_count->count}}</span></strong>
                                 </div>
                             </div>
                         </div>
@@ -82,8 +82,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <i class="fas fa-procedures"></i>
-                                    <h5 class="card-title"> Assigned Class</h5>
-                                    <strong> <span class="card-number">123</span></strong>
+                                    <h5 class="card-title">Assigned Section</h5>
+                                    <strong> <span class="card-number">{{$assigned_class_count}}</span></strong>
                                 </div>
                             </div>
                         </div>
