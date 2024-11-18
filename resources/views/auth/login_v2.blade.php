@@ -6,7 +6,10 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('assets/css/login-register.css')}}">
-
+    <style>
+        .form-check-input { margin-left: 3px;}
+        #form-check-label { margin-left: 20px; }
+    </style>
 </head>
 <body>
     <div class="image-side">
