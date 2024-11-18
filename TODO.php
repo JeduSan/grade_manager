@@ -47,13 +47,13 @@
 // [x] " teachers
 // [x] "" subjects
 
-// [ ] APPLY UI
+// [x] APPLY UI
 // [x] Teacher manager
 // [x] Student manager
 // [x] Class manager
 // [x] Subject manager
 // [x] User manager
-// [ ] Dashboard
+// [x] Dashboard
 
 // ==================
 // TEACHER DASHBOARD
@@ -68,3 +68,6 @@
 
 // [ ] Apply error messages to forms to see what is wrong from the outputs
     // [ ] set old value
+
+// [ ] Register UI
+// [ ] Login UI
