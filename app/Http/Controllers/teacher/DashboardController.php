@@ -26,9 +26,20 @@ class DashboardController extends Controller
         // Count all classes
         $assigned_class_count = ClassModel::whereRaw("teacher_key = (SELECT `key` FROM teacher WHERE user_id = " . Auth::user()->id . ")" )->count();
 
+        $pending_grades = DB::table('student_class')
+        ->select(
+            DB::raw('COUNT(score) as count')
+        )
+        ->leftJoin('class','class.id','student_class.class_id')
+        ->leftJoin('teacher','teacher.key','class.teacher_key')
+        ->where('teacher.user_id',Auth::user()->id)
+        ->where('score',0)
+        ->first();
+
         return view('teacher.dashboard',[
             'assigned_subject_count' => $assigned_subject_count,
-            'assigned_class_count' => $assigned_class_count
+            'assigned_class_count' => $assigned_class_count,
+            'pending_grades' => $pending_grades
         ]);
     }
 

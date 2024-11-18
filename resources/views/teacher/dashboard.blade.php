@@ -71,7 +71,7 @@
                                 <div class="card-body">
                                     <i class="fas fa-calendar-check"></i>
                                     <h5 class="card-title">Grades to be Encoded</h5>
-                                    <strong> <span class="card-number">22</span></strong>
+                                    <strong> <span class="card-number">{{$pending_grades->count}}</span></strong>
                                 </div>
                             </div>
                         </div>

@@ -41,28 +41,28 @@ class ViewSubjectsController extends Controller
         $classes = ClassModel::search($request->search)
         ->query(function (Builder $builder) {
             $builder->select(
-                    'student_class.id as student_class_id',
+                    // 'student_class.id as student_class_id',
                     'class.id',
                     'subject.key',
                     'class.section',
                     'subject.code as subject_code',
                     'subject.description as subject_name',
                     'subject.units as units',
-                    DB::raw(
-                        'COUNT(student_class.score) as ungraded_student_count'
-                    )
+                    // DB::raw(
+                    //     'COUNT(student_class.score) as ungraded_student_count'
+                    // )
                 )
                 ->leftJoin('teacher','teacher.key','class.teacher_key')
                 ->leftJoin('course','course.id','class.course_id')
                 ->leftJoin('subject','subject.key','class.subject_key')
-                ->leftJoin('student_class','student_class.class_id','class.id') // used to count the number of students in this class who has been graded (score > 0)
-                ->whereRaw("teacher_key = (SELECT `key` FROM teacher WHERE user_id = " . Auth::user()->id . ")" )
-                ->groupBy('class.section','subject.code','subject.description','subject.units','student_class.id','class.id','subject.key');
+                // ->leftJoin('student_class','student_class.class_id','class.id') // used to count the number of students in this class who has been graded (score > 0)
+                ->whereRaw("teacher_key = (SELECT `key` FROM teacher WHERE user_id = " . Auth::user()->id . ")" );
+                // ->groupBy('class.section','subject.code','subject.description','subject.units','student_class.id','class.id','subject.key');
         })
         ->orderBy('class.id','asc')
         ->get();
 
-
+        // dd($classes);
 
         return view('teacher.view-subjects',[
             'classes' => $classes

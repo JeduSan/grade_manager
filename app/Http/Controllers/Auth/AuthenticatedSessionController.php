@@ -32,9 +32,11 @@ class AuthenticatedSessionController extends Controller
         // return redirect()->intended(route('dashboard', absolute: false));
 
         if(Auth::user()->role_id == 1) {
-            return redirect()->intended(route('admin.dashboard', absolute: false));
+            // return redirect()->intended(route('admin.dashboard', absolute: false));
+            return to_route('admin.dashboard');
         } else if (Auth::user()->role_id == 3) {
-            return redirect()->intended(route('teacher.dashboard', absolute: false));
+            // return redirect()->intended(route('teacher.dashboard', absolute: false));
+            return to_route('teacher.dashboard');
         }
 
     }

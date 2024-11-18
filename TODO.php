@@ -58,9 +58,10 @@
 // ==================
 // TEACHER DASHBOARD
 // ==================
-// [ ] List of assigned subjects/classes
-// [ ] List of students per subject/class
-// [ ] Input of grades
+// [x] List of assigned subjects/classes
+// [x] List of students per subject/class
+// [x] Input of grades
+// [ ] dashboard
 
 // BUG: [KNOWN BUGS]
     // [ ] Searching for a class with enough data for a second page will cause the second page to be inaccessible
@@ -77,3 +78,6 @@
     // [x] Teacher edit
     // [x] Student add
     // [x] Student edit
+
+// BUG //[ ] Adding a student to a class creates a new instance of the class on the class list (teacher side -> view subjects)
+    // Steps to reproduce: add a student to a class (admin), then view subjects (teacher)
