@@ -46,7 +46,9 @@ require __DIR__.'/auth.php';
 
 // TEMP LANDING PAGE
 Route::get('/',function () {
-    return view('landing');
+    // return view('landing');
+    // REVIEW: Our landing page will be the login page
+    return to_route('login');
 });
 
 Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
