@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ClassModel;
 use App\Models\StudentClass;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,7 +92,8 @@ class ViewSubjectsController extends Controller
                 'student.id as student_id',
                 DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
                 'course.abbr as course',
-                'student_year_level.year_level_id as year'
+                'student_year_level.year_level_id as year',
+                'student_class.score'
             )
             ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
             ->leftJoin('student','student.key','student_year_level.student_key')
@@ -111,9 +113,22 @@ class ViewSubjectsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $student_class_id,string $class_id)
     {
-        //
+        $request->validate([
+            'grade' => ['required','numeric']
+        ]);
+
+        try {
+            StudentClass::where('id',$student_class_id)->update([
+                'score' => $request->grade
+            ]);
+            session(['success' => 'Student graded successfully!']);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return redirect('/teacher/view/subjects/class_list/'.$class_id);
     }
 
     /**

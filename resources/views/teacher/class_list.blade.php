@@ -56,6 +56,9 @@
                         </div>
                     </div>
 
+                    {{-- POPUP --}}
+                    @include('components.popup-condition')
+
                     <!-- Table for viewing students -->
                     <div class="table-container">
                         <table class="table table-hover">
@@ -90,7 +93,17 @@
                                             4th Year
                                         @endif
                                     </td>
-                                    <td><input type="text" class="form-control" style="width: 120px;" placeholder="Enter Grade" onblur="replaceGrade(this)"></td>
+                                    {{-- <td><input type="text" class="form-control" style="width: 120px;" placeholder="Enter Grade" onblur="replaceGrade(this)"></td> --}}
+                                    <form action="/teacher/view/subjects/class_list/grading/{{$student->id}}/{{$class_id}}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+
+                                        @if ($student->score == 0)
+                                        <td><input type="text" name="grade" class="form-control" style="width: 120px;" placeholder="Enter Grade"></td>
+                                        @else
+                                        <td><input type="text" name="grade" class="form-control" style="width: 120px;" placeholder="Enter Grade" value="{{$student->score}}"></td>
+                                        @endif
+                                    </form>
                                 </tr>
 
                                 @endforeach
@@ -107,12 +120,15 @@
             document.getElementById('sidebar').classList.toggle('toggled');
         });
 
-        function replaceGrade(input) {
-            const grade = input.value.trim();
-            if (grade) {
-                input.parentElement.innerHTML = `<span>${grade}</span>`;
-            }
-        }
+        const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
+        toastSuccess.show();
+
+        // function replaceGrade(input) {
+        //     const grade = input.value.trim();
+        //     if (grade) {
+        //         input.parentElement.innerHTML = `<span>${grade}</span>`;
+        //     }
+        // }
     </script>
 
 </body>
