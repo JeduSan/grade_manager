@@ -71,3 +71,10 @@
 
 // [ ] Register UI
 // [ ] Login UI
+
+// [ ] Add show password to:
+    // [ ] Login
+    // [ ] Teacher add
+    // [ ] Teacher edit
+    // [ ] Student add
+    // [ ] Student edit

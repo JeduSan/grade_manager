@@ -45,7 +45,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="student_password" id="studentPassword" placeholder="Enter student's password" required>
+                        <input type="password" class="form-control" name="student_password" id="studentPassword" placeholder="Enter student's password" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
