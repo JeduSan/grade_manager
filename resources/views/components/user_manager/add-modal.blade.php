@@ -20,6 +20,10 @@
                     </div> --}}
                     <div class="mb-3">
                         <input type="password" class="form-control" name="admin_password" id="adminPassword" placeholder="Enter admin's password" required>
+                        <div>
+                            <input type="checkbox" id="show_password" class="form-check-input" onclick="showPassword('adminPassword')">
+                            <label id="form-check-label" for="show_password">Show Password</label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>

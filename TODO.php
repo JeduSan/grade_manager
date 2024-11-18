@@ -69,12 +69,11 @@
 // [ ] Apply error messages to forms to see what is wrong from the outputs
     // [ ] set old value
 
-// [ ] Register UI
-// [ ] Login UI
+// [x] Login UI
 
-// [ ] Add show password to:
-    // [ ] Login
-    // [ ] Teacher add
-    // [ ] Teacher edit
-    // [ ] Student add
-    // [ ] Student edit
+// [x] Add show password to:
+    // [x] Login
+    // [x] Teacher add
+    // [x] Teacher edit
+    // [x] Student add
+    // [x] Student edit

@@ -124,6 +124,16 @@
             document.getElementById('sidebar').classList.toggle('toggled');
         });
 
+        function showPassword(inputId) {
+            var password = document.getElementById(inputId);
+
+            if(password.type == 'password') {
+                password.type = 'text';
+            } else if(password.type == 'text') {
+                password.type = 'password'
+            }
+        }
+
         const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
         toastSuccess.show();
     </script>
