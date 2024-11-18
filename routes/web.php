@@ -1,13 +1,8 @@
 <?php
 
-use App\Http\Controllers\admin\AddSemesterController;
-use App\Http\Controllers\admin\AddStudentController;
 use App\Http\Controllers\admin\AddStudentFromClassController;
-use App\Http\Controllers\admin\AddSubjectController;
-use App\Http\Controllers\admin\AddTeacherController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ManagerClassController;
-use App\Http\Controllers\admin\ManagerController;
 use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\ManagerStudentController;
 use App\Http\Controllers\admin\ManagerSubjectController;
@@ -18,15 +13,16 @@ use App\Http\Controllers\admin\StudentExcelController;
 use App\Http\Controllers\admin\SubjectExcelController;
 use App\Http\Controllers\admin\TeacherExcelController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\teacher\DashboardController as TeacherDashboardController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -102,3 +98,9 @@ Route::get('/admin/manager/user',[ManagerUserController::class,'index'])->name('
 Route::post('/admin/manager/add/user',[ManagerUserController::class,'store'])->name('admin.manager.add.user');
 Route::patch('/admin/manager/edit/user/{id}',[ManagerUserController::class,'update'])->name('admin.manager.edit.user');
 Route::get('/admin/manager/delete/user/{id}',[ManagerUserController::class,'destroy'])->name('admin.manager.delete.user');
+
+
+// =========
+// TEACHER SIDE
+// =========
+Route::get('/teacher/dashboard',[TeacherDashboardController::class,'index'])->name('teacher.dashboard');
