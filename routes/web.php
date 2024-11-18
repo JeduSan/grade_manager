@@ -112,4 +112,5 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
     Route::get('/teacher/dashboard', [TeacherDashboardController::class, 'index'])->name('teacher.dashboard');
 
     Route::get('/teacher/view/subjects', [ViewSubjectsController::class, 'index'])->name('teacher.view.subjects');
+    Route::get('/teacher/view/subjects/class_list/{class_id}', [ViewSubjectsController::class, 'show']);
 });

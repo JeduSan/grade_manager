@@ -83,10 +83,11 @@
                                         @endif
 
                                         <td>
-                                            <button class="btn btn-action"
+                                            {{-- <button class="btn btn-action"
                                                 onclick="window.location.href='class-list.html';">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
+                                            </button> --}}
+                                            <a href="/teacher/view/subjects/class_list/{{$class->id}}" class="btn btn-action"><i class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
 

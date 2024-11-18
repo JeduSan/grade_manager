@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ClassModel;
+use App\Models\StudentClass;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,9 +79,33 @@ class ViewSubjectsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request,string $class_id)
     {
-        //
+
+        $students = StudentClass::search($request->search)
+        ->query(function (Builder $builder) use ($class_id) {
+            $builder->select(
+                'student_class.id',
+                'course.id as course_id',
+                'student_year_level.id as year_level_id',
+                'student.id as student_id',
+                DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
+                'course.abbr as course',
+                'student_year_level.year_level_id as year'
+            )
+            ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
+            ->leftJoin('student','student.key','student_year_level.student_key')
+            ->leftJoin('course','course.id','student.course_id')
+            ->where('student_class.class_id',$class_id);
+        })
+        ->get();
+
+        // dd($students);
+
+        return view('teacher.class_list',[
+            'class_id' => $class_id,
+            'students' => $students
+        ]);
     }
 
     /**
