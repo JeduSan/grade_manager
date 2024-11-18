@@ -58,7 +58,7 @@
                                 <div class="card-body">
                                     <i class="fas fa-calendar-check"></i>
                                     <h5 class="card-title">Total Sections</h5>
-                                    <strong> <span class="card-number">22</span></strong>
+                                    <strong> <span class="card-number">{{$class_count}}</span></strong>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,16 @@
                                 <div class="card-body">
                                     <i class="fas fa-calendar-alt"></i>
                                     <h5 class="card-title">Current Semester</h5>
-                                    <strong> <span class="card-number">1st Semester 2024-2025</span></strong>
+                                    <strong> <span class="card-number">
+                                        @if ($current_sem->sem == 1)
+                                            1st Semester
+                                        @elseif ($current_sem->sem == 2)
+                                            2nd Semester
+                                        @elseif ($current_sem->sem == 3)
+                                            Summer
+                                        @endif
+                                        {{$current_sem->start."-".$current_sem->end}}
+                                    </span></strong>
                                 </div>
                             </div>
                         </div>
