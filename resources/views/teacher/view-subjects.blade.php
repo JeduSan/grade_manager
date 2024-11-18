@@ -42,10 +42,13 @@
                         <h5>Class List </h5>
 
                         <div class="d-flex ms-auto">
-                            <div class="search-container me-3">
-                                <input type="text" class="form-control" placeholder="Search Subjects..."
-                                    id="searchInput">
-                            </div>
+
+                            <form action="/teacher/view/subjects" method="GET">
+                                <div class="search-container me-3">
+                                    <input type="text" name="search" class="form-control" placeholder="Search Subjects..."
+                                        id="searchInput">
+                                </div>
+                            </form>
 
                         </div>
                     </div>
