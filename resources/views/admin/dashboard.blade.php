@@ -96,24 +96,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>ECS 103</td>
-                                    <td>LAW1RB</td>
-                                    <td><span class="text-danger">Not Assigned</span></td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                  <td>ECS 103</td>
-                                  <td>LAW1RB</td>
-                                  <td><span class="text-danger">Not Assigned</span></td>
-                                  <td><span class="badge bg-warning">Pending</span></td>
-                              </tr>
-                              <tr>
-                                <td>ECS 103</td>
-                                <td>LAW1RB</td>
-                                <td><span class="text-danger">Not Assigned</span></td>
-                                <td><span class="badge bg-warning">Pending</span></td>
-                            </tr>
+
+                                @foreach ($pending_classes as $class)
+
+                                    <tr>
+                                        <td>{{$class->code}}</td>
+                                        <td>
+                                            @if ($class->section != null)
+                                                {{$class->section}}
+                                            @else
+                                                <span class="badge bg-warning">Pending</span>
+                                            @endif
+                                        </td>
+                                        <td><span class="text-danger">Not Assigned</span></td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                    </tr>
+
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

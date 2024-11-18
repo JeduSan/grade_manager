@@ -34,11 +34,24 @@ class DashboardController extends Controller
             'CURDATE() between semester.start_date and semester.end_date'
         )->first();
 
+        // Classes without teachers assigned
+        $pending_classes = DB::table('class')
+        ->select(
+            'subject.code',
+            'subject.description as name',
+            'class.section',
+            // 'class.teacher_key'
+        )
+        ->leftJoin('subject','subject.key','class.subject_key')
+        ->where('class.teacher_key',null)
+        ->get();
+
         return view('admin.dashboard',[
             'teacher_count' => $teacher_count,
             'student_count' => $student_count,
             'class_count' => $class_count,
-            'current_sem' => $current_sem
+            'current_sem' => $current_sem,
+            'pending_classes' => $pending_classes
         ]);
     }
 
