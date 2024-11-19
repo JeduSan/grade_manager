@@ -83,3 +83,5 @@
     // Steps to reproduce: add a student to a class (admin), then view subjects (teacher)
 
 // [ ] remember me when logging in
+
+// [ ] Change delete confirmations from link to form (refer to teacher profile account deactivation)

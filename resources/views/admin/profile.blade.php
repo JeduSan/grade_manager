@@ -37,18 +37,18 @@
 
                         <div class="profile-header">
                             <div>
-                                <div class="col-md-6" style="font-size: 1em; color: #d6251b;"><strong>D1100</strong></div>
-                                <h2>Aldwin Illumin</h2>
-                                <div class="col-md-6" style="font-size: 0.9em; color: #d6251b;">aldwin@gmail.com</div>
+                                {{-- <div class="col-md-6" style="font-size: 1em; color: #d6251b;"><strong>D1100</strong></div> --}}
+                                <h2>{{$user->name}}</h2>
+                                <div class="col-md-6" style="font-size: 0.9em; color: #d6251b;">{{$user->email}}</div>
                                 <p>Admin - EUC Grading System</p>
                             </div>
                         </div>
 
-                        <div class="action-btns">
+                        {{-- <div class="action-btns">
                             <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
                             <button class="btn btn-password" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
                             <button class="btn btn-cancel" data-bs-toggle="modal" data-bs-target="#deactivateAccountModal">Deactivate Account</button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

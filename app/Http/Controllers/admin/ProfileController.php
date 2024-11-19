@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -12,7 +14,15 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $user = DB::table('users')
+        ->where('users.id',Auth::user()->id)
+        ->first();
+
+        // dd($user);
+
+        return view('admin.profile', [
+            'user' => $user
+        ]);
     }
 
     /**

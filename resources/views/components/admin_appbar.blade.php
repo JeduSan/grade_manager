@@ -8,7 +8,7 @@
                     <i class="fas fa-user-circle profile-icon"></i> Profile
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                    <li><a class="dropdown-item" href="admin-profile.html">View Profile</a></li>
+                    <li><a class="dropdown-item" href="/admin/profile">View Profile</a></li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <li><button type="submit" class="dropdown-item">Logout</button></li>
