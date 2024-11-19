@@ -49,7 +49,7 @@
 
                         <div class="action-btns">
                             <button class="btn btn-add" data-bs-toggle="modal" data-form="{{$user->user_id}}" data-fname="{{$user->fname}}" data-lname="{{$user->lname}}" data-email="{{$user->email}}" data-bs-target="#editProfileModal">Edit Profile</button>
-                            <button class="btn btn-password" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
+                            <button class="btn btn-password" data-bs-toggle="modal" data-form="{{$user->user_id}}" data-bs-target="#changePasswordModal">Change Password</button>
                             <button class="btn btn-cancel" data-bs-toggle="modal" data-bs-target="#deactivateAccountModal">Deactivate Account</button>
                         </div>
                     </div>
@@ -61,34 +61,8 @@
     {{-- EDIT MODAL --}}
     @include('components.teacher_profile.edit-modal')
 
-    <!-- Change Password Modal -->
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="currentPassword" placeholder="Current Password">
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="newPassword" placeholder="New Password">
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm New Password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-add">Change Password</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- CHANGE PASSWORD MODAL --}}
+    @include('components.teacher_profile.change-pass-modal')
 
     <!-- Deactivate Account Modal -->
     <div class="modal fade" id="deactivateAccountModal" tabindex="-1" aria-labelledby="deactivateAccountModalLabel" aria-hidden="true">
@@ -112,6 +86,17 @@
     <script>
         var editButtons = document.querySelectorAll('[data-bs-target="#editProfileModal"]');
         var editForm = document.querySelector('#editForm');
+        var changeButtons = document.querySelectorAll('[data-bs-target="#changePasswordModal"]');
+        var changePassForm = document.querySelector('#changePassForm');
+
+        changeButtons.forEach(function (button){
+            button.addEventListener('click',function(){
+                var form = button.getAttribute('data-form');
+
+                // alert(`${fname} - ${lname} - ${email} - ${form}`);
+                changePassForm.setAttribute('action','/teacher/profile/update/password/' + form);
+            });
+        });
 
         editButtons.forEach(function (button){
             button.addEventListener('click',function(){

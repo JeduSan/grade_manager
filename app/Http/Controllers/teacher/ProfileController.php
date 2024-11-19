@@ -6,9 +6,11 @@ use Exception;
 use App\Models\User;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -69,6 +71,26 @@ class ProfileController extends Controller
                 ]);
             });
             session(['success' => 'Profile edited successfully!']);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('teacher.profile');
+    }
+
+    public function update_password(Request $request, string $user_id) {
+        // dd($user_id,$request->all());
+        $request->validate([
+            'old_password' => ['required', 'current_password',Rules\Password::defaults()],
+            'new_password' => ['required','confirmed',Rules\Password::defaults()]
+        ]);
+
+        try {
+            User::where('id',$user_id)->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+
+            session(['success' => 'Password updated!']);
         } catch (Exception $e) {
             session(['failure' => 'Something went wrong :(']);
         }
