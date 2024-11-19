@@ -24,15 +24,9 @@
 
             <!-- Main content area -->
             <div class="col p-0">
-                <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
-                    <div class="container-fluid d-flex align-items-center">
-                        <img src="{{asset('assets/images/logo.png')}}" alt="Logo" class="logo">
-                        <p class="logo-name">EUC Grading System</p>
-                        <a class="navbar-brand ms-auto" href="teacher-profile.html">
-                            <i class="fas fa-user-circle profile-icon"></i> Profile
-                        </a>
-                    </div>
-                </nav>
+
+                {{-- APPBAR --}}
+                @include('components.teacher_appbar')
 
                 <!-- Page content -->
                 <div class="container-fluid page-content mt-3">

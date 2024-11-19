@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\admin\AddStudentFromClassController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\admin\ManagerClassController;
-use App\Http\Controllers\admin\ManagerSemesterController;
-use App\Http\Controllers\admin\ManagerStudentController;
-use App\Http\Controllers\admin\ManagerSubjectController;
-use App\Http\Controllers\admin\ManagerTeacherController;
 use App\Http\Controllers\admin\ManagerUserController;
-use App\Http\Controllers\admin\RemoveStudentFromClassController;
+use App\Http\Controllers\admin\ManagerClassController;
 use App\Http\Controllers\admin\StudentExcelController;
 use App\Http\Controllers\admin\SubjectExcelController;
 use App\Http\Controllers\admin\TeacherExcelController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\admin\ManagerStudentController;
+use App\Http\Controllers\admin\ManagerSubjectController;
+use App\Http\Controllers\admin\ManagerTeacherController;
 use App\Http\Controllers\teacher\ViewSubjectsController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\ManagerSemesterController;
+use App\Http\Controllers\admin\AddStudentFromClassController;
+use App\Http\Controllers\admin\RemoveStudentFromClassController;
+use App\Http\Controllers\teacher\ProfileController as TeacherProfileController;
+use App\Http\Controllers\teacher\DashboardController as TeacherDashboardController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -114,4 +115,8 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
     Route::get('/teacher/view/subjects', [ViewSubjectsController::class, 'index'])->name('teacher.view.subjects');
     Route::get('/teacher/view/subjects/class_list/{class_id}', [ViewSubjectsController::class, 'show']);
     Route::patch('/teacher/view/subjects/class_list/grading/{student_class_id}/{class_id}', [ViewSubjectsController::class, 'update']);
+
+    // PROFILE
+    Route::get('/teacher/profile', [TeacherProfileController::class, 'index'])->name('teacher.profile');
+    Route::patch('/teacher/profile/update/{user_id}', [TeacherProfileController::class, 'update'])->name('teachers.profile.update');
 });

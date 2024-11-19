@@ -79,5 +79,7 @@
     // [x] Student add
     // [x] Student edit
 
-// BUG //[ ] Adding a student to a class creates a new instance of the class on the class list (teacher side -> view subjects)
+// BUG //[x] Adding a student to a class creates a new instance of the class on the class list (teacher side -> view subjects)
     // Steps to reproduce: add a student to a class (admin), then view subjects (teacher)
+
+// [ ] remember me when logging in
