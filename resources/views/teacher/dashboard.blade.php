@@ -84,13 +84,34 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Subject Name</th>
                                     <th>Section</th>
+                                    <th>Subject Name</th>
                                     <th> Grade Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+
+                                @foreach ($classes as $class)
+
+                                    <tr>
+                                        <td>{{$class->section}}</td>
+                                        <td>
+                                            {{$class->subject_name}}
+                                            <p class="subject-code" id="subjectCode"
+                                                style="font-size: 0.8em; color: rgb(182, 26, 26);">{{$class->subject_code}} - {{$class->units}} units</p>
+                                        </td>
+
+                                        {{-- When there is no students with a score of 0, means everyone has been graded, thus being completed --}}
+                                        @if ($class->ungraded_count <= 0)
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        @else
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                        @endif
+                                    </tr>
+
+                                @endforeach
+
+                                {{-- <tr>
                                     <td>ECS 103</td>
                                     <td>LAW1RB</td>
                                     <td><span class="badge bg-warning">Pending</span></td>
@@ -104,7 +125,7 @@
                                 <td>ECS 103</td>
                                 <td>LAW1RB</td>
                                 <td><span class="badge bg-warning">Pending</span></td>
-                            </tr>
+                            </tr> --}}
                             </tbody>
                         </table>
                     </div>
