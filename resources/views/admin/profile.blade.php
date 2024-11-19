@@ -23,13 +23,13 @@
         <div class="row flex-nowrap">
 
             {{-- SIDEBAR --}}
-            @include('components.teacher_sidebar')
+            @include('components.admin_sidebar')
 
             <!-- Main content -->
             <div class="col p-0">
 
                 {{-- APPBAR --}}
-                @include('components.teacher_appbar')
+                @include('components.admin_appbar')
 
                 <!-- Page content -->
                 <div class="container-fluid page-content mt-3">
