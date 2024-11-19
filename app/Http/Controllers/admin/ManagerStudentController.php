@@ -60,11 +60,11 @@ class ManagerStudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'student_id' => ['required','string','max:255'],
+            'student_id' => ['required','string','unique:student,id','max:255'],
             'student_fname' => ['required','string','max:255'],
             'student_mname' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
-            'student_email' => ['required','string','lowercase','email','max:255','unique:student,email'],
+            'student_email' => ['required','string','unique:student,email','lowercase','email','max:255','unique:student,email'],
             'student_course' => ['required','numeric','integer','digits:1'],
             'student_year' => ['required','numeric','integer','digits:1'],
             'student_password' => ['required',Rules\Password::defaults()]
