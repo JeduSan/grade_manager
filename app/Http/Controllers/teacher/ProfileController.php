@@ -103,6 +103,12 @@ class ProfileController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            User::destroy($id);
+        } catch (Exception $e) {
+            session(['failure' => 'Something went wrong :(']);
+        }
+
+        return to_route('teacher.profile');
     }
 }

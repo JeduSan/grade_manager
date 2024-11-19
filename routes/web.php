@@ -120,4 +120,5 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
     Route::get('/teacher/profile', [TeacherProfileController::class, 'index'])->name('teacher.profile');
     Route::patch('/teacher/profile/update/{user_id}', [TeacherProfileController::class, 'update'])->name('teachers.profile.update');
     Route::patch('/teacher/profile/update/password/{user_id}', [TeacherProfileController::class, 'update_password'])->name('teachers.profile.update');
+    Route::delete('/teacher/profile/deactivate/{user_id}', [TeacherProfileController::class, 'destroy'])->name('teachers.profile.deactivate');
 });
