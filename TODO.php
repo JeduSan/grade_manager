@@ -69,6 +69,17 @@
 
 // [ ] Apply error messages to forms to see what is wrong from the outputs
     // [ ] set old value
+    // [ ] make updates unique (id and email)
+
+    // [ ] Admin
+    // [ ] add teacher
+    // [ ] edit teacher
+    // [ ] add student
+    // [ ] edit student
+    // [ ] add class
+    // [ ] edit class
+    // [ ] add subject
+    // [ ] edit subject
 
 // [x] Login UI
 

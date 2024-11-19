@@ -12,18 +12,23 @@
                     @method('PATCH')
                     <div class="mb-3">
                         <input type="text" class="form-control" name="student_id" id="editStudentID" placeholder="Enter student ID" required>
+                        <x-input-error :messages="$errors->get('student_id')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="student_fname" id="editStudentFName" placeholder="Enter student's first name" required>
+                        <x-input-error :messages="$errors->get('student_fname')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="student_mname" id="editStudentMName" placeholder="Enter student's middle name" required>
+                        <x-input-error :messages="$errors->get('student_mname')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="student_lname" id="editStudentLName" placeholder="Enter student's last name" required>
+                        <x-input-error :messages="$errors->get('student_lname')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <input type="email" class="form-control" name="student_email" id="editStudentEmail" placeholder="Enter student's email" required>
+                        <x-input-error :messages="$errors->get('student_email')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         {{-- <input type="text" class="form-control" name="student_course" id="editStudentCourse" placeholder="Enter student's course"> --}}
@@ -33,6 +38,8 @@
                                 <option value="{{$course->id}}">{{$course->description}}</option>
                             @endforeach
                         </select>
+                        <x-input-error :messages="$errors->get('student_course')" class="mt-2" />
+
                     </div>
                     <div class="mb-3">
                         {{-- <input type="text" class="form-control" name="student_year" id="editStudentYear" placeholder="Enter student's year"> --}}
@@ -44,9 +51,11 @@
                             <option value="3">3rd Year</option>
                             <option value="4">4th Year</option>
                         </select>
+                        <x-input-error :messages="$errors->get('student_year')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" name="student_password" id="editStudentPassword" placeholder="Enter student's password">
+                        <x-input-error :messages="$errors->get('student_password')" class="mt-2" />
                         <div>
                             <input type="checkbox" id="show_password" class="form-check-input" onclick="showPassword('editStudentPassword')">
                             <label id="form-check-label" for="show_password">Show Password</label>

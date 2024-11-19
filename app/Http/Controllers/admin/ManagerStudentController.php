@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\AcademicYear;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\StudentYearLevel;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
@@ -125,11 +126,11 @@ class ManagerStudentController extends Controller
     public function update(Request $request, string $user_id)
     {
         $request->validate([
-            'student_id' => ['required','string','max:255'],
+            'student_id' => ['required','string','unique:student,id,'.$request->student_id,'max:255'],
             'student_fname' => ['required','string','max:255'],
             'student_mname' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
-            'student_email' => ['required','string','lowercase','email','max:255'],
+            'student_email' => ['required','string','lowercase','email','unique:student,email,'.$request->student_email,'max:255'],
             'student_course' => ['required','numeric','integer'],
             'student_year' => ['required','numeric','integer'],
             'student_password' => ['nullable',Rules\Password::defaults()]
@@ -164,8 +165,7 @@ class ManagerStudentController extends Controller
 
             session(['success' => 'Student edited successfully!']);
         } catch(Exception $e) {
-            throw $e;
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong. Please make sure that the ID/Email is unique!']);
         }
 
         return to_route('admin.manager.student');
