@@ -41,6 +41,7 @@ class ViewSubjectsController extends Controller
         $classes = ClassModel::search($request->search)
         ->query(function (Builder $builder) {
             $builder->select(
+                    // 'student_class.score',
                     // 'student_class.id as student_class_id',
                     'class.id',
                     'subject.key',
@@ -57,6 +58,7 @@ class ViewSubjectsController extends Controller
                 ->leftJoin('subject','subject.key','class.subject_key')
                 // ->leftJoin('student_class','student_class.class_id','class.id') // used to count the number of students in this class who has been graded (score > 0)
                 ->whereRaw("teacher_key = (SELECT `key` FROM teacher WHERE user_id = " . Auth::user()->id . ")" );
+                // ->having('student_class.score',0)
                 // ->groupBy('class.section','subject.code','subject.description','subject.units','student_class.id','class.id','subject.key');
         })
         ->orderBy('class.id','asc')
@@ -64,8 +66,39 @@ class ViewSubjectsController extends Controller
 
         // dd($classes);
 
+        $pending_grades = DB::table('student_class')
+        ->select(
+            'score',
+            'class.id as class_id',
+            DB::raw('COUNT(score) as count')
+        )
+        ->leftJoin('class','class.id','student_class.class_id')
+        ->leftJoin('teacher','teacher.key','class.teacher_key')
+        ->where('teacher.user_id',Auth::user()->id)
+        ->having('score',0)
+        ->groupBy('class.id','score')
+        // ->groupBy('score')
+        ->get();
+        // dd($pending_grades);
+
+        $mapped = $classes->map(function ($item,$key) use ($pending_grades) {
+            foreach($pending_grades as $pending) {
+                if ($pending->class_id == $item->id) {
+                    // $item->push(['score' => $pending->score]);
+                    // Assign the score from $pending_grades
+                    $item->ungraded_count = $pending->count;
+                    break; // Exit loop once match is found
+                }
+
+            }
+            return $item;
+        });
+
+        // dd($mapped->all(),$classes);
+
         return view('teacher.view-subjects',[
-            'classes' => $classes
+            'classes' => $mapped,
+            'pending_grades' => $pending_grades
         ]);
     }
 

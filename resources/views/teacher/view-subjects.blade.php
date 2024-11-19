@@ -76,7 +76,8 @@
                                                 style="font-size: 0.8em; color: rgb(182, 26, 26);">{{$class->subject_code}} - {{$class->units}} units</p>
                                         </td>
 
-                                        @if ($class->ungraded_student_count == 0)
+                                        {{-- When there is no students with a score of 0, means everyone has been graded, thus being completed --}}
+                                        @if ($class->ungraded_count <= 0)
                                         <td><span class="badge bg-success">Completed</span></td>
                                         @else
                                         <td><span class="badge bg-warning">Pending</span></td>
