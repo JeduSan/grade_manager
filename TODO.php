@@ -97,7 +97,7 @@
 
 // [ ] Change delete confirmations from link to form & route from GET to DELETE(refer to teacher profile account deactivation)
     // [x] class
-    // [ ] teacher
+    // [x] teacher
     // [x] student
     // [ ] subjects
     // [ ] users

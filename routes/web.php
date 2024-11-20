@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/manager/teacher', [ManagerTeacherController::class, 'index'])->name('admin.manager.teacher');
     Route::post('/admin/manager/add/teacher', [ManagerTeacherController::class, 'store'])->name('admin.manager.add.teacher');
     Route::post('/admin/manager/add/teacher/excel', [TeacherExcelController::class, 'store'])->name('admin.manager.add.teacher.excel');
-    Route::get('/admin/manager/delete/teacher/{id}', [ManagerTeacherController::class, 'destroy'])->name('admin.manager.delete.teacher');
+    Route::delete('/admin/manager/delete/teacher/{id}', [ManagerTeacherController::class, 'destroy'])->name('admin.manager.delete.teacher');
     Route::patch('/admin/manager/edit/teacher/{user_id}', [ManagerTeacherController::class, 'update'])->name('admin.manager.edit.teacher');
 
     // STUDENT MANAGER

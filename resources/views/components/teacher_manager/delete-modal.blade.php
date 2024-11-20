@@ -12,7 +12,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 {{-- <button type="button" class="btn btn-danger" onclick="showErrorMessage('Error deleting teacher. Please try again.')">Delete</button> --}}
-                <a class="btn btn-danger" id="deleteClassModalBtn">Delete</a>
+                {{-- <a class="btn btn-danger" id="deleteClassModalBtn">Delete</a> --}}
+                <form  id="deleteClassModalBtn" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                </form>
             </div>
         </div>
     </div>

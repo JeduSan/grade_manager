@@ -26,16 +26,16 @@
             @include('components.admin_sidebar')
 
             <!-- Main content area -->
-            <div class="col p-0">
+            <div class="p-0 col">
 
                 <!-- Page content -->
-                <div class="container-fluid page-content mt-3">
+                <div class="mt-3 container-fluid page-content">
                     <br><br>
 
                     {{-- APPBAR --}}
                     @include('components.admin_appbar')
 
-                    <div class="d-flex mb-3">
+                    <div class="mb-3 d-flex">
                         <h5>Manage Teachers</h5>
 
                         <div class="d-flex ms-auto">
@@ -141,7 +141,9 @@
             button.addEventListener('click', function() {
                 var form = button.getAttribute('data-form');
 
-                deleteClassModalBtn.setAttribute('href', '/admin/manager/delete/teacher/' + form);
+                // deleteClassModalBtn.setAttribute('href', '/admin/manager/delete/teacher/' + form);
+                deleteClassModalBtn.setAttribute('action', '/admin/manager/delete/teacher/' + form);
+
             });
         });
 
