@@ -14,9 +14,10 @@ use App\Http\Controllers\admin\ManagerTeacherController;
 use App\Http\Controllers\teacher\ViewSubjectsController;
 use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\AddStudentFromClassController;
-use App\Http\Controllers\admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\admin\RemoveStudentFromClassController;
+use App\Http\Controllers\admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\teacher\ProfileController as TeacherProfileController;
+use App\Http\Controllers\student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\teacher\DashboardController as TeacherDashboardController;
 
 // Route::get('/', function () {
@@ -132,5 +133,5 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
 // STUDENT SIDE
 // ============
 Route::middleware(['auth','verified','student'])->group(function () {
-    Route::get('/student/dashboard', [TeacherDashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 });

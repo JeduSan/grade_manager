@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\GuestCustom;
+use App\Http\Middleware\Student;
 use App\Http\Middleware\Teacher;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => Admin::class,
             'teacher' => Teacher::class,
-            'cguest' => GuestCustom::class
+            'cguest' => GuestCustom::class,
+            'student' => Student::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

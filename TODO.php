@@ -93,7 +93,7 @@
 // BUG //[x] Adding a student to a class creates a new instance of the class on the class list (teacher side -> view subjects)
     // Steps to reproduce: add a student to a class (admin), then view subjects (teacher)
 
-// [ ] remember me when logging in
+// [x] remember me when logging in
 
 // [x] Change delete confirmations from link to form & route from GET to DELETE(refer to teacher profile account deactivation)
     // [x] class
@@ -103,3 +103,12 @@
     // [x] users
 
 // [ ] Add a semester page
+
+// [ ] Make students unique per class (currently you can add multiple of the same student)
+
+// [ ] Fix unique on update error
+    // [ ] student ([x]email,id)
+    // [ ] teacher (email,id)
+    // [ ] subject (code)
+    // [ ] class (section)
+    // [ ] user (email)

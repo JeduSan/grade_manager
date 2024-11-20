@@ -153,6 +153,7 @@ class ManagerClassController extends Controller
                     DB::raw('CONCAT(student.fname," ",student.mname," ",student.lname) as name'),
                     'student_year_level.id as year'
                 )
+                ->leftJoin('course','course.id','student.course_id')
                 ->leftJoin('student_year_level','student_year_level.student_key','student.key');
         })
         ->get();
