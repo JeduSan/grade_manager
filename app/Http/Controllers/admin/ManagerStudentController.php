@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ManagerStudentController extends Controller
 {
@@ -65,7 +66,7 @@ class ManagerStudentController extends Controller
             'student_fname' => ['required','string','max:255'],
             'student_mname' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
-            'student_email' => ['required','string','unique:student,email','lowercase','email','max:255','unique:student,email'],
+            'student_email' => ['required','string','unique:student,email','lowercase','email','max:255'],
             'student_course' => ['required','numeric','integer','digits:1'],
             'student_year' => ['required','numeric','integer','digits:1'],
             'student_password' => ['required',Rules\Password::defaults()]
@@ -130,7 +131,7 @@ class ManagerStudentController extends Controller
             'student_fname' => ['required','string','max:255'],
             'student_mname' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
-            'student_email' => ['required','string','lowercase','email','unique:student,email,'.$request->student_email,'max:255'],
+            'student_email' => ['required','string','lowercase','email','unique:users,email,'.$request->user_id,'max:255'],
             'student_course' => ['required','numeric','integer'],
             'student_year' => ['required','numeric','integer'],
             'student_password' => ['nullable',Rules\Password::defaults()]
