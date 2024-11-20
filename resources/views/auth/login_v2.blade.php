@@ -35,10 +35,10 @@
                     <input type="checkbox" id="show_password" class="form-check-input" onclick="showPassword('password')">
                     <label id="form-check-label" for="show_password">Show Password</label>
                 </div>
-            </div>
-            <div>
-                <input type="checkbox" id="remember" name="remember" class="form-check-input">
-                <label id="form-check-label" for="remember">Remember me</label>
+                <div>
+                    <input type="checkbox" id="remember" name="remember" class="form-check-input">
+                    <label id="form-check-label" for="remember">Remember me</label>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Log In</button>
             {{-- <p class="mt-3 text-center">Don't have an account? <a href="signup.html">Sign Up</a></p> --}}
