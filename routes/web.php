@@ -104,7 +104,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/manager/user', [ManagerUserController::class, 'index'])->name('admin.manager.user');
     Route::post('/admin/manager/add/user', [ManagerUserController::class, 'store'])->name('admin.manager.add.user');
     Route::patch('/admin/manager/edit/user/{id}', [ManagerUserController::class, 'update'])->name('admin.manager.edit.user');
-    Route::get('/admin/manager/delete/user/{id}', [ManagerUserController::class, 'destroy'])->name('admin.manager.delete.user');
+    Route::delete('/admin/manager/delete/user/{id}', [ManagerUserController::class, 'destroy'])->name('admin.manager.delete.user');
 
     // PROFILE
     Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');

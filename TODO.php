@@ -95,11 +95,11 @@
 
 // [ ] remember me when logging in
 
-// [ ] Change delete confirmations from link to form & route from GET to DELETE(refer to teacher profile account deactivation)
+// [x] Change delete confirmations from link to form & route from GET to DELETE(refer to teacher profile account deactivation)
     // [x] class
     // [x] teacher
     // [x] student
     // [x] subjects
-    // [ ] users
+    // [x] users
 
 // [ ] Add a semester page
