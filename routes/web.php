@@ -74,7 +74,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/manager/student', [ManagerStudentController::class, 'index'])->name('admin.manager.student');
     Route::post('/admin/manager/add/student', [ManagerStudentController::class, 'store'])->name('admin.manager.add.student');
     Route::post('/admin/manager/add/student/excel', [StudentExcelController::class, 'store'])->name('admin.manager.add.student.excel');
-    Route::get('/admin/manager/delete/student/{id}', [ManagerStudentController::class, 'destroy'])->name('admin.manager.delete.student');
+    Route::delete('/admin/manager/delete/student/{id}', [ManagerStudentController::class, 'destroy'])->name('admin.manager.delete.student');
     Route::patch('/admin/manager/edit/student/{user_id}', [ManagerStudentController::class, 'update'])->name('admin.manager.edit.student');
 
     // SEMESTER MANAGER
