@@ -87,7 +87,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/manager/subject', [ManagerSubjectController::class, 'index'])->name('admin.manager.subject');
     Route::post('/admin/manager/add/subject', [ManagerSubjectController::class, 'store'])->name('admin.manager.add.subject');
     Route::post('/admin/manager/add/subject/excel', [SubjectExcelController::class, 'store'])->name('admin.manager.add.subject.excel');
-    Route::get('/admin/manager/delete/subject/{id}', [ManagerSubjectController::class, 'destroy'])->name('admin.manager.delete.subject');
+    Route::delete('/admin/manager/delete/subject/{id}', [ManagerSubjectController::class, 'destroy'])->name('admin.manager.delete.subject');
     Route::patch('/admin/manager/edit/subject/{id}', [ManagerSubjectController::class, 'update'])->name('admin.manager.edit.subject');
 
     // CLASS MANAGER

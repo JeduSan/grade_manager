@@ -23,7 +23,7 @@
             @include('components.admin_sidebar')
 
             <!-- Main content area -->
-            <div class="col p-0">
+            <div class="p-0 col">
 
                 {{-- APPBAR --}}
                 @include('components.admin_appbar')
@@ -32,10 +32,10 @@
                 @include('components.popup-condition')
 
                 <!-- Page content -->
-                <div class="container-fluid page-content mt-3">
+                <div class="mt-3 container-fluid page-content">
                     <br><br>
 
-                    <div class="d-flex mb-3">
+                    <div class="mb-3 d-flex">
                         <h5>Manage Subjects</h5>
 
                         <div class="d-flex ms-auto">
@@ -118,7 +118,9 @@
             button.addEventListener('click',function () {
                 var id = button.getAttribute('data-id');
 
-                deleteModalBtn.setAttribute('href','/admin/manager/delete/subject/' + id);
+                // deleteModalBtn.setAttribute('href','/admin/manager/delete/subject/' + id);
+                deleteModalBtn.setAttribute('action','/admin/manager/delete/subject/' + id);
+
             });
         });
 

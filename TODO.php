@@ -99,7 +99,7 @@
     // [x] class
     // [x] teacher
     // [x] student
-    // [ ] subjects
+    // [x] subjects
     // [ ] users
 
 // [ ] Add a semester page
