@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dashboard</title>
+    <title>Grade Manager</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -21,18 +21,18 @@
             @include('components.admin_sidebar')
 
             <!-- Main content area -->
-            <div class="col p-0">
+            <div class="p-0 col">
 
                 {{-- APPBAR --}}
                 @include('components.admin_appbar')
 
                 <!-- Page content -->
-                <div class="container-fluid page-content mt-3">
+                <div class="mt-3 container-fluid page-content">
                     <br><br>
 
                     @include('components.popup-condition')
 
-                    <div class="d-flex mb-3">
+                    <div class="mb-3 d-flex">
                         <h5>Student List</h5>
                         <div class="d-flex ms-auto">
                             <form action="/admin/manager/view/class/{{$class->id}}" method="GET">
@@ -48,9 +48,9 @@
                     </div>
 
                     <!-- Teacher's Info Container -->
-                    <div class="teacher-info-container mb-4 p-3 bg-white" style="border-radius: 10px; box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);">
+                    <div class="p-3 mb-4 bg-white teacher-info-container" style="border-radius: 10px; box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);">
                         <h5 class="m-0" style="font-size: 1.25em;">{{$class->teacher}}</h5>
-                        <div class="teacher-details mt-1" style="font-size: 0.95em;">
+                        <div class="mt-1 teacher-details" style="font-size: 0.95em;">
                             <p class="m-0">{{$class->subject}}</p>
                             <p class="m-0" style="color: rgb(209, 27, 27);">{{$class->units}}-units</p>
                         </div>

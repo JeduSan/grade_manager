@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dashboard</title>
+    <title>Grade Manager</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -26,16 +26,16 @@
             @include('components.admin_sidebar')
 
             <!-- Main content area -->
-            <div class="col p-0">
+            <div class="p-0 col">
 
                 {{-- APPBAR --}}
                 @include('components.admin_appbar')
 
                 <!-- Page content -->
-                <div class="container-fluid page-content mt-3">
+                <div class="mt-3 container-fluid page-content">
                     <br><br>
                     <div class="row">
-                        <div class="col-md-3 mb-3">
+                        <div class="mb-3 col-md-3">
                             <div class="card">
                                 <div class="card-body">
                                     <i class="fas fa-user-md"></i>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="mb-3 col-md-3">
                             <div class="card">
                                 <div class="card-body">
                                     <i class="fas fa-procedures"></i>
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="mb-3 col-md-3">
                             <div class="card">
                                 <div class="card-body">
                                     <i class="fas fa-calendar-check"></i>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="mb-3 col-md-3">
 
                             <div class="card">
                                 <div class="card-body">
