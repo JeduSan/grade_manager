@@ -48,7 +48,7 @@ Route::get('/', function () {
     // return view('landing');
     // REVIEW: Our landing page will be the login page
     return to_route('login');
-})->middleware(['guest']);
+})->middleware(['cguest']);
 
 // ==========
 // ADMIN SIDE
@@ -125,4 +125,13 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
     Route::patch('/teacher/profile/update/{user_id}', [TeacherProfileController::class, 'update'])->name('teachers.profile.update');
     Route::patch('/teacher/profile/update/password/{user_id}', [TeacherProfileController::class, 'update_password'])->name('teachers.profile.update');
     Route::delete('/teacher/profile/deactivate/{user_id}', [TeacherProfileController::class, 'destroy'])->name('teachers.profile.deactivate');
+});
+
+
+// ============
+// STUDENT SIDE
+// ============
+// [ ] Create student middleware
+Route::middleware(['auth','verified','teacher'])->group(function () {
+    Route::get('/student/dashboard', [TeacherDashboardController::class, 'index'])->name('student.dashboard');
 });
