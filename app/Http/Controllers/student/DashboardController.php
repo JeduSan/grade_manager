@@ -23,6 +23,7 @@ class DashboardController extends Controller
         $pending_class_no = 0; // (score == null)
         $failed_class_no = 0; // (score > 3)
         $inc_class_no = 0; // (score == 0)
+        $ineligible_grade_count = 0; // no. of grades > 2.00, if this > 0, scholarship will be None, even if the student's grade is within the grade threshold
 
         // REVIEW: all grades on all classes and sem
         // [ ] select only the needed
@@ -39,11 +40,17 @@ class DashboardController extends Controller
         // GWA FORMULA
         // (grade x units) / total units
 
+        $grade_threshold = 2.00;
         foreach ($subjects as $subject) {
             // compute gwa
             $gwa += (float) $subject->score * (float) $subject->units;
             // sum total units
             $total_units += $subject->units;
+
+            // check for grades higher than 2.00, to know if student is disqualified
+            if($subject->score > $grade_threshold) {
+                $ineligible_grade_count++;
+            }
 
             if ($subject->score > 0) {
                 $completed_class_no++;
@@ -60,11 +67,11 @@ class DashboardController extends Controller
         $gwa = round(($gwa/$total_units),4);
 
         // Get scholar type
-        if($gwa >= 1 && $gwa <= 1.3){
+        if(($gwa >= 1 && $gwa <= 1.3) && $ineligible_grade_count == 0){
             $scholarship_type = 'University Scholar';
-        } else if($gwa > 1.3 && $gwa <= 1.5) {
+        } else if(($gwa > 1.3 && $gwa <= 1.5) && $ineligible_grade_count == 0) {
             $scholarship_type = 'Academic Scholar';
-        } else if($gwa > 1.5 && $gwa <= 2) {
+        } else if(($gwa > 1.5 && $gwa <= 2) || (($gwa >= 1 && $gwa <= 5) && $ineligible_grade_count > 0)) {
             $scholarship_type = 'Dean\'s Lister';
         } else {
             $scholarship_type = 'None';
