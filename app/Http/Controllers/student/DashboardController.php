@@ -76,7 +76,13 @@ class DashboardController extends Controller
             // 'subjects' => $subjects,
             'gwa' => $gwa,
             'scholarship_type' => $scholarship_type,
-            'total_units' => $total_units
+            'total_units' => $total_units,
+            'grade_status' => [
+                'completed' => $completed_class_no,
+                'pending' => $pending_class_no,
+                'failed' => $failed_class_no,
+                'inc' => $inc_class_no
+            ]
         ]);
     }
 
