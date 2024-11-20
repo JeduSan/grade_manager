@@ -70,12 +70,12 @@ class ViewSubjectsController extends Controller
         ->select(
             'score',
             'class.id as class_id',
-            DB::raw('COUNT(score) as count')
+            DB::raw('COUNT(*) as count')
         )
         ->leftJoin('class','class.id','student_class.class_id')
         ->leftJoin('teacher','teacher.key','class.teacher_key')
         ->where('teacher.user_id',Auth::user()->id)
-        ->having('score',0)
+        ->havingRaw('score is NULL')
         ->groupBy('class.id','score')
         // ->groupBy('score')
         ->get();
@@ -94,7 +94,7 @@ class ViewSubjectsController extends Controller
             return $item;
         });
 
-        // dd($mapped->all(),$classes);
+        // dd($mapped->all(),$classes,$pending_grades);
 
         return view('teacher.view-subjects',[
             'classes' => $mapped,
@@ -149,7 +149,7 @@ class ViewSubjectsController extends Controller
     public function update(Request $request, string $student_class_id,string $class_id)
     {
         $request->validate([
-            'grade' => ['required','numeric']
+            'grade' => ['nullable','numeric']
         ]);
 
         try {

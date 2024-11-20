@@ -22,7 +22,7 @@ class AddStudentFromClassController extends Controller
             StudentClass::create([
                 'student_year_level_id' => $request->year_id,
                 'class_id' => $class_id,
-                'score' => 0
+                // 'score' => 0
             ]);
 
             session(['success' => 'Student added successfully!']);

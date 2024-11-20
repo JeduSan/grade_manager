@@ -76,7 +76,7 @@ class ManagerClassController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'instructor' => ['required','integer','numeric'],
+            'instructor' => ['nullable','integer','numeric'],
             'subject' => ['required','integer','numeric'],
             'course' => ['required','integer','numeric'],
             'year' => ['required','integer','numeric'],

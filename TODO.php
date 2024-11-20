@@ -112,3 +112,5 @@
     // [ ] subject (code)
     // [ ] class (section)
     // [ ] user (email)
+
+// [ ] UPDATE MIGRATION since I updated student_class.score to be nullable, and the class trigger

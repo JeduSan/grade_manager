@@ -7,6 +7,6 @@
     <title>Grade Manager</title>
 </head>
 <body>
-dashboard
+    dashboard
 </body>
 </html>

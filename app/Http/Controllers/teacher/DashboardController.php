@@ -90,12 +90,12 @@ class DashboardController extends Controller
         ->select(
             'score',
             'class.id as class_id',
-            DB::raw('COUNT(score) as count')
+            DB::raw('COUNT(*) as count')
         )
         ->leftJoin('class','class.id','student_class.class_id')
         ->leftJoin('teacher','teacher.key','class.teacher_key')
         ->where('teacher.user_id',Auth::user()->id)
-        ->having('score',0)
+        ->havingRaw('score is NULL')
         ->groupBy('class.id','score')
         // ->groupBy('score')
         ->get();

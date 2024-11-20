@@ -84,11 +84,11 @@
                                         @csrf
                                         @method('PATCH')
 
-                                        @if ($student->score == 0)
+                                        {{-- @if ($student->score == null)
                                         <td><input type="text" name="grade" class="form-control" style="width: 120px;" placeholder="Enter Grade"></td>
-                                        @else
+                                        @else --}}
                                         <td><input type="text" name="grade" class="form-control" style="width: 120px;" placeholder="Enter Grade" value="{{$student->score}}"></td>
-                                        @endif
+                                        {{-- @endif --}}
                                     </form>
                                 </tr>
 
