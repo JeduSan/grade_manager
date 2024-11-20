@@ -170,7 +170,7 @@ class ManagerClassController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'instructor' => ['required','integer','numeric'],
+            'instructor' => ['nullable','integer','numeric'],
             'subject' => ['required','integer','numeric'],
             'course' => ['required','integer','numeric'],
             'year' => ['required','integer','numeric'],
@@ -190,6 +190,7 @@ class ManagerClassController extends Controller
 
             session(['success' => 'Class updated!']);
         } catch (Exception $e) {
+            // throw $e;
             session(['failure' => 'Something went wrong :(']);
         }
 
