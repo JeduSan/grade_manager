@@ -131,7 +131,6 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
 // ============
 // STUDENT SIDE
 // ============
-// [ ] Create student middleware
-Route::middleware(['auth','verified','teacher'])->group(function () {
+Route::middleware(['auth','verified','student'])->group(function () {
     Route::get('/student/dashboard', [TeacherDashboardController::class, 'index'])->name('student.dashboard');
 });
