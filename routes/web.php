@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\ManagerSemesterController;
 use App\Http\Controllers\admin\AddStudentFromClassController;
 use App\Http\Controllers\admin\RemoveStudentFromClassController;
 use App\Http\Controllers\admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\teacher\ProfileController as TeacherProfileController;
 use App\Http\Controllers\student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\teacher\DashboardController as TeacherDashboardController;
@@ -109,6 +110,10 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     // PROFILE
     Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+
+    // SETTINGS
+    Route::get('/admin/settings',[SettingsController::class,'index'])->name('admin.settings');
+    Route::post('/admin/settings/add/sem',[SettingsController::class,'store'])->name('admin.settings.add.sem');
 });
 
 // ============

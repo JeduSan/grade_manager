@@ -32,7 +32,7 @@ class ManagerUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'admin_name' => ['required','string','max:255'],
+            'admin_name' => ['required','string','unique:users,name','max:255'],
             'admin_email' => ['required','string','max:255','unique:'.User::class.',email'],
             'admin_password' => ['required',Rules\Password::defaults()],
         ]);

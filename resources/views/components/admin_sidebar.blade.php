@@ -33,10 +33,15 @@
               <a href="/admin/manager/subject" class="px-0 text-white align-middle nav-link">
                   <i class="fas fa-cogs icon-size"></i> <span class="ms-1">Manage Subjects</span>
               </a>
-          </li>
+            </li>
             <li>
                 <a href="/admin/manager/user" class="px-0 text-white align-middle nav-link">
                     <i class="fas fa-cogs icon-size"></i> <span class="ms-1">Manage Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/settings" class="px-0 text-white align-middle nav-link">
+                    <i class="fas fa-cogs icon-size"></i> <span class="ms-1">Settings</span>
                 </a>
             </li>
         </ul>
