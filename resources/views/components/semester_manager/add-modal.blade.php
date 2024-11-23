@@ -20,11 +20,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <input class="form-control" type="date" name="semester_start">
+                        <label class="form-control-label " for="semester_start">Start Date</label>
+                        <input class="form-control" type="date" id="semester_start" name="semester_start">
                     </div>
 
                     <div class="mb-3">
-                        <input class="form-control" type="date" name="semester_end">
+                        <label class="form-control-label" for="semester_end">Start Date</label>
+                        <input class="form-control" type="date" id="semester_end" name="semester_end">
                     </div>
 
                     <div class="modal-footer">

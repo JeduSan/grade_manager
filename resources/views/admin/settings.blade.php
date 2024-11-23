@@ -83,7 +83,7 @@
                                         <td>{{$sem->start}}</td>
                                         <td>{{$sem->end}}</td>
                                         <td>
-                                            <button class="btn btn-action" data-id="{{$sem->id}}" data-name="" data-email="" data-bs-toggle="modal" data-bs-target="#editAdminModal"><i class="fas fa-edit"></i></button>
+                                            {{-- <button class="btn btn-action" data-id="{{$sem->id}}" data-name="" data-email="" data-bs-toggle="modal" data-bs-target="#editAdminModal"><i class="fas fa-edit"></i></button> --}}
                                             <button class="btn btn-action" data-id="{{$sem->id}}" data-bs-toggle="modal" data-bs-target="#deleteAdminModal"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -97,7 +97,7 @@
     </div>
 
     {{-- EDIT MODAL --}}
-    @include('components.user_manager.edit-modal')
+    {{-- @include('components.user_manager.edit-modal') --}}
 
     {{-- DELETE MODAL --}}
     @include('components.user_manager.delete-modal')
@@ -105,22 +105,22 @@
     <script>
         var deleteUserModalBtn = document.querySelector('#deleteUserModalBtn');
         var deleteButtons = document.querySelectorAll('[data-bs-target="#deleteAdminModal"]');
-        var editButtons = document.querySelectorAll('[data-bs-target="#editAdminModal"]');
-        var editForm = document.querySelector('#editForm');
+        // var editButtons = document.querySelectorAll('[data-bs-target="#editAdminModal"]');
+        // var editForm = document.querySelector('#editForm');
 
-        editButtons.forEach(function (button) {
-            button.addEventListener('click',function () {
-                var id = button.getAttribute('data-id');
-                var name = button.getAttribute('data-name');
-                var email = button.getAttribute('data-email');
+        // editButtons.forEach(function (button) {
+        //     button.addEventListener('click',function () {
+        //         var id = button.getAttribute('data-id');
+        //         var name = button.getAttribute('data-name');
+        //         var email = button.getAttribute('data-email');
 
-                // alert(`${id} - ${name} - ${email}`);
+        //         // alert(`${id} - ${name} - ${email}`);
 
-                document.getElementById('editAdminName').value = name;
-                document.getElementById('editAdminEmail').value = email;
-                editForm.setAttribute('action','/admin/manager/edit/user/' + id);
-            });
-        });
+        //         document.getElementById('editAdminName').value = name;
+        //         document.getElementById('editAdminEmail').value = email;
+        //         editForm.setAttribute('action','/admin/manager/edit/user/' + id);
+        //     });
+        // });
 
         deleteButtons.forEach(function (button) {
             button.addEventListener('click', function () {
@@ -137,15 +137,15 @@
             document.getElementById('sidebar').classList.toggle('toggled');
         });
 
-        function showPassword(inputId) {
-            var password = document.getElementById(inputId);
+        // function showPassword(inputId) {
+        //     var password = document.getElementById(inputId);
 
-            if(password.type == 'password') {
-                password.type = 'text';
-            } else if(password.type == 'text') {
-                password.type = 'password'
-            }
-        }
+        //     if(password.type == 'password') {
+        //         password.type = 'text';
+        //     } else if(password.type == 'text') {
+        //         password.type = 'password'
+        //     }
+        // }
 
         const toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess'));
         toastSuccess.show();
