@@ -3,7 +3,7 @@
         <x-slot:type>
             Success
         </x-slot:type>
-        {{ session()->get('success') }}
+        {!! session()->get('success') !!}
     </x-pop-up>
 
     @php
@@ -14,7 +14,7 @@
         <x-slot:type>
             Failure
         </x-slot:type>
-        {{ session()->get('failure') }}
+        {!! session()->get('failure') !!}
     </x-pop-up>
 
     @php

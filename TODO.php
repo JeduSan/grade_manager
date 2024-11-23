@@ -71,6 +71,8 @@
     // [ ] set old value
     // [ ] make updates unique (id and email)
 
+    // [x] Login
+
     // [ ] Admin
     // [ ] add teacher
     // [ ] edit teacher
@@ -80,6 +82,7 @@
     // [ ] edit class
     // [ ] add subject
     // [ ] edit subject
+    // [ ] Techer
 
 // [x] Login UI
 
@@ -104,13 +107,15 @@
 
 // [ ] Add a semester page
 
-// [ ] Make students unique per class (currently you can add multiple of the same student)
+// [x] Make students unique per class (currently you can add multiple of the same student)
 
-// [ ] Fix unique on update error
-    // [ ] student ([x]email,id)
-    // [ ] teacher (email,id)
-    // [ ] subject (code)
-    // [ ] class (section)
-    // [ ] user (email)
+// [x] Fix unique on update error
+    // [x] student ([x]email,[x]id)
+    // [x] teacher ([x]email,[x]id)
+    // [x] subject (code)
+    // [x] class (section)
+    // [x] user (email)
 
 // [ ] UPDATE MIGRATION since I updated student_class.score to be nullable, and the class trigger
+
+// [x] make the current user undeletable

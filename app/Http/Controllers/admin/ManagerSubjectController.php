@@ -67,7 +67,7 @@ class ManagerSubjectController extends Controller
     {
         $request->validate([
             'subject_name' => ['required','string','max:255'],
-            'subject_code' => ['required','string','max:255'],
+            'subject_code' => ['required','string','unique:subject,code,'.$request->subject_code.",code",'max:255'],
             'subject_units' => ['required','numeric','integer']
         ]);
 

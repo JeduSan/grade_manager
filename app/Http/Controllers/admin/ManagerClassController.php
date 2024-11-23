@@ -24,7 +24,7 @@ class ManagerClassController extends Controller
     {
         $teachers = Teacher::all();
 
-        $subjects = Subject::all();
+        $subjects = Subject::orderBy('description','asc')->get();
 
         $courses = Course::all();
 
@@ -95,7 +95,7 @@ class ManagerClassController extends Controller
             ]);
             session(['success' => 'Class added successfully!']);
         } catch(Exception $e) {
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong :( <br><br> - Please make sure the class doesn\'t have a duplicate in the list (section, subject, instructor).']);
         }
 
         return to_route('admin.manager.class');
@@ -176,7 +176,7 @@ class ManagerClassController extends Controller
             'course' => ['required','integer','numeric'],
             'year' => ['required','integer','numeric'],
             'semester' => ['required','integer','numeric'],
-            'section' => ['nullable','string','max:255']
+            'section' => ['nullable','string','unique:class,section,'.$request->section,'max:255']
         ]);
 
         try {

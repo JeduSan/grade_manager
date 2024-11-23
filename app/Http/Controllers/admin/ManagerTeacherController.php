@@ -101,10 +101,10 @@ class ManagerTeacherController extends Controller
     public function update(Request $request, string $user_id)
     {
         $request->validate([
-            'teacher_id' => ['required','string','max:255'],
+            'teacher_id' => ['required','string','unique:teacher,id,'.$request->teacher_id,'max:255'],
             'teacher_fname' => ['required','string','max:255'],
             'teacher_lname' => ['required','string','max:255'],
-            'teacher_email' => ['required','string','max:255'],
+            'teacher_email' => ['required','string','unique:users,email,'.$user_id,'max:255'],
             'teacher_dept' => ['required','numeric','integer'],
             'teacher_password' => ['nullable',Rules\Password::defaults()]
         ]);

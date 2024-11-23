@@ -28,7 +28,7 @@ class AddStudentFromClassController extends Controller
             session(['success' => 'Student added successfully!']);
 
         } catch(Exception $e) {
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong :( <br><br> - Please make sure the student is not in the list yet.']);
         }
 
         return redirect("/admin/manager/view/class/$class_id");

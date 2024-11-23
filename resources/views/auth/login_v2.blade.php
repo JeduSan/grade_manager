@@ -24,13 +24,9 @@
             @csrf
             <div class="form-group">
                 <input type="text" class="form-control" name="input_type" placeholder="Username or Email" required>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-
             </div>
             <div class="form-group">
-                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <input type="password" minlength="8" id="password" class="form-control" name="password" placeholder="Password" required>
                 <div>
                     <input type="checkbox" id="show_password" class="form-check-input" onclick="showPassword('password')">
                     <label id="form-check-label" for="show_password">Show Password</label>
@@ -40,6 +36,14 @@
                     <label id="form-check-label" for="remember">Remember me</label>
                 </div>
             </div>
+
+            {{-- ERROR MESSAGES --}}
+            <div class="mb-3">
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+
             <button type="submit" class="btn btn-primary btn-block">Log In</button>
             {{-- <p class="mt-3 text-center">Don't have an account? <a href="signup.html">Sign Up</a></p> --}}
         </form>
