@@ -93,6 +93,14 @@ class SettingsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Semester::destroy($id);
+
+            session(['success' => 'Semester deleted successfully!']);
+        } catch(Exception $e) {
+            session(['failure' => 'Something went wrong :( <br><br> - Only newly created semesters can be deleted for data integrity reasons.']);
+        }
+
+        return to_route('admin.settings');
     }
 }

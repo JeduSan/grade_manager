@@ -100,7 +100,7 @@
     {{-- @include('components.user_manager.edit-modal') --}}
 
     {{-- DELETE MODAL --}}
-    @include('components.user_manager.delete-modal')
+    @include('components.semester_manager.delete-modal')
 
     <script>
         var deleteUserModalBtn = document.querySelector('#deleteUserModalBtn');
@@ -128,7 +128,7 @@
 
                 // alert(id);
                 // deleteUserModalBtn.setAttribute('href','/admin/manager/delete/user/' + id);
-                deleteUserModalBtn.setAttribute('action','/admin/manager/delete/user/' + id);
+                deleteUserModalBtn.setAttribute('action','/admin/settings/delete/sem/' + id);
 
             });
         });

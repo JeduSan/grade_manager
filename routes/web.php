@@ -114,6 +114,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // SETTINGS
     Route::get('/admin/settings',[SettingsController::class,'index'])->name('admin.settings');
     Route::post('/admin/settings/add/sem',[SettingsController::class,'store'])->name('admin.settings.add.sem');
+    Route::delete('/admin/settings/delete/sem/{id}',[SettingsController::class,'destroy'])->name('admin.settings.destroy.sem');
 });
 
 // ============
