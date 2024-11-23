@@ -8,8 +8,14 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\StudentLogin;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+
+// For student api to be accessed by nodejs api
+// Route::post('/student_login', [StudentLogin::class, 'store'])
+//         // ->middleware(['cors'])
+//         ->name('student_login');
 
 Route::middleware('cguest')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])

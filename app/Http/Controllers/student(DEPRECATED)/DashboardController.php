@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $inc_class_no = 0; // (score == 0)
         $ineligible_grade_count = 0; // no. of grades > 2.00, if this > 0, scholarship will be None, even if the student's grade is within the grade threshold
 
-        // REVIEW: all grades on all classes and sem
+        // REVIEW: all grades on all classes for the current sem
         // [ ] select only the needed
         $subjects = DB::table('student_class')
         ->leftJoin('student_year_level','student_year_level.id','student_class.student_year_level_id')
@@ -77,9 +77,21 @@ class DashboardController extends Controller
             $scholarship_type = 'None';
         }
 
-        dd($subjects->all(), $gwa, $scholarship_type, $total_units, $completed_class_no, $pending_class_no, $failed_class_no, $inc_class_no);
+        // dd($subjects->all(), $gwa, $scholarship_type, $total_units, $completed_class_no, $pending_class_no, $failed_class_no, $inc_class_no);
 
-        return view('student.dashboard',[
+        // return view('student.dashboard',[
+        //     // 'subjects' => $subjects,
+        //     'gwa' => $gwa,
+        //     'scholarship_type' => $scholarship_type,
+        //     'total_units' => $total_units,
+        //     'grade_status' => [
+        //         'completed' => $completed_class_no,
+        //         'pending' => $pending_class_no,
+        //         'failed' => $failed_class_no,
+        //         'inc' => $inc_class_no
+        //     ]
+        // ]);
+        return response()->json([
             // 'subjects' => $subjects,
             'gwa' => $gwa,
             'scholarship_type' => $scholarship_type,

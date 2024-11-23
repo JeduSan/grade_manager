@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Cors;
 use App\Http\Middleware\GuestCustom;
 use App\Http\Middleware\Student;
 use App\Http\Middleware\Teacher;
@@ -19,8 +20,15 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => Admin::class,
             'teacher' => Teacher::class,
             'cguest' => GuestCustom::class,
-            'student' => Student::class
+            'student' => Student::class,
+            'cors' => Cors::class
         ]);
+
+        // REVIEW: normally, requests requires csrf tokens, this removed it for these routes
+        // $middleware->validateCsrfTokens(except: [
+        //     '/student_login',
+        //     '/student/dashboard/data'
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

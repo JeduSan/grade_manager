@@ -132,6 +132,7 @@ Route::middleware(['auth','verified','teacher'])->group(function () {
 // ============
 // STUDENT SIDE
 // ============
-Route::middleware(['auth','verified','student'])->group(function () {
-    Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
-});
+// Route::middleware(['auth','verified','student'])->group(function () {
+    // Route::get('/student/dashboard/data', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+    // Route::get('/student/view/grades', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+// });
