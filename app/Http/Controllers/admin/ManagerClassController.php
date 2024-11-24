@@ -176,7 +176,7 @@ class ManagerClassController extends Controller
             'course' => ['required','integer','numeric'],
             'year' => ['required','integer','numeric'],
             'semester' => ['required','integer','numeric'],
-            'section' => ['nullable','string','unique:class,section,'.$request->section,'max:255']
+            'section' => ['nullable','string','unique:class,section,'.$request->section.',section','max:255']
         ]);
 
         try {

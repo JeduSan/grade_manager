@@ -61,7 +61,7 @@ class ViewSubjectsController extends Controller
                 // ->having('student_class.score',0)
                 // ->groupBy('class.section','subject.code','subject.description','subject.units','student_class.id','class.id','subject.key');
         })
-        ->orderBy('class.id','asc')
+        ->orderBy('class.id','desc')
         ->get();
 
         // dd($classes);

@@ -37,7 +37,7 @@
                     <br><br>
 
                     <div class="mb-3 d-flex">
-                        <h5>Manage Semesters for AY {{$acad_year->year ?? "[Please, register new A.Y.]"}}</h5>
+                        <h5>Semesters for AY {{$acad_year->year ?? "[Please, register new A.Y.]"}}</h5>
 
                         <div class="d-flex ms-auto">
                             {{-- <form method="GET">

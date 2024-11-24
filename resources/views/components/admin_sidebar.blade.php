@@ -41,7 +41,7 @@
             </li>
             <li>
                 <a href="/admin/settings" class="px-0 text-white align-middle nav-link">
-                    <i class="fas fa-cogs icon-size"></i> <span class="ms-1">Settings</span>
+                    <i class="fas fa-cogs icon-size"></i> <span class="ms-1">Manage Semester</span>
                 </a>
             </li>
         </ul>

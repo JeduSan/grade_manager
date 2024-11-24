@@ -69,16 +69,21 @@
                                 <div class="card-body">
                                     <i class="fas fa-calendar-alt"></i>
                                     <h5 class="card-title">Current Semester</h5>
-                                    <strong> <span class="card-number">
-                                        @if ($current_sem->sem == 1)
-                                            1st Semester
-                                        @elseif ($current_sem->sem == 2)
-                                            2nd Semester
-                                        @elseif ($current_sem->sem == 3)
-                                            Summer
-                                        @endif
-                                        {{$current_sem->start."-".$current_sem->end}}
-                                    </span></strong>
+
+                                    @if (isset($current_sem->sem))
+                                        <strong> <span class="card-number">
+                                            @if ($current_sem->sem == 1)
+                                                1st Semester
+                                            @elseif ($current_sem->sem == 2)
+                                                2nd Semester
+                                            @elseif ($current_sem->sem == 3)
+                                                Summer
+                                            @endif
+                                            {{$current_sem->start."-".$current_sem->end}}
+                                        </span></strong>
+                                    @else
+                                        Please register a new sem at settings :)
+                                    @endif
                                 </div>
                             </div>
                         </div>
