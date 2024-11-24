@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AddAcademicYearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\DashboardController;
@@ -80,10 +81,10 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::patch('/admin/manager/edit/student/{user_id}', [ManagerStudentController::class, 'update'])->name('admin.manager.edit.student');
 
     // SEMESTER MANAGER
-    Route::get('/admin/manager/semester', [ManagerSemesterController::class, 'index'])->name('admin.manager.semester');
-    Route::post('/admin/manager/add/semester', [ManagerSemesterController::class, 'store'])->name('admin.manager.add.semester');
-    Route::get('/admin/manager/delete/semester/{id}', [ManagerSemesterController::class, 'destroy'])->name('admin.manager.delete.semester');
-    Route::patch('/admin/manager/edit/semester/{id}', [ManagerSemesterController::class, 'update'])->name('admin.manager.edit.semester');
+    // Route::get('/admin/manager/semester', [ManagerSemesterController::class, 'index'])->name('admin.manager.semester');
+    // Route::post('/admin/manager/add/semester', [ManagerSemesterController::class, 'store'])->name('admin.manager.add.semester');
+    // Route::get('/admin/manager/delete/semester/{id}', [ManagerSemesterController::class, 'destroy'])->name('admin.manager.delete.semester');
+    // Route::patch('/admin/manager/edit/semester/{id}', [ManagerSemesterController::class, 'update'])->name('admin.manager.edit.semester');
 
     // SUBJECT MANAGER
     Route::get('/admin/manager/subject', [ManagerSubjectController::class, 'index'])->name('admin.manager.subject');
@@ -115,6 +116,9 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/settings',[SettingsController::class,'index'])->name('admin.settings');
     Route::post('/admin/settings/add/sem',[SettingsController::class,'store'])->name('admin.settings.add.sem');
     Route::delete('/admin/settings/delete/sem/{id}',[SettingsController::class,'destroy'])->name('admin.settings.destroy.sem');
+
+    Route::post('/admin/settings/add/academic_year',AddAcademicYearController::class)->name('admin.settings.add.academic_year');
+
 });
 
 // ============

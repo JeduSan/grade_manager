@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-control-label" for="semester_end">Start Date</label>
+                        <label class="form-control-label" for="semester_end">End Date</label>
                         <input class="form-control" type="date" id="semester_end" name="semester_end">
                     </div>
 

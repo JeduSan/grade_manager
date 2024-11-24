@@ -17,6 +17,10 @@ class SettingsController extends Controller
     public function index()
     {
 
+        // Get the current academic year based in the current year
+        $acad_year = AcademicYear::select(DB::raw('CONCAT(YEAR(start_date),"-",YEAR(end_date)) as year'))->where(DB::raw('YEAR(start_date)'),DB::raw('YEAR(NOW())'))
+        ->first();
+
         $sems = DB::table('semester')
         ->select(
             'semester.id',
@@ -34,7 +38,8 @@ class SettingsController extends Controller
         // dd($sems);
 
         return view('admin.settings',[
-            'sems' => $sems
+            'sems' => $sems,
+            'acad_year' => $acad_year
         ]);
     }
 

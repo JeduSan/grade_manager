@@ -37,7 +37,7 @@
                     <br><br>
 
                     <div class="mb-3 d-flex">
-                        <h5>Manage Semesters for AY {{$sems[0]->acad_year}}</h5>
+                        <h5>Manage Semesters for AY {{$acad_year->year ?? "[Please, register new A.Y.]"}}</h5>
 
                         <div class="d-flex ms-auto">
                             {{-- <form method="GET">
@@ -45,6 +45,14 @@
                                     <input type="text" name="search" class="form-control" placeholder="Search Admins..." id="searchInput">
                                 </div>
                             </form> --}}
+
+                            <form action="/admin/settings/add/academic_year" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-add me-3" title="Toggle when a new academic year has begun to register the new school year">
+                                    <i class="fas fa-user-plus"></i> Update Academic Year
+                                </button>
+                            </form>
+
                             <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addAdminModal">
                                 <i class="fas fa-user-plus"></i> Add Semester
                             </button>
