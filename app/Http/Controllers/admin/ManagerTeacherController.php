@@ -28,12 +28,13 @@ class ManagerTeacherController extends Controller
                 'teacher.id',
                 'teacher.fname',
                 'teacher.lname',
-                'teacher.email',
+                'users.email',
                 'dept.description as dept',
                 'teacher.dept_id',
                 'teacher.user_id'
             )
-            ->leftJoin('dept','dept.id','teacher.dept_id');
+            ->leftJoin('dept','dept.id','teacher.dept_id')
+            ->leftJoin('users','users.id','teacher.user_id');
         })
         ->get();
 
@@ -51,7 +52,7 @@ class ManagerTeacherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'teacher_id' => ['required','string','max:255'],
+            'teacher_id' => ['required','string','unique:teacher,id','max:255'],
             'teacher_fname' => ['required','string','max:255'],
             'teacher_lname' => ['required','string','max:255'],
             'teacher_email' => ['required','string','max:255','unique:'.User::class.',email'],
@@ -73,7 +74,7 @@ class ManagerTeacherController extends Controller
                     'id' => $request->teacher_id,
                     'fname' => $request->teacher_fname,
                     'lname' => $request->teacher_lname,
-                    'email' => $request->teacher_email,
+                    // 'email' => $request->teacher_email,
                     'dept_id' => $request->teacher_dept,
                     'user_id' => $user->id
                 ]);
@@ -116,7 +117,7 @@ class ManagerTeacherController extends Controller
                     'id' => $request->teacher_id,
                     'fname' => $request->teacher_fname,
                     'lname' => $request->teacher_lname,
-                    'email' => $request->teacher_email,
+                    // 'email' => $request->teacher_email,
                     'dept_id' => $request->teacher_dept
                 ]);
 

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use Exception;
+use AssertionError;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
-use AssertionError;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,16 +40,22 @@ class ManagerUserController extends Controller
 
         try {
 
-            User::create([
+            $user = User::create([
                 'name' => $request->admin_name,
                 'email' => $request->admin_email,
                 'password' => Hash::make($request->admin_password),
                 'role_id' => 1 // admin
             ]);
 
+            Admin::create([
+                'lname' => $request->admin_lname,
+                'fname' => $request->admin_fname,
+                'user_id' => $user->id
+            ]);
+
             session(['success' => 'Admin added successfully!']);
         } catch(Exception $e) {
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong :( - Please make sure the username is not yet taken.']);
         }
 
         return to_route('admin.manager.user');

@@ -33,14 +33,15 @@ class ManagerStudentController extends Controller
                 'student.mname',
                 'student.lname',
                 'student.id',
-                'student.email',
+                'users.email',
                 'student_year_level.year_level_id as year',
                 'course.abbr as course',
                 'student.user_id',
                 'student.course_id'
             )
             ->leftJoin('student_year_level','student_year_level.student_key','student.key')
-            ->leftJoin('course','course.id','student.course_id');
+            ->leftJoin('course','course.id','student.course_id')
+            ->leftJoin('users','users.id','student.user_id');
         })
         ->get();
 
@@ -66,7 +67,7 @@ class ManagerStudentController extends Controller
             'student_fname' => ['required','string','max:255'],
             'student_mname' => ['required','string','max:255'],
             'student_fname' => ['required','string','max:255'],
-            'student_email' => ['required','string','unique:student,email','lowercase','email','max:255'],
+            'student_email' => ['required','string','unique:users,email','lowercase','email','max:255'],
             'student_course' => ['required','numeric','integer','digits:1'],
             'student_year' => ['required','numeric','integer','digits:1'],
             'student_password' => ['required',Rules\Password::defaults()]
@@ -87,7 +88,7 @@ class ManagerStudentController extends Controller
                     'fname' => $request->student_fname,
                     'mname' => $request->student_mname,
                     'lname' => $request->student_lname,
-                    'email' => $request->student_email,
+                    // 'email' => $request->student_email,
                     'course_id' => $request->student_course,
                     'user_id' => $user->id
                 ]);
@@ -107,7 +108,7 @@ class ManagerStudentController extends Controller
             session(['success' => 'Student added successfully!']);
 
         } catch(Exception $e) {
-            session(['failure' => 'Something went wrong :( <br><br> - Please make sure the student ID/Email doesn\'t exist yet.']);
+            session(['failure' => 'Something went wrong :( <br><br> - Please make sure the student ID/Email doesn\'t exist yet.'.$e->getMessage()]);
         }
 
         return to_route('admin.manager.student');
@@ -148,7 +149,7 @@ class ManagerStudentController extends Controller
                 $student->fname = $request->student_fname;
                 $student->mname = $request->student_mname;
                 $student->lname = $request->student_lname;
-                $student->email = $request->student_email;
+                // $student->email = $request->student_email;
                 $student->course_id = $request->student_course;
                 $student->save();
 

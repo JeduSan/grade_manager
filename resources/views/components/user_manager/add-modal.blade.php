@@ -10,7 +10,13 @@
                 <form action="/admin/manager/add/user" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="admin_name" id="adminName" placeholder="Enter admin's name" required>
+                        <input type="text" class="form-control" name="admin_name" id="adminName" placeholder="Enter admin's username" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="admin_fname" id="adminFName" placeholder="Enter admin's firtname" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="admin_lname" id="adminLName" placeholder="Enter admin's lastname" required>
                     </div>
                     <div class="mb-3">
                         <input type="email" class="form-control" name="admin_email" id="adminEmail" placeholder="Enter admin's email" required>

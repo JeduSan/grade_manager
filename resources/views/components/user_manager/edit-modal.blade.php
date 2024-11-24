@@ -13,6 +13,12 @@
                     <div class="mb-3">
                         <input type="text" class="form-control" name="admin_name" id="editAdminName" placeholder="Enter admin's name" required>
                     </div>
+                    {{-- <div class="mb-3">
+                        <input type="text" class="form-control" name="admin_fname" id="editAdminFName" placeholder="Enter admin's firtname" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="admin_lname" id="editAdminLName" placeholder="Enter admin's lastname" required>
+                    </div> --}}
                     <div class="mb-3">
                         <input type="email" class="form-control" name="admin_email" id="editAdminEmail" placeholder="Enter admin's email" required>
                     </div>
