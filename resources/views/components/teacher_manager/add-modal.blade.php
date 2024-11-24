@@ -37,6 +37,17 @@
                             <label id="form-check-label" for="show_password">Show Password</label>
                         </div>
                     </div>
+
+                    {{-- ERROR MESSAGES --}}
+                    <div class="mb-3">
+                        <x-input-error :messages="$errors->get('teacher_id')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('teacher_fname')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('teacher_lname')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('teacher_email')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('teacher_dept')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('teacher_password')" class="mt-2" />
+                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-add">Save Teacher</button>

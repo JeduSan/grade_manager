@@ -8,7 +8,6 @@
 // [x] Add subject
 // [x] Add semester
 // [x] Assign a class/section to a teacher
-// [ ] Subject Manager -> see all students for that subject and who is the instructor
 
 // [x] Register student to a class upon class creation based on course and year
 
@@ -61,11 +60,12 @@
 // [x] List of assigned subjects/classes
 // [x] List of students per subject/class
 // [x] Input of grades
-// [ ] dashboard
+// [x] dashboard
 
 // BUG: [KNOWN BUGS]
-    // [ ] Searching for a class with enough data for a second page will cause the second page to be inaccessible
+    // [x] Searching for a class with enough data for a second page will cause the second page to be inaccessible
         // ex: searching for "wish" will have 2 page result, but the second page will be inaccessible.
+        // SOLUTION: Don't paginate XD
 
 // [ ] Apply error messages to forms to see what is wrong from the outputs
     // [ ] set old value
@@ -73,17 +73,20 @@
 
     // [x] Login
 
-    // [ ] Admin
-    // [ ] add teacher
-    // [ ] edit teacher
-    // [ ] add student
-    // [ ] edit student
-    // [ ] add class
-    // [ ] edit class
-    // [ ] add subject
-    // [ ] edit subject
+    // [x] Admin
+    // [x] add teacher
+    // [x] edit teacher
+    // [x] add student
+    // [x] edit student
+    // [x] add class
+    // [x] edit class
+    // [x] add subject
+    // [x] edit subject
+    // [x] add user
+    // [x] edit user
 
-    // [ ] Techer
+    // [x] Techer
+    // [x] profile
 
 // [x] Login UI
 
@@ -106,7 +109,7 @@
     // [x] subjects
     // [x] users
 
-// [ ] Add a semester page
+// [x] Add a semester page
 
 // [x] Make students unique per class (currently you can add multiple of the same student)
 

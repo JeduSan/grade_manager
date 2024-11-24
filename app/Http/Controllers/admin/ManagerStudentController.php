@@ -107,7 +107,7 @@ class ManagerStudentController extends Controller
             session(['success' => 'Student added successfully!']);
 
         } catch(Exception $e) {
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong :( <br><br> - Please make sure the student ID/Email doesn\'t exist yet.']);
         }
 
         return to_route('admin.manager.student');

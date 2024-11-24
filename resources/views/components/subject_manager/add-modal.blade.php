@@ -18,6 +18,14 @@
                     <div class="mb-3">
                         <input type="number" class="form-control" name="subject_units" id="subjectUnits" placeholder="Enter Subject Units" required>
                     </div>
+
+                    {{-- ERROR MESSAGES --}}
+                    <div class="mb-3">
+                        <x-input-error :messages="$errors->get('subject_code')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('subject_name')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('subject_units')" class="mt-2" />
+                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-add">Save Subject</button>

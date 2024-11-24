@@ -68,6 +68,17 @@
                         <label for="section" class="form-label">Section</label>
                         <input type="text" class="form-control" name="section" id="editClassSection" placeholder="Enter Section">
                     </div>
+
+                    {{-- ERROR MESSAGES --}}
+                    <div class="mb-3">
+                        <x-input-error :messages="$errors->get('instructor')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('subject')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('course')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('year')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('semester')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('section')" class="mt-2" />
+                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-add">Save Changes</button>

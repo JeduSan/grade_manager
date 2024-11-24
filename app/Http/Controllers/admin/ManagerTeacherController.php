@@ -81,7 +81,7 @@ class ManagerTeacherController extends Controller
             session(['success' => 'Teacher added successfully!']);
 
         } catch (Exception $e) {
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong :( <br><br> - Please make sure that the Teacher ID is not yet taken.']);
         }
 
         return to_route('admin.manager.teacher');
@@ -130,7 +130,7 @@ class ManagerTeacherController extends Controller
             session(['success' => 'Teacher edited successfully!']);
 
         } catch(Exception $e) {
-            session(['failure' => 'Something went wrong :(']);
+            session(['failure' => 'Something went wrong :( <br><br> - Please make sure the teacher ID or Email doesn\'t exist yet.']);
         }
 
         return to_route('admin.manager.teacher');
